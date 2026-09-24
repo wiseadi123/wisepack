@@ -48,6 +48,15 @@
       padding: 0;
     }
 
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: var(--font);
       background-color: var(--bg-main);
@@ -64,12 +73,16 @@
       color: #FFFFFF;
       padding: 16px 0;
       box-shadow: var(--shadow-sm);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 20px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .header-inner {
@@ -78,6 +91,8 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .brand-area {
@@ -92,6 +107,7 @@
       border-radius: 50%;
       background: #FFFFFF;
       padding: 2px;
+      flex-shrink: 0;
     }
 
     .brand-title {
@@ -119,7 +135,15 @@
     .user-actions {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 10px;
+    }
+
+    .user-status-group,
+    .user-buttons-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .user-pill {
@@ -139,6 +163,7 @@
       background: #36B37E;
       border-radius: 50%;
       box-shadow: 0 0 8px #36B37E;
+      flex-shrink: 0;
     }
 
     /* Buttons */
@@ -157,6 +182,7 @@
       transition: all 0.2s ease;
       text-decoration: none;
       white-space: nowrap;
+      box-sizing: border-box;
     }
 
     .btn-primary {
@@ -210,14 +236,18 @@
     /* Main Container Padding */
     .main-content {
       padding: 30px 0 60px 0;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* KPI STATS ROW */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-bottom: 24px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .stat-card {
@@ -231,6 +261,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-sizing: border-box;
     }
 
     .stat-card::after {
@@ -274,6 +305,8 @@
       gap: 14px;
       align-items: center;
       justify-content: space-between;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .filter-group {
@@ -282,11 +315,18 @@
       gap: 12px;
       align-items: center;
       flex-grow: 1;
+      width: auto;
+      box-sizing: border-box;
+    }
+
+    .search-input-wrap {
+      flex-grow: 1;
+      min-width: 240px;
     }
 
     .search-input {
       width: 100%;
-      min-width: 260px;
+      box-sizing: border-box;
       padding: 10px 14px;
       border: 1.5px solid var(--border-color);
       border-radius: var(--radius-sm);
@@ -303,6 +343,12 @@
       box-shadow: 0 0 0 3px rgba(23, 92, 211, 0.15);
     }
 
+    .selects-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .filter-select {
       background: #FFFFFF;
       color: var(--text-main);
@@ -311,6 +357,7 @@
       border-radius: var(--radius-sm);
       font-family: inherit;
       font-size: 0.9rem;
+      box-sizing: border-box;
     }
 
     .filter-select:focus {
@@ -325,12 +372,15 @@
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
       overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* Desktop Table */
     .desktop-table-wrap {
       display: none;
       overflow-x: auto;
+      width: 100%;
     }
 
     @media (min-width: 900px) {
@@ -379,18 +429,20 @@
       padding: 4px 10px;
       border-radius: 6px;
       border: 1px solid rgba(23, 92, 211, 0.25);
+      flex-shrink: 0;
     }
 
     .status-select-sm {
       background: #FFFFFF;
       color: var(--text-main);
       border: 1.5px solid var(--border-color);
-      padding: 6px 10px;
+      padding: 7px 10px;
       border-radius: var(--radius-sm);
       font-size: 0.85rem;
       font-family: inherit;
       font-weight: 600;
       cursor: pointer;
+      box-sizing: border-box;
     }
 
     .status-select-sm:focus {
@@ -407,6 +459,7 @@
       font-weight: 600;
       border: 1px solid var(--border-color);
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .action-btn-group {
@@ -419,37 +472,46 @@
     .mobile-cards-wrap {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      padding: 14px;
+      gap: 12px;
+      padding: 12px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .mobile-lead-card {
       background: #FFFFFF;
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 18px;
-      box-shadow: var(--shadow-xs);
+      padding: 16px;
+      box-shadow: 0 2px 10px rgba(16, 43, 80, 0.05);
       display: flex;
       flex-direction: column;
       gap: 12px;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
     }
 
     .client-name {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--primary);
+      word-break: break-word;
     }
 
     .client-phone-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
       color: var(--text-muted);
       font-size: 0.95rem;
     }
@@ -462,13 +524,41 @@
       color: var(--text-main);
       line-height: 1.5;
       border: 1px solid var(--border-color);
+      word-break: break-word;
+    }
+
+    .mobile-status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: #F8FAFC;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .mobile-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 10px;
       margin-top: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .btn-mobile-act {
+      width: 100%;
+      padding: 12px 6px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      border-radius: 10px;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      white-space: nowrap;
+      text-align: center;
     }
 
     .empty-state {
@@ -590,6 +680,135 @@
       z-index: 2000;
       display: none;
     }
+
+    /* RESPONSIVE MOBILE MEDIA QUERIES (Under 768px) */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 12px;
+      }
+
+      .crm-header {
+        padding: 12px 0;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .brand-area {
+        justify-content: flex-start;
+      }
+
+      .brand-title {
+        font-size: 1.2rem;
+      }
+
+      .user-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .user-status-group {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: 8px;
+      }
+
+      .user-status-group .user-pill {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.78rem;
+        padding: 6px 8px;
+        white-space: nowrap;
+      }
+
+      .user-buttons-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .user-buttons-group .btn {
+        width: 100%;
+        padding: 9px 4px;
+        font-size: 0.82rem;
+        justify-content: center;
+        border-radius: 8px;
+      }
+
+      .main-content {
+        padding: 16px 0 40px 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .stat-card {
+        padding: 14px 12px;
+        border-radius: 12px;
+      }
+
+      .stat-value {
+        font-size: 1.65rem;
+      }
+
+      .stat-label {
+        font-size: 0.8rem;
+      }
+
+      .controls-card {
+        padding: 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        border-radius: 14px;
+      }
+
+      .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .search-input-wrap {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .selects-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .filter-select {
+        width: 100%;
+        min-width: 0;
+        font-size: 0.85rem;
+        padding: 9px 8px;
+      }
+
+      .export-wrap {
+        width: 100%;
+      }
+
+      .export-wrap .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 11px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -638,29 +857,34 @@
           </div>
 
           <div class="user-actions">
-            <div class="user-pill" style="border-color: rgba(37, 211, 102, 0.5); background: #E7F9EE; color: #00875A; font-weight: 700;" title="מחובר ומסונכרן בזמן אמת ל-MongoDB Atlas">
-              <span class="online-indicator" style="background-color: #25D366;"></span>
-              <span>MongoDB Atlas 🍃</span>
+            <div class="user-status-group">
+              <div class="user-pill" style="border-color: rgba(37, 211, 102, 0.5); background: #E7F9EE; color: #00875A; font-weight: 700;" title="מחובר ומסונכרן בזמן אמת ל-MongoDB Atlas">
+                <span class="online-indicator" style="background-color: #25D366;"></span>
+                <span>Atlas 🍃</span>
+              </div>
+
+              <div class="user-pill">
+                <span class="online-indicator"></span>
+                <span id="loggedUserName">adicore123</span>
+              </div>
             </div>
 
-            <div class="user-pill">
-              <span class="online-indicator"></span>
-              <span id="loggedUserName">adicore123</span>
+            <div class="user-buttons-group">
+              <button type="button" class="btn btn-header btn-sm" id="refreshBtn" title="רענן פניות">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>רענן</span>
+              </button>
+
+              <a href="/" target="_blank" class="btn btn-header btn-sm" title="מעבר לדף הנחיתה">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span>לאתר</span>
+              </a>
+
+              <button type="button" class="btn btn-header btn-sm" id="logoutBtn" title="התנתק" style="color: #FCA5A5;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span>יציאה</span>
+              </button>
             </div>
-
-            <button type="button" class="btn btn-header btn-sm" id="refreshBtn" title="רענן פניות">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-              <span>רענן</span>
-            </button>
-
-            <a href="/" target="_blank" class="btn btn-header btn-sm" title="מעבר לדף הנחיתה">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              <span>לאתר</span>
-            </a>
-
-            <button type="button" class="btn btn-header btn-sm" id="logoutBtn" title="התנתק" style="color: #FCA5A5;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            </button>
           </div>
         </div>
       </div>
@@ -695,28 +919,30 @@
         <!-- FILTERS & CONTROLS -->
         <div class="controls-card">
           <div class="filter-group">
-            <div style="flex-grow: 1; min-width: 240px;">
+            <div class="search-input-wrap">
               <input type="text" id="searchInput" class="search-input" placeholder="🔍 חיפוש לפי שם, טלפון, מספר פנייה...">
             </div>
 
-            <select id="statusFilter" class="filter-select">
-              <option value="ALL">כל הסטטוסים</option>
-              <option value="חדש">חדש</option>
-              <option value="בטיפול">בטיפול</option>
-              <option value="נסגר">נסגר</option>
-            </select>
+            <div class="selects-row">
+              <select id="statusFilter" class="filter-select">
+                <option value="ALL">כל הסטטוסים</option>
+                <option value="חדש">חדש</option>
+                <option value="בטיפול">בטיפול</option>
+                <option value="נסגר">נסגר</option>
+              </select>
 
-            <select id="toolFilter" class="filter-select">
-              <option value="ALL">כל סוגי הכלים</option>
-              <option value="אופניים חשמליים">אופניים חשמליים</option>
-              <option value="טרקטורונים חשמליים">טרקטורונים חשמליים</option>
-              <option value="שואבי אבק">שואבי אבק</option>
-              <option value="רחפנים">רחפנים</option>
-              <option value="כלים ומכשירים נוספים">כלים ומכשירים נוספים</option>
-            </select>
+              <select id="toolFilter" class="filter-select">
+                <option value="ALL">כל סוגי הכלים</option>
+                <option value="אופניים חשמליים">אופניים חשמליים</option>
+                <option value="טרקטורונים חשמליים">טרקטורונים חשמליים</option>
+                <option value="שואבי אבק">שואבי אבק</option>
+                <option value="רחפנים">רחפנים</option>
+                <option value="כלים ומכשירים נוספים">כלים ומכשירים נוספים</option>
+              </select>
+            </div>
           </div>
 
-          <div>
+          <div class="export-wrap">
             <button type="button" class="btn btn-primary btn-sm" id="exportBtn" title="ייצוא קובץ JSON">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               <span>ייצוא JSON ל-MongoDB</span>
@@ -979,8 +1205,8 @@
 
             ${lead.description ? `<div class="desc-preview">${lead.description}</div>` : ''}
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
-              <span style="font-size: 0.88rem; font-weight: 600; color: var(--text-muted);">סטטוס:</span>
+            <div class="mobile-status-row">
+              <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-main);">סטטוס פנייה:</span>
               <select class="status-select-sm" onchange="updateLeadStatus('${lead.id}', this.value)">
                 <option value="חדש" ${curStatus === 'חדש' ? 'selected' : ''}>חדש</option>
                 <option value="בטיפול" ${curStatus === 'בטיפול' ? 'selected' : ''}>בטיפול</option>
@@ -989,11 +1215,11 @@
             </div>
 
             <div class="mobile-actions">
-              <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-whatsapp" style="padding: 10px;">
-                <span>💬 וואטסאפ</span>
+              <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-mobile-act">
+                <span>💬 פתח וואטסאפ</span>
               </a>
-              <a href="${telLink}" class="btn btn-call" style="padding: 10px;">
-                <span>📞 חיוג</span>
+              <a href="${telLink}" class="btn btn-call btn-mobile-act">
+                <span>📞 חייג ללקוח</span>
               </a>
             </div>
           </div>
