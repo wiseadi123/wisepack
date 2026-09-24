@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משה - סדר בתיק הביטוחי ומומחה פיננסי</title>
+    <meta name="description"
+        content="היי, אני משה. מומחה אישי לניהול התיק הביטוחי, איתור כספים, הגנה מקיפה וניהול תביעות מול חברות הביטוח. מוזמנים לשלוח הודעת וואטסאפ לייעוץ.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="moshe.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- AOS CSS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialService",
+      "name": "משה - סדר בתיק הביטוחי",
+      "description": "מומחה אישי לסדר בתיק הביטוחי, איתור כספים אבודים לחלוטין, הגנה מקיפה למשפחה וניהול מקצועי של תביעות מול חברות הביטוח.",
+      "telephone": "+972500000000",
+      "url": "https://yoursite.com"
+    }
+    </script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Heebo', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#0A2540',
+                            navyLight: '#11355A',
+                            gold: '#C5A572',
+                            goldLight: '#E6D3A8',
+                            slate: '#334155',
+                            light: '#F8FAFC'
+                        },
+                        whatsapp: {
+                            DEFAULT: '#25D366',
+                            hover: '#20BA56'
+                        }
+                    },
+                    boxShadow: {
+                        'premium': '0 25px 50px -12px rgba(10, 37, 64, 0.15)',
+                        'glow': '0 0 30px rgba(197, 165, 114, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-brand-light text-brand-slate overflow-x-hidden pb-12 md:pb-0">
+
+    <!-- WhatsApp SVG Template -->
+    <svg style="display:none;">
+        <symbol id="whatsapp-icon" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.878-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </symbol>
+    </svg>
+
+    <!-- Floating Background Shapes -->
+    <div class="fixed top-20 left-[-10%] w-[500px] h-[500px] bg-brand-navy/5 rounded-full blur-3xl animate-float -z-10">
+    </div>
+    <div class="fixed bottom-20 right-[-10%] w-[400px] h-[400px] bg-brand-gold/10 rounded-full blur-3xl animate-float -z-10"
+        style="animation-delay: 2s;"></div>
+
+    <!-- Top Attention Banner -->
+    <div class="bg-brand-navy text-white text-center text-sm font-bold py-2.5 tracking-wide">
+        <span class="text-brand-gold">🌟</span> עדיין לא בטוחים אם אתם משלמים כפול? פגישת ייעוץ בוואטסאפ ללא עלות!
+    </div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <!-- Logo -->
+            <a href="#"
+                class="flex flex-col items-start min-w-48 group cursor-pointer transition-transform hover:-translate-y-0.5">
+                <div class="flex items-center gap-2 mb-0.5">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-navy to-brand-navyLight flex items-center justify-center shadow-lg group-hover:shadow-brand-gold/50 transition-shadow">
+                        <i data-lucide="shield" class="w-5 h-5 text-brand-gold"></i>
+                    </div>
+                    <span class="font-black text-2xl text-brand-navy tracking-tight leading-none">משה.</span>
+                </div>
+                <span class="text-xs font-bold text-brand-slate uppercase tracking-[0.2em] opacity-70 pr-10">סדר בתיק
+                    הביטוחי</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 font-bold text-brand-slate">
+                <a href="#home" class="hover:text-brand-gold transition-colors">ראשי</a>
+                <a href="#about" class="hover:text-brand-gold transition-colors">קצת עליי</a>
+                <a href="#services" class="hover:text-brand-gold transition-colors">השירותים שלנו</a>
+                <a href="#contact" class="hover:text-brand-gold transition-colors">צרו קשר</a>
+
+                <a href="https://wa.me/972500000000" target="_blank"
+                    class="bg-brand-gold hover:bg-brand-goldLight text-white px-6 py-3 rounded-full shadow-glow hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
+                    <svg class="w-5 h-5">
+                        <use href="#whatsapp-icon"></use>
+                    </svg>
+                    שילחו וואטסאפ
+                </a>
+            </div>
+
+            <!-- Mobile Menu Btn -->
+            <button class="md:hidden text-brand-navy hover:text-brand-gold transition-colors" id="mobile-menu-btn"
+                aria-label="פתח תפריט">
+                <i data-lucide="menu" class="w-8 h-8" id="menu-icon-open"></i>
+                <i data-lucide="x" class="w-8 h-8 hidden" id="menu-icon-close"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu"
+            class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 flex flex-col items-center gap-6 text-xl font-bold py-10 opacity-0 pointer-events-none transition-all duration-300 -translate-y-4 md:hidden">
+            <a href="#home" class="mobile-link text-brand-navy hover:text-brand-gold">ראשי</a>
+            <a href="#about" class="mobile-link text-brand-navy hover:text-brand-gold">קצת עליי</a>
+            <a href="#services" class="mobile-link text-brand-navy hover:text-brand-gold">השירותים שלנו</a>
+            <a href="https://wa.me/972500000000" target="_blank"
+                class="mobile-link flex items-center justify-center gap-3 bg-whatsapp text-white px-10 py-4 rounded-full shadow-lg mt-4 w-10/12">
+                <svg class="w-6 h-6">
+                    <use href="#whatsapp-icon"></use>
+                </svg>
+                לשיחת ייעוץ בוואטסאפ
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative pt-12 pb-24 md:pt-24 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
+
+            <!-- Text Content -->
+            <div class="md:w-1/2 text-center md:text-right relative z-10" data-aos="fade-up">
+
+                <div
+                    class="inline-flex items-center gap-2 bg-white border border-brand-gold/30 px-5 py-2 rounded-full shadow-sm mb-8">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-whatsapp opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-whatsapp"></span>
+                    </span>
+                    <span class="text-sm font-bold text-brand-navy">זמין עכשיו להתייעצות אישית</span>
+                </div>
+
+                <h1
+                    class="text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.1] mb-6 text-brand-navy tracking-tight">
+                    היי, אני משה.<br class="hidden md:block">
+                    באתי לעשות לכם <br>
+                    <span class="text-gradient inline-block mt-2">סדר בתיק הביטוחי.</span>
+                </h1>
+
+                <p
+                    class="text-lg md:text-xl text-brand-slate/80 mb-10 leading-relaxed font-medium max-w-xl mx-auto md:mx-0">
+                    בדיקה מקיפה והתאמה מדויקת למידותיכם, איתור כספים שאפילו לא הכרתם, וליווי אישי במאני-טיים מול חברות
+                    הביטוח – <span class="text-brand-navy font-bold">כדי שתקבלו בדיוק מה שמגיע לכם, בלי לשלם
+                        כפול.</span>
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="https://wa.me/972500000000" target="_blank"
+                        class="bg-brand-navy text-white px-8 py-4.5 rounded-2xl font-bold hover:bg-brand-navyLight shadow-premium flex items-center justify-center gap-3 transform active:scale-95 hover:-translate-y-1 transition-all group">
+                        שילחו לי הודעה מיידית
+                        <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#services"
+                        class="bg-white text-brand-navy px-8 py-4.5 rounded-2xl font-bold hover:bg-brand-light shadow-sm border-2 border-brand-slate/10 flex items-center justify-center gap-2 transition-all">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-brand-gold"></i>
+                        גלו איך זה עובד
+                    </a>
+                </div>
+
+                <div
+                    class="mt-10 flex items-center justify-center md:justify-start gap-4 text-sm font-bold text-brand-slate opacity-80">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-gold"></i> ללא התחייבות מראש
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-gold mr-4"></i> שילוב ודיוק בהתאמה למשפחה
+                </div>
+            </div>
+
+            <!-- Hero Image Composition -->
+            <div class="md:w-1/2 relative w-full" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="relative z-10 w-full max-w-lg mx-auto">
+                    <!-- Glowing blob behind image -->
+                    <div
+                        class="absolute inset-0 bg-brand-gold rounded-[3rem] rotate-3 opacity-20 blur-xl -z-10 animate-pulse-slow">
+                    </div>
+
+                    <div
+                        class="relative img-wrapper rounded-[2.5rem] shadow-premium border-[6px] border-white overflow-hidden bg-white group">
+                        <!-- High end Unsplash image -->
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1600&auto=format&fit=crop"
+                            class="w-full h-[500px] object-cover" alt="משה - סדר בתיק הביטוחי וייעוץ אישי">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent"></div>
+                    </div>
+
+                    <!-- Floating Trust Badge -->
+                    <div
+                        class="absolute -bottom-6 -right-6 lg:-right-10 glass-card p-5 rounded-2xl flex items-center gap-4 animate-float border-r-4 border-r-brand-gold">
+                        <div
+                            class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center text-brand-gold shadow-sm">
+                            <i data-lucide="trending-up" class="w-6 h-6"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-xs font-bold text-brand-slate/70">לקוחות מעידים על</span>
+                            <span class="font-black text-xl text-brand-navy leading-none mt-1">חיסכון של אלפי ₪</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Trust Stats -->
+    <section class="max-w-7xl mx-auto px-6 pt-10 pb-20 border-b border-brand-slate/10">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center group" data-aos="fade-up" data-aos-delay="0">
+                <div
+                    class="w-16 h-16 mx-auto bg-brand-light rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                    <i data-lucide="heart-handshake" class="w-8 h-8 text-brand-gold"></i>
+                </div>
+                <h3 class="font-black text-xl text-brand-navy mb-1">שקיפות מלאה</h3>
+                <p class="text-sm text-brand-slate/70 font-medium">יודעים בדיוק על מה משלמים</p>
+            </div>
+            <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
+                <div
+                    class="w-16 h-16 mx-auto bg-brand-light rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                    <i data-lucide="users" class="w-8 h-8 text-brand-gold"></i>
+                </div>
+                <h3 class="font-black text-xl text-brand-navy mb-1">יחס אישי מבוסס אמון</h3>
+                <p class="text-sm text-brand-slate/70 font-medium">ליווי צמוד לכל המשפחה</p>
+            </div>
+            <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
+                <div
+                    class="w-16 h-16 mx-auto bg-brand-light rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                    <i data-lucide="piggy-bank" class="w-8 h-8 text-brand-gold"></i>
+                </div>
+                <h3 class="font-black text-xl text-brand-navy mb-1">חיסכון משמעותי</h3>
+                <p class="text-sm text-brand-slate/70 font-medium">מניעת כפילויות בפוליסות</p>
+            </div>
+            <div class="text-center group" data-aos="fade-up" data-aos-delay="300">
+                <div
+                    class="w-16 h-16 mx-auto bg-brand-light rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                    <i data-lucide="alarm-clock-check" class="w-8 h-8 text-brand-gold"></i>
+                </div>
+                <h3 class="font-black text-xl text-brand-navy mb-1">מענה מהיר ברגע האמת</h3>
+                <p class="text-sm text-brand-slate/70 font-medium">זמינות מלאה מול הביטוח</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Moshe Section -->
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+
+            <div class="md:w-[45%] relative" data-aos="fade-left">
+                <!-- Decorative background elements -->
+                <div class="absolute -inset-6 bg-brand-light rounded-full blur-2xl -z-10"></div>
+                <div class="img-wrapper rounded-[2.5rem] shadow-premium overflow-hidden border border-brand-slate/5">
+                    <img src="image/WhatsApp Image 2026-02-21 at 22.23.18.jpeg" alt="משה סדר בתיק הביטוחי"
+                        class="w-full h-[500px] object-cover object-top">
+                </div>
+                <div
+                    class="absolute -bottom-8 -right-8 bg-brand-navy text-white p-6 rounded-3xl shadow-xl flex items-center gap-4 border border-white/10 backdrop-blur-sm">
+                    <div class="w-12 h-12 bg-white/10 rounded-full flex justify-center items-center">
+                        <i data-lucide="award" class="w-6 h-6 text-brand-gold"></i>
+                    </div>
+                    <div>
+                        <p class="font-black text-lg">מומחיות מוכחת</p>
+                        <p class="text-sm font-medium text-white/70">המון לקוחות מרוצים</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:w-[55%] relative z-10 mt-10 md:mt-0" data-aos="fade-right">
+                <span
+                    class="bg-brand-light text-brand-gold font-bold tracking-widest text-sm uppercase px-4 py-2 rounded-full mb-6 inline-block">קצת
+                    עליי</span>
+                <h2 class="text-4xl md:text-5xl font-black text-brand-navy mb-6 leading-tight">אל תשאירו את התיק הביטוחי
+                    שלכם לרובוטים.</h2>
+                <div class="w-20 h-1.5 bg-brand-gold rounded-full mb-8"></div>
+
+                <p class="text-xl text-brand-slate/80 leading-relaxed font-medium mb-6">
+                    בתחום כל כך רגיש ואישי כמו ביטוח ופיננסים, מוקד טלפוני לעולם לא יחליף מגע אנושי ומקצוענות אמיתית.
+                </p>
+                <p class="text-lg text-brand-slate/80 leading-relaxed font-light mb-8">
+                    המטרה שלי פשוטה: להבטיח שאתם והמשפחה שלכם מוגנים ב-100% מבלי לשלם שקל אחד מיותר. אני קורא את האותיות
+                    הקטנות, בודק איפה חברות הביטוח גובות מכם כסף כפול, ומנהל את המאבקים ברגעי האמת. <br>אצלי אתם מקבלים
+                    תשובות ברורות.
+                </p>
+
+                <div class="flex items-center gap-6">
+                    <a href="https://wa.me/972500000000" target="_blank"
+                        class="border-b-2 border-brand-gold pb-1 font-bold text-brand-navy hover:text-brand-gold transition-colors text-lg flex items-center gap-2">
+                        בואו נדבר
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-light relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6" data-aos="fade-up">
+                <div class="max-w-2xl">
+                    <span
+                        class="text-brand-gold font-bold tracking-widest text-sm uppercase bg-brand-gold/10 px-4 py-2 rounded-full">מה
+                        בעצם אנחנו עושים?</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-brand-navy mt-6 mb-4">המעטפת המלאה למשפחה</h2>
+                    <p class="text-lg text-brand-slate/80 font-medium leading-relaxed">משלב הבדיקה, דרך הוזלת העלויות
+                        ועד לעמידה איתנה מול פקידי ועורכי דין של מחלקת התביעות.</p>
+                </div>
+
+                <!-- Swiper Navigation Buttons -->
+                <div class="hidden md:flex gap-3">
+                    <button
+                        class="swiper-button-prev-custom w-12 h-12 rounded-full bg-white border border-brand-slate/10 text-brand-slate hover:bg-brand-gold hover:text-white hover:border-brand-gold shadow-sm transition-all flex justify-center items-center">
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                    <button
+                        class="swiper-button-next-custom w-12 h-12 rounded-full bg-brand-navy text-white hover:bg-brand-navyLight shadow-lg transition-all flex justify-center items-center">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Swiper Container -->
+            <div class="swiper servicesSwiper !pb-20 !px-4 -mx-4">
+                <div class="swiper-wrapper">
+
+                    <!-- Service 1 -->
+                    <div class="swiper-slide h-auto">
+                        <div
+                            class="bg-white rounded-3xl p-6 shadow-sm hover:shadow-premium transition-all duration-300 h-full border border-gray-100 relative top-0 hover:-top-3 group flex flex-col">
+                            <div
+                                class="h-56 rounded-2xl overflow-hidden mb-8 img-wrapper relative border border-gray-50">
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=800&auto=format&fit=crop"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-white/95 backdrop-blur shadow-[0_0_20px_rgba(0,0,0,0.1)] w-12 h-12 rounded-full flex items-center justify-center animate-bounce"
+                                    style="animation-duration: 3s">
+                                    <i data-lucide="file-spreadsheet" class="w-6 h-6 text-brand-gold"></i>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-4 flex flex-col flex-grow">
+                                <h3
+                                    class="text-2xl font-black text-brand-navy mb-3 group-hover:text-brand-gold transition-colors">
+                                    סדר בתיק הביטוחי</h3>
+                                <p class="text-brand-slate/70 text-[15px] mb-6 leading-relaxed font-medium flex-grow">
+                                    הידעת?<br>
+                                    80% מכלל הלקוחות לא יודעים על מה הם מבוטחים ואחוז דומה משלמים על אותו ביטוח בחברות
+                                    שונות מה שנקרא ״כפל ביטוחי״.</p>
+                                <a href="https://wa.me/972500000000"
+                                    class="text-brand-navy font-bold flex items-center gap-2 group-hover:text-brand-gold transition-colors mt-auto">
+                                    לבדיקת התיק שלך <i data-lucide="arrow-left-circle" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="swiper-slide h-auto">
+                        <div
+                            class="bg-white rounded-3xl p-6 shadow-sm hover:shadow-premium transition-all duration-300 h-full border border-gray-100 relative top-0 hover:-top-3 group flex flex-col">
+                            <div
+                                class="h-56 rounded-2xl overflow-hidden mb-8 img-wrapper relative border border-gray-50">
+                                <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=800&auto=format&fit=crop"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-white/95 backdrop-blur shadow-[0_0_20px_rgba(0,0,0,0.1)] w-12 h-12 rounded-full flex items-center justify-center animate-bounce"
+                                    style="animation-duration: 3s">
+                                    <i data-lucide="search-check" class="w-6 h-6 text-brand-gold"></i>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-4 flex flex-col flex-grow">
+                                <h3
+                                    class="text-2xl font-black text-brand-navy mb-3 group-hover:text-brand-gold transition-colors">
+                                    איתור כספים על שמכם שאתם לא מכירים!</h3>
+                                <p class="text-brand-slate/70 text-[15px] mb-6 leading-relaxed font-medium flex-grow">
+                                    כיום בחברות הביטוח יש מעל ל 15 מיליארד שקל כספים שאף אחד לא דורש אותם!</p>
+                                <a href="https://wa.me/972500000000"
+                                    class="text-brand-navy font-bold flex items-center gap-2 group-hover:text-brand-gold transition-colors mt-auto">
+                                    לאיתור הכספים שלך <i data-lucide="arrow-left-circle" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="swiper-slide h-auto">
+                        <div
+                            class="bg-white rounded-3xl p-6 shadow-sm hover:shadow-premium transition-all duration-300 h-full border border-gray-100 relative top-0 hover:-top-3 group flex flex-col">
+                            <div
+                                class="h-56 rounded-2xl overflow-hidden mb-8 img-wrapper relative border border-gray-50">
+                                <div
+                                    class="absolute inset-0 bg-brand-navy/10 group-hover:bg-transparent transition-colors z-10 duration-500">
+                                </div>
+                                <img src="https://images.unsplash.com/photo-1565514020179-0c6ca2010a1c?q=80&w=800&auto=format&fit=crop"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-white/95 backdrop-blur shadow-[0_0_20px_rgba(0,0,0,0.1)] w-12 h-12 rounded-full flex items-center justify-center animate-bounce z-20"
+                                    style="animation-duration: 3s">
+                                    <i data-lucide="shield-alert" class="w-6 h-6 text-brand-gold"></i>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-4 flex flex-col flex-grow">
+                                <h3
+                                    class="text-2xl font-black text-brand-navy mb-3 group-hover:text-brand-gold transition-colors">
+                                    תנאי הצטרפות הטובים ביותר</h3>
+                                <p class="text-brand-slate/70 text-[15px] mb-6 leading-relaxed font-medium flex-grow">
+                                    לאחר בדיקה בכל חברות ביטוח.</p>
+                                <a href="https://wa.me/972500000000"
+                                    class="text-brand-navy font-bold flex items-center gap-2 group-hover:text-brand-gold transition-colors mt-auto">
+                                    להתייעצות מיידית <i data-lucide="arrow-left-circle" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="swiper-slide h-auto">
+                        <div
+                            class="bg-white rounded-3xl p-6 shadow-sm hover:shadow-premium transition-all duration-300 h-full border border-gray-100 relative top-0 hover:-top-3 group flex flex-col">
+                            <div
+                                class="h-56 rounded-2xl overflow-hidden mb-8 img-wrapper relative border border-gray-50">
+                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-white/95 backdrop-blur shadow-[0_0_20px_rgba(0,0,0,0.1)] w-12 h-12 rounded-full flex items-center justify-center animate-bounce"
+                                    style="animation-duration: 3s">
+                                    <i data-lucide="badge-help" class="w-6 h-6 text-brand-gold"></i>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-4 flex flex-col flex-grow">
+                                <h3
+                                    class="text-2xl font-black text-brand-navy mb-3 group-hover:text-brand-gold transition-colors">
+                                    איתכם ברגע האמת!</h3>
+                                <p class="text-brand-slate/70 text-[15px] mb-6 leading-relaxed font-medium flex-grow">
+                                    בסוף סוכן ביטוח נמדד בקרות מקרה תביעה ששם אתם הכי צריכים אותנו!<br>
+                                    אנחנו בתחום מעל עשור עם המון ניסיון וקשרים בחברות הביטוח ככה שאנחנו נדאג שתקבלו את
+                                    מה שמגיע לכם בקרות מקרה תביעה בזמן המהיר ביותר!</p>
+                                <a href="https://wa.me/972500000000"
+                                    class="text-brand-navy font-bold flex items-center gap-2 group-hover:text-brand-gold transition-colors mt-auto">
+                                    קבלו סיוע עכשיו <i data-lucide="arrow-left-circle" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="swiper-slide h-auto">
+                        <div
+                            class="bg-white rounded-3xl p-6 shadow-sm hover:shadow-premium transition-all duration-300 h-full border border-gray-100 relative top-0 hover:-top-3 group flex flex-col">
+                            <div
+                                class="h-56 rounded-2xl overflow-hidden mb-8 img-wrapper relative border border-gray-50">
+                                <div
+                                    class="absolute inset-0 bg-brand-navy/10 group-hover:bg-transparent transition-colors z-10 duration-500">
+                                </div>
+                                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800&auto=format&fit=crop"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-white/95 backdrop-blur shadow-[0_0_20px_rgba(0,0,0,0.1)] w-12 h-12 rounded-full flex items-center justify-center animate-bounce z-20"
+                                    style="animation-duration: 3s">
+                                    <i data-lucide="piggy-bank" class="w-6 h-6 text-brand-gold"></i>
+                                </div>
+                            </div>
+                            <div class="px-2 pb-4 flex flex-col flex-grow">
+                                <h3
+                                    class="text-2xl font-black text-brand-navy mb-3 group-hover:text-brand-gold transition-colors">
+                                    חסכונות פנסיונים</h3>
+                                <p class="text-brand-slate/70 text-[15px] mb-6 leading-relaxed font-medium flex-grow">
+                                    יש לך פנסיה? החיסכון הכי חשוב שיש לך בחיים וישמש אותך כהכנסה בעת הפרישה! מתי לאחרונה
+                                    בדקת את דמי הניהול שאתה משלם? האם אתה במסלול ההשקעה הנכון בקרן פנסיה שלך?<br>
+                                    <strong>פה אני נכנס לתמונה!</strong>
+                                </p>
+                                <a href="https://wa.me/972500000000"
+                                    class="text-brand-navy font-bold flex items-center gap-2 group-hover:text-brand-gold transition-colors mt-auto">
+                                    לייעוץ פנסיוני <i data-lucide="arrow-left-circle" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Pagination -->
+                <div class="swiper-pagination mt-10 relative"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Banner -->
+    <div class="bg-brand-navy py-5 overflow-hidden border-y border-brand-gold/30">
+        <div class="flex whitespace-nowrap gap-12 text-white font-black text-2xl uppercase tracking-widest opacity-90 animate-[marquee_20s_linear_infinite]"
+            style="animation: marquee 30s linear infinite;">
+            <style>
+                @keyframes marquee {
+                    0% {
+                        transform: translateX(0);
+                    }
+
+                    100% {
+                        transform: translateX(100%);
+                    }
+                }
+            </style>
+            <span>אמינות ויושרה</span> <span class="text-brand-gold">✦</span> <span>ליווי אישי</span> <span
+                class="text-brand-gold">✦</span> <span>חיסכון אדיר</span> <span class="text-brand-gold">✦</span>
+            <span>רשת ביטחון</span> <span class="text-brand-gold">✦</span> <span>איתכם ברגע האמת</span> <span
+                class="text-brand-gold">✦</span>
+            <span>אמינות ויושרה</span> <span class="text-brand-gold">✦</span> <span>ליווי אישי</span> <span
+                class="text-brand-gold">✦</span> <span>חיסכון אדיר</span> <span class="text-brand-gold">✦</span>
+            <span>רשת ביטחון</span> <span class="text-brand-gold">✦</span> <span>איתכם ברגע האמת</span> <span
+                class="text-brand-gold">✦</span>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span
+                    class="text-brand-gold font-bold uppercase tracking-widest text-sm bg-brand-gold/5 px-4 py-1.5 rounded-full inline-block mb-4 border border-brand-gold/20">המילה
+                    של הלקוחות שלי</span>
+                <h2 class="text-4xl md:text-5xl font-black text-brand-navy mb-4">ההצלחה שלי, השקט שלכם</h2>
+            </div>
+
+            <div class="swiper reviewsSwiper !pb-14">
+                <div class="swiper-wrapper">
+                    <!-- Review 1 -->
+                    <div class="swiper-slide h-auto">
+                        <div
+                            class="bg-brand-light p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-lg transition-all h-full relative group">
+                            <div class="absolute -top-6 -left-6 opacity-10 group-hover:scale-110 transition-transform">
+                                <i data-lucide="quote" class="w-32 h-32 fill-brand-navy"></i>
+                            </div>
+                            <div class="flex text-brand-gold mb-5">
+                                <i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i>
+                            </div>
+                            <p class="text-brand-slate font-medium italic mb-8 relative z-10 leading-relaxed">
+                                "הייתי בטוח שאני משלם המון כסף לחינם, אבל לא מצאתי את הידיים והרגליים בתוך הפוליסות. משה
+                                הגיע, עשה סדר מופתי, מצא שני ביטוחים זהים ששילמתי עליהם וחסך לי מאות שקלים בחודש. מקצוען
+                                מעולם אחר."
+                            </p>
+                            <div class="flex items-center gap-4 relative z-10 border-t border-brand-slate/10 pt-4">
+                                <div
+                                    class="w-12 h-12 bg-white rounded-full flex items-center justify-center font-black text-brand-navy text-xl shadow-sm">
+                                    א</div>
+                                <div>
+                                    <h4 class="font-bold text-brand-navy text-lg">אמיר ד.</h4>
+                                    <span class="text-sm font-medium text-brand-slate/60">בעל עסק, רמת גן</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="swiper-slide h-auto">
+                        <div
+                            class="bg-brand-light p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-lg transition-all h-full relative group">
+                            <div class="absolute -top-6 -left-6 opacity-10 group-hover:scale-110 transition-transform">
+                                <i data-lucide="quote" class="w-32 h-32 fill-brand-navy"></i>
+                            </div>
+                            <div class="flex text-brand-gold mb-5">
+                                <i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i>
+                            </div>
+                            <p class="text-brand-slate font-medium italic mb-8 relative z-10 leading-relaxed">
+                                "ברגע האמת, כשהיינו צריכים לתבוע את חברת הביטוח על בעיה רפואית, הם כמובן עשו בעיות הליך
+                                בירוקרטי נוראי. משה לקח את המושכות ולא הרפה עד שקיבלנו את הקצבה. זה הגב שכל אחד צריך."
+                            </p>
+                            <div class="flex items-center gap-4 relative z-10 border-t border-brand-slate/10 pt-4">
+                                <div
+                                    class="w-12 h-12 bg-white rounded-full flex items-center justify-center font-black text-brand-navy text-xl shadow-sm">
+                                    ד</div>
+                                <div>
+                                    <h4 class="font-bold text-brand-navy text-lg">דנה ושלומי ל.</h4>
+                                    <span class="text-sm font-medium text-brand-slate/60">תל אביב</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="swiper-slide h-auto">
+                        <div
+                            class="bg-brand-light p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-lg transition-all h-full relative group">
+                            <div class="absolute -top-6 -left-6 opacity-10 group-hover:scale-110 transition-transform">
+                                <i data-lucide="quote" class="w-32 h-32 fill-brand-navy"></i>
+                            </div>
+                            <div class="flex text-brand-gold mb-5">
+                                <i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i><i data-lucide="star"
+                                    class="fill-current w-5 h-5"></i>
+                            </div>
+                            <p class="text-brand-slate font-medium italic mb-8 relative z-10 leading-relaxed">
+                                "שנים הייתי שכירה וכל פעם פתחו לי קופה אחרת. ביקשתי משה לבדוק אם יש איזה כסף אבוד.
+                                להפתעתי הוא מצא קרן השתלמות שמנה מלפני עשור! תהליך האיתור דרכו היה מהיר ושקוף לגמרי."
+                            </p>
+                            <div class="flex items-center gap-4 relative z-10 border-t border-brand-slate/10 pt-4">
+                                <div
+                                    class="w-12 h-12 bg-white rounded-full flex items-center justify-center font-black text-brand-navy text-xl shadow-sm">
+                                    ר</div>
+                                <div>
+                                    <h4 class="font-bold text-brand-navy text-lg">רחלי א.</h4>
+                                    <span class="text-sm font-medium text-brand-slate/60">ראשון לציון</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & CTA Section -->
+    <section id="contact" class="pb-24 pt-10 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-brand-navy rounded-[3rem] p-10 md:p-20 relative overflow-hidden shadow-2xl"
+                data-aos="zoom-in">
+                <!-- Abstract glowing circles -->
+                <div
+                    class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-gold/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2">
+                </div>
+
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div
+                        class="w-20 h-20 bg-brand-gold/20 rounded-full flex items-center justify-center mb-8 border border-brand-gold/40 shadow-[0_0_30px_rgba(197,165,114,0.3)]">
+                        <i data-lucide="shield" class="w-10 h-10 text-brand-gold"></i>
+                    </div>
+
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight">
+                        שקט נפשי למשפחה מתחיל<br>
+                        <span class="text-brand-gold">בהחלטה אחת</span>
+                    </h2>
+
+                    <p class="text-xl text-white/80 font-light max-w-2xl mb-12 leading-relaxed">
+                        בלי טפסים מסובכים או המתנות ארוכות - פשוט שולחים הודעה קצרה בוואטסאפ, ואני כבר דואג לשאר.
+                        לבדיקה, לאיתור ולהוזלת עלויות.
+                    </p>
+
+                    <a href="https://wa.me/972500000000" target="_blank"
+                        class="bg-whatsapp hover:bg-whatsapp-hover text-white px-10 py-5 rounded-full font-black text-xl flex items-center gap-4 transition-all hover:scale-105 shadow-[0_10px_40px_-5px_rgba(37,211,102,0.4)] group">
+                        <span class="relative flex h-4 w-4">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40"></span>
+                            <span
+                                class="relative inline-flex rounded-full h-4 w-4 bg-white/30 border border-white"></span>
+                        </span>
+                        דברו איתי בוואטסאפ עכשיו
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050e18] pt-16 pb-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex flex-col items-center mb-8">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="shield" class="w-6 h-6 text-brand-gold"></i>
+                    <span class="font-black text-2xl text-white tracking-tight">משה.</span>
+                </div>
+                <p class="text-white/40 text-sm font-medium">מומחה אישי לסדר בתיק הביטוחי שלך</p>
+            </div>
+
+            <div
+                class="border-t border-white/5 pt-8 text-white/30 text-xs font-medium flex flex-col md:flex-row justify-center items-center gap-4">
+                <span>&copy;
+                    <script>document.write(new Date().getFullYear())</script> כל הזכויות שמורות למשה.
+                </span>
+                <span class="hidden md:inline">•</span>
+                <span>אין האמור מהווה ייעוץ פנסיוני/ביטוחי במקום רישיון כדת וכדין. האתר נבנה כמודל.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Absolute Perfect Floating WhatsApp Button -->
+    <a href="https://wa.me/972500000000" target="_blank"
+        class="fixed bottom-6 right-6 z-50 flex items-center group cursor-pointer" aria-label="פניה ישירה בוואטסאפ">
+
+        <!-- Button Wrapper -->
+        <div
+            class="relative w-[60px] h-[60px] bg-[#25D366] rounded-full shadow-[0_8px_30px_rgba(37,211,102,0.5)] flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:-translate-y-1">
+            <svg class="w-8 h-8 text-white relative z-10">
+                <use href="#whatsapp-icon"></use>
+            </svg>
+
+            <!-- Red Notification Dot -->
+            <div
+                class="absolute -top-1 -right-1 z-20 w-6 h-6 border-2 border-white bg-red-500 rounded-full flex items-center justify-center shadow-lg">
+                <span class="text-[11px] font-bold text-white leading-none">1</span>
+                <!-- Ping effect specific to the dot to catch eye -->
+                <span class="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-60 animate-ping"></span>
+            </div>
+
+            <!-- Outer Radar Pulse (Always pulsing slowly) -->
+            <div
+                class="absolute inset-0 border border-[#25D366] rounded-full animate-[pulseRing_2s_cubic-bezier(0.4,0,0.6,1)_infinite]">
+            </div>
+        </div>
+
+        <!-- Premium Sleek Tooltip -->
+        <div
+            class="absolute right-[calc(100%+16px)] top-1/2 -translate-y-1/2 bg-white px-5 py-3 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-gray-100 flex flex-col gap-0.5 opacity-0 md:opacity-100 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none min-w-[160px] before:content-[''] before:absolute before:-right-2 before:top-1/2 before:-translate-y-1/2 before:border-y-8 before:border-y-transparent before:border-l-8 before:border-l-white">
+            <span class="font-black text-brand-navy text-[15px] block leading-tight">שלום! פה משה 👋</span>
+            <span
+                class="text-xs font-bold text-brand-slate/60 w-full text-right flex items-center justify-end gap-1.5"><span
+                    class="w-2 h-2 rounded-full bg-[#25D366] animate-pulse block"></span> אני מחובר עכשיו</span>
+        </div>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Init Icons
+        lucide.createIcons();
+
+        // Init Animations
+        AOS.init({
+            once: true,
+            duration: 800,
+            offset: 50,
+            easing: 'ease-out-cubic',
+        });
+
+        // Initialize Services Swiper
+        const servicesSwiper = new Swiper('.servicesSwiper', {
+            slidesPerView: 1.1,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: '.swiper-button-next-custom',
+                prevEl: '.swiper-button-prev-custom',
+            },
+            breakpoints: {
+                640: { slidesPerView: 2.2, spaceBetween: 24 },
+                1024: { slidesPerView: 4, spaceBetween: 24 }
+            }
+        });
+
+        // Initialize Reviews Swiper
+        const reviewsSwiper = new Swiper('.reviewsSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: { slidesPerView: 2, spaceBetween: 24 },
+                1024: { slidesPerView: 3, spaceBetween: 30 }
+            }
+        });
+
+        // Mobile Menu Toggling
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                // Open menu
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+                iconOpen.classList.add('hidden');
+                iconClose.classList.remove('hidden');
+            } else {
+                // Close menu
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', toggleMenu));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Environment Variables & Sensitive Credentials (DO NOT COMMIT)
+.env
+.env.local
+.env.*.local
+atlas-credentials.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db

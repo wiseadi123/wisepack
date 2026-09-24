@@ -1,0 +1,70 @@
+[
+  {
+    "id": "1004",
+    "createdAt": "2026-09-24T15:25:52.828Z",
+    "description": "בדיקת פרימיום",
+    "formattedTime": "24.9.2026, 18:25",
+    "fullName": "בדיקת טופס מהיר",
+    "leadNumber": 1004,
+    "phone": "0509611808",
+    "status": "בטיפול",
+    "toolType": "אופניים חשמליים",
+    "whatsappConsent": false,
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "NOT_REQUESTED"
+    },
+    "updatedAt": "2026-09-24T15:38:40.531Z"
+  },
+  {
+    "id": "1003",
+    "createdAt": "2026-09-24T14:06:49.539Z",
+    "description": "בירור לגבי ייצור סוללה מותאמת",
+    "formattedTime": "24.9.2026, 17:06",
+    "fullName": "עדי",
+    "leadNumber": 1003,
+    "phone": "050-9611808",
+    "source": "landing_page_form",
+    "status": "חדש",
+    "toolType": "אופניים חשמליים",
+    "whatsappConsent": true,
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "SENT"
+    }
+  },
+  {
+    "id": "1002",
+    "createdAt": "2026-09-24T12:55:24.614Z",
+    "description": "סוללה לטרקטורון ילדים שאינה נטענת",
+    "formattedTime": "24.9.2026, 15:55",
+    "fullName": "יוסי כהן",
+    "leadNumber": 1002,
+    "phone": "052-7654321",
+    "source": "landing_page_form",
+    "status": "בטיפול",
+    "toolType": "טרקטורונים חשמליים",
+    "whatsappConsent": true,
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "SENT"
+    }
+  },
+  {
+    "id": "1001",
+    "createdAt": "2026-09-24T10:54:36.578Z",
+    "description": "סוללה 48V שמתרוקנת מהר",
+    "formattedTime": "24.9.2026, 13:54",
+    "fullName": "ישראל ישראלי",
+    "leadNumber": 1001,
+    "phone": "054-1234567",
+    "source": "landing_page_form",
+    "status": "נסגר",
+    "toolType": "אופניים חשמליים",
+    "whatsappConsent": true,
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "SENT"
+    }
+  }
+]

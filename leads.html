@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wisepack | מערכת ניהול פניות ולידים (CRM)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <style>
+    /* ==========================================================================
+       Wisepack CRM 2026 - Designed to match the landing page theme 1:1
+       ========================================================================== */
+    :root {
+      --primary: #102B50;
+      --primary-dark: #0A1C34;
+      --accent: #175CD3;
+      --accent-hover: #124BB0;
+      --accent-light: #EBF3FF;
+      --bg-main: #F2F7FD;
+      --bg-card: #FFFFFF;
+      --text-main: #172B4D;
+      --text-muted: #5E6C84;
+      --text-light: #8993A4;
+      --border-color: #E2E8F0;
+      --whatsapp: #25D366;
+      --whatsapp-hover: #1EBE5D;
+      --whatsapp-bg: #E7F9EE;
+      --danger: #DE350B;
+      --warning: #B76E00;
+      --warning-bg: #FFF8E6;
+      --success: #00875A;
+      --success-bg: #E3FCEF;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-xs: 0 1px 3px rgba(16, 43, 80, 0.06);
+      --shadow-sm: 0 4px 14px rgba(16, 43, 80, 0.08);
+      --shadow-md: 0 8px 24px rgba(16, 43, 80, 0.12);
+      --font: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      direction: rtl;
+      text-align: right;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Top Brand Header */
+    .crm-header {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      padding: 16px 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dash-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      padding: 2px;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.8rem;
+      color: #CBD5E1;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      background: rgba(56, 182, 255, 0.2);
+      color: #38B6FF;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-right: 6px;
+      border: 1px solid rgba(56, 182, 255, 0.4);
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      color: #F8FAFC;
+    }
+
+    .online-indicator {
+      width: 8px;
+      height: 8px;
+      background: #36B37E;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #36B37E;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #FFFFFF;
+      box-shadow: 0 3px 10px rgba(23, 92, 211, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-whatsapp {
+      background: var(--whatsapp);
+      color: #FFFFFF;
+      box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--whatsapp-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-call {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .btn-call:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-header {
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-header:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.84rem;
+      border-radius: 6px;
+    }
+
+    /* Main Container Padding */
+    .main-content {
+      padding: 30px 0 60px 0;
+    }
+
+    /* KPI STATS ROW */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px 20px;
+      box-shadow: var(--shadow-xs);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 4px;
+    }
+
+    .stat-total::after { background: var(--accent); }
+    .stat-new::after { background: #0284C7; }
+    .stat-progress::after { background: #F59E0B; }
+    .stat-closed::after { background: var(--success); }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    /* CONTROLS CARD */
+    .controls-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    .search-input {
+      width: 100%;
+      min-width: 260px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      background-color: #FFFFFF;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(23, 92, 211, 0.15);
+    }
+
+    .filter-select {
+      background: #FFFFFF;
+      color: var(--text-main);
+      border: 1.5px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* LEADS CONTAINER */
+    .leads-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    /* Desktop Table */
+    .desktop-table-wrap {
+      display: none;
+      overflow-x: auto;
+    }
+
+    @media (min-width: 900px) {
+      .desktop-table-wrap {
+        display: block;
+      }
+      .mobile-cards-wrap {
+        display: none !important;
+      }
+    }
+
+    .leads-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+
+    .leads-table th {
+      background: #F8FAFC;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 14px 18px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
+
+    .leads-table td {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.93rem;
+      vertical-align: middle;
+    }
+
+    .leads-table tr:hover {
+      background-color: #F8FAFC;
+    }
+
+    /* Badges */
+    .lead-num-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(23, 92, 211, 0.25);
+    }
+
+    .status-select-sm {
+      background: #FFFFFF;
+      color: var(--text-main);
+      border: 1.5px solid var(--border-color);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .status-select-sm:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .tool-badge {
+      background: #F1F5F9;
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .action-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* MOBILE CARDS VIEW */
+    .mobile-cards-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 14px;
+    }
+
+    .mobile-lead-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .client-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .client-phone-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .desc-preview {
+      background: #F8FAFC;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: var(--text-main);
+      line-height: 1.5;
+      border: 1px solid var(--border-color);
+    }
+
+    .mobile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      opacity: 0.4;
+    }
+
+    /* LOGIN MODAL (Light theme matching the landing page) */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 28, 52, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .auth-box {
+      width: 100%;
+      max-width: 420px;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .auth-logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      margin: 0 auto 16px auto;
+      background: #FFFFFF;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .auth-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .auth-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      text-align: right;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(23, 92, 211, 0.15);
+    }
+
+    .auth-error {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      display: none;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: var(--shadow-md);
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      z-index: 2000;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUTH MODAL -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-box">
+      <img src="assets/logo.png" alt="Wisepack" class="auth-logo">
+      <h2 class="auth-title">כניסה למערכת Wisepack</h2>
+      <p class="auth-desc">מערכת ניהול פניות ולידים מאובטחת</p>
+
+      <form id="loginForm" class="auth-form">
+        <div class="auth-error" id="authError">שם משתמש או סיסמה שגויים.</div>
+        
+        <div class="form-group">
+          <label class="form-label" for="username">שם משתמש</label>
+          <input type="text" id="username" class="form-input" placeholder="הזן שם משתמש" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">סיסמה</label>
+          <input type="password" id="password" class="form-input" placeholder="הזן סיסמה" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="loginBtn" style="margin-top: 8px; padding: 13px;">
+          <span>כניסה למערכת</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD WRAPPER -->
+  <div id="dashboardWrap" style="display: none;">
+    
+    <!-- TOP HEADER -->
+    <header class="crm-header">
+      <div class="container">
+        <div class="header-inner">
+          <div class="brand-area">
+            <img src="assets/logo.png" alt="Wisepack" class="dash-logo">
+            <div>
+              <h1 class="brand-title">Wisepack <span class="brand-badge">מערכת לידים</span></h1>
+              <p class="brand-subtitle">ניהול, מעקב וסגירת פניות בוואטסאפ ובטלפון</p>
+            </div>
+          </div>
+
+          <div class="user-actions">
+            <div class="user-pill" style="border-color: rgba(37, 211, 102, 0.5); background: #E7F9EE; color: #00875A; font-weight: 700;" title="מחובר ומסונכרן בזמן אמת ל-MongoDB Atlas">
+              <span class="online-indicator" style="background-color: #25D366;"></span>
+              <span>MongoDB Atlas 🍃</span>
+            </div>
+
+            <div class="user-pill">
+              <span class="online-indicator"></span>
+              <span id="loggedUserName">adicore123</span>
+            </div>
+
+            <button type="button" class="btn btn-header btn-sm" id="refreshBtn" title="רענן פניות">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <span>רענן</span>
+            </button>
+
+            <a href="/" target="_blank" class="btn btn-header btn-sm" title="מעבר לדף הנחיתה">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>לאתר</span>
+            </a>
+
+            <button type="button" class="btn btn-header btn-sm" id="logoutBtn" title="התנתק" style="color: #FCA5A5;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        
+        <!-- KPI STATS -->
+        <section class="stats-grid">
+          <div class="stat-card stat-total">
+            <div class="stat-label">סה״כ פניות</div>
+            <div class="stat-value" id="kpiTotal">0</div>
+          </div>
+
+          <div class="stat-card stat-new">
+            <div class="stat-label">פניות חדשות</div>
+            <div class="stat-value" id="kpiNew" style="color: #0284C7;">0</div>
+          </div>
+
+          <div class="stat-card stat-progress">
+            <div class="stat-label">בטיפול</div>
+            <div class="stat-value" id="kpiProgress" style="color: #D97706;">0</div>
+          </div>
+
+          <div class="stat-card stat-closed">
+            <div class="stat-label">נסגרו בהצלחה</div>
+            <div class="stat-value" id="kpiClosed" style="color: var(--success);">0</div>
+          </div>
+        </section>
+
+        <!-- FILTERS & CONTROLS -->
+        <div class="controls-card">
+          <div class="filter-group">
+            <div style="flex-grow: 1; min-width: 240px;">
+              <input type="text" id="searchInput" class="search-input" placeholder="🔍 חיפוש לפי שם, טלפון, מספר פנייה...">
+            </div>
+
+            <select id="statusFilter" class="filter-select">
+              <option value="ALL">כל הסטטוסים</option>
+              <option value="חדש">חדש</option>
+              <option value="בטיפול">בטיפול</option>
+              <option value="נסגר">נסגר</option>
+            </select>
+
+            <select id="toolFilter" class="filter-select">
+              <option value="ALL">כל סוגי הכלים</option>
+              <option value="אופניים חשמליים">אופניים חשמליים</option>
+              <option value="טרקטורונים חשמליים">טרקטורונים חשמליים</option>
+              <option value="שואבי אבק">שואבי אבק</option>
+              <option value="רחפנים">רחפנים</option>
+              <option value="כלים ומכשירים נוספים">כלים ומכשירים נוספים</option>
+            </select>
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-primary btn-sm" id="exportBtn" title="ייצוא קובץ JSON">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>ייצוא JSON ל-MongoDB</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- MAIN LEADS CARD -->
+        <div class="leads-card">
+          
+          <!-- DESKTOP TABLE -->
+          <div class="desktop-table-wrap">
+            <table class="leads-table">
+              <thead>
+                <tr>
+                  <th>מס׳ פנייה</th>
+                  <th>מועד</th>
+                  <th>שם הלקוח</th>
+                  <th>טלפון</th>
+                  <th>סוג כלי</th>
+                  <th>תיאור / פרטים</th>
+                  <th>סטטוס</th>
+                  <th>פעולות מהירות</th>
+                </tr>
+              </thead>
+              <tbody id="desktopTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- MOBILE CARDS -->
+          <div class="mobile-cards-wrap" id="mobileCardsBody">
+            <!-- Populated via JS -->
+          </div>
+
+          <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-icon">📭</div>
+            <h3>לא נמצאו פניות תואמות</h3>
+            <p>נסה לשנות את תנאי החיפוש או הסינון</p>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // --- STATE & AUTH ---
+    const AUTH_KEY = 'wisepack_auth_token';
+    let allLeads = [];
+
+    const authOverlay = document.getElementById('authOverlay');
+    const dashboardWrap = document.getElementById('dashboardWrap');
+    const loginForm = document.getElementById('loginForm');
+    const authError = document.getElementById('authError');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const searchInput = document.getElementById('searchInput');
+    const statusFilter = document.getElementById('statusFilter');
+    const toolFilter = document.getElementById('toolFilter');
+    const exportBtn = document.getElementById('exportBtn');
+    const toastEl = document.getElementById('toast');
+
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.style.display = 'block';
+      setTimeout(() => { toastEl.style.display = 'none'; }, 3000);
+    }
+
+    // Check login state
+    function checkAuth() {
+      const token = sessionStorage.getItem(AUTH_KEY) || localStorage.getItem(AUTH_KEY);
+      if (token === 'ok_adicore123') {
+        authOverlay.style.display = 'none';
+        dashboardWrap.style.display = 'block';
+        loadLeads();
+      } else {
+        authOverlay.style.display = 'flex';
+        dashboardWrap.style.display = 'none';
+      }
+    }
+
+    // Handle Login
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+
+      if (u === 'adicore123' && p === 'c38410a3') {
+        sessionStorage.setItem(AUTH_KEY, 'ok_adicore123');
+        localStorage.setItem(AUTH_KEY, 'ok_adicore123');
+        authError.style.display = 'none';
+        authOverlay.style.display = 'none';
+        dashboardWrap.style.display = 'block';
+        loadLeads();
+      } else {
+        authError.style.display = 'block';
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(AUTH_KEY);
+      checkAuth();
+    });
+
+    // Format phone for WhatsApp
+    function cleanPhoneForWa(phone) {
+      if (!phone) return '';
+      let digits = phone.replace(/\D/g, '');
+      if (digits.startsWith('05')) {
+        digits = '972' + digits.substring(1);
+      } else if (digits.startsWith('5') && digits.length === 9) {
+        digits = '972' + digits;
+      }
+      return digits;
+    }
+
+    // Load leads
+    async function loadLeads() {
+      try {
+        const res = await fetch('/api/leads?t=' + Date.now());
+        if (!res.ok) throw new Error('Failed to fetch leads');
+        allLeads = await res.json();
+        render();
+      } catch (err) {
+        console.error('Error fetching leads:', err);
+        showToast('שגיאה בטעינת הנתונים מהשרת');
+      }
+    }
+
+    // Update lead status
+    async function updateLeadStatus(leadId, newStatus) {
+      try {
+        const res = await fetch('/api/leads/update-status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: leadId, status: newStatus })
+        });
+        if (res.ok) {
+          showToast(`סטטוס פנייה ${leadId} עודכן ל: ${newStatus}`);
+          loadLeads();
+        } else {
+          showToast('שגיאה בעדכון הסטטוס');
+        }
+      } catch (err) {
+        console.error('Error updating status:', err);
+      }
+    }
+
+    // Render Filtered Leads
+    function render() {
+      const q = searchInput.value.toLowerCase().trim();
+      const sFilter = statusFilter.value;
+      const tFilter = toolFilter.value;
+
+      const filtered = allLeads.filter(lead => {
+        const idMatch = (lead.id || '').toString().toLowerCase().includes(q);
+        const nameMatch = (lead.fullName || '').toLowerCase().includes(q);
+        const phoneMatch = (lead.phone || '').includes(q);
+        const descMatch = (lead.description || '').toLowerCase().includes(q);
+        const toolMatch = (lead.toolType || '').toLowerCase().includes(q);
+
+        const matchesQuery = !q || idMatch || nameMatch || phoneMatch || descMatch || toolMatch;
+        const matchesStatus = sFilter === 'ALL' || (lead.status || 'חדש') === sFilter;
+        const matchesTool = tFilter === 'ALL' || lead.toolType === tFilter;
+
+        return matchesQuery && matchesStatus && matchesTool;
+      });
+
+      // Update KPIs
+      document.getElementById('kpiTotal').textContent = allLeads.length;
+      document.getElementById('kpiNew').textContent = allLeads.filter(l => (l.status || 'חדש') === 'חדש').length;
+      document.getElementById('kpiProgress').textContent = allLeads.filter(l => l.status === 'בטיפול').length;
+      document.getElementById('kpiClosed').textContent = allLeads.filter(l => l.status === 'נסגר').length;
+
+      const emptyState = document.getElementById('emptyState');
+      if (filtered.length === 0) {
+        emptyState.style.display = 'block';
+      } else {
+        emptyState.style.display = 'none';
+      }
+
+      // Render Desktop Table
+      const desktopTbody = document.getElementById('desktopTableBody');
+      desktopTbody.innerHTML = filtered.map(lead => {
+        const leadId = lead.id || '---';
+        const displayId = leadId.startsWith('#') ? leadId : `#${leadId.replace(/^WP-/, '')}`;
+        const waPhone = cleanPhoneForWa(lead.phone);
+        const waMsg = encodeURIComponent(`שלום ${lead.fullName}, מדבר נציג Wisepack בנוגע לפנייה ${displayId} שלך לגבי ${lead.toolType || 'הסוללה'}.`);
+        const waLink = `https://wa.me/${waPhone}?text=${waMsg}`;
+        const telLink = `tel:${lead.phone.replace(/[^0-9+]/g, '')}`;
+        const curStatus = lead.status || 'חדש';
+
+        return `
+          <tr>
+            <td><span class="lead-num-badge">${displayId}</span></td>
+            <td style="color: var(--text-muted); font-size: 0.85rem;">${lead.formattedTime || 'היום'}</td>
+            <td><strong>${lead.fullName}</strong></td>
+            <td><a href="${telLink}" style="color: var(--accent); font-weight: 600; text-decoration: none;">${lead.phone}</a></td>
+            <td><span class="tool-badge">${lead.toolType}</span></td>
+            <td style="max-width: 280px; font-size: 0.88rem; color: var(--text-muted);">${lead.description || '-'}</td>
+            <td>
+              <select class="status-select-sm" onchange="updateLeadStatus('${lead.id}', this.value)">
+                <option value="חדש" ${curStatus === 'חדש' ? 'selected' : ''}>חדש</option>
+                <option value="בטיפול" ${curStatus === 'בטיפול' ? 'selected' : ''}>בטיפול</option>
+                <option value="נסגר" ${curStatus === 'נסגר' ? 'selected' : ''}>נסגר</option>
+              </select>
+            </td>
+            <td>
+              <div class="action-btn-group">
+                <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm" title="פתח וואטסאפ עם הלקוח">
+                  <span>וואטסאפ</span>
+                </a>
+                <a href="${telLink}" class="btn btn-call btn-sm" title="חייג ללקוח">
+                  <span>חיוג</span>
+                </a>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // Render Mobile Cards
+      const mobileWrap = document.getElementById('mobileCardsBody');
+      mobileWrap.innerHTML = filtered.map(lead => {
+        const leadId = lead.id || '---';
+        const displayId = leadId.startsWith('#') ? leadId : `#${leadId.replace(/^WP-/, '')}`;
+        const waPhone = cleanPhoneForWa(lead.phone);
+        const waMsg = encodeURIComponent(`שלום ${lead.fullName}, מדבר נציג Wisepack בנוגע לפנייה ${displayId} שלך לגבי ${lead.toolType || 'הסוללה'}.`);
+        const waLink = `https://wa.me/${waPhone}?text=${waMsg}`;
+        const telLink = `tel:${lead.phone.replace(/[^0-9+]/g, '')}`;
+        const curStatus = lead.status || 'חדש';
+
+        return `
+          <div class="mobile-lead-card">
+            <div class="card-top">
+              <span class="lead-num-badge">${displayId}</span>
+              <span style="font-size: 0.82rem; color: var(--text-muted);">${lead.formattedTime || 'היום'}</span>
+            </div>
+
+            <div class="client-name">${lead.fullName}</div>
+            
+            <div class="client-phone-row">
+              <span>טלפון: <a href="${telLink}" style="color: var(--accent); font-weight: 700;">${lead.phone}</a></span>
+              <span class="tool-badge">${lead.toolType}</span>
+            </div>
+
+            ${lead.description ? `<div class="desc-preview">${lead.description}</div>` : ''}
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+              <span style="font-size: 0.88rem; font-weight: 600; color: var(--text-muted);">סטטוס:</span>
+              <select class="status-select-sm" onchange="updateLeadStatus('${lead.id}', this.value)">
+                <option value="חדש" ${curStatus === 'חדש' ? 'selected' : ''}>חדש</option>
+                <option value="בטיפול" ${curStatus === 'בטיפול' ? 'selected' : ''}>בטיפול</option>
+                <option value="נסגר" ${curStatus === 'נסגר' ? 'selected' : ''}>נסגר</option>
+              </select>
+            </div>
+
+            <div class="mobile-actions">
+              <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-whatsapp" style="padding: 10px;">
+                <span>💬 וואטסאפ</span>
+              </a>
+              <a href="${telLink}" class="btn btn-call" style="padding: 10px;">
+                <span>📞 חיוג</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Search and filters listeners
+    searchInput.addEventListener('input', render);
+    statusFilter.addEventListener('change', render);
+    toolFilter.addEventListener('change', render);
+    refreshBtn.addEventListener('click', () => {
+      loadLeads();
+      showToast('הנתונים רועננו בהצלחה');
+    });
+
+    // Export JSON
+    exportBtn.addEventListener('click', () => {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allLeads, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `wisepack_leads_${new Date().toISOString().slice(0, 10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    });
+
+    // Auto-refresh every 20 seconds
+    setInterval(loadLeads, 20000);
+
+    // Initial check
+    checkAuth();
+  </script>
+</body>
+</html>

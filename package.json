@@ -1,0 +1,22 @@
+{
+  "name": "wisepack-landing",
+  "version": "1.0.0",
+  "description": "Wisepack - Landing page for custom battery manufacturing and repair",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "wisepack",
+    "batteries",
+    "landing-page",
+    "rtl",
+    "hebrew"
+  ],
+  "author": "Wisepack",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^7.6.0"
+  }
+}
