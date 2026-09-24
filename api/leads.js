@@ -120,7 +120,10 @@ module.exports = async (req, res) => {
   if (req.method === 'GET') {
     try {
       const leads = await collection.find({}, { projection: { _id: 0 } }).sort({ createdAt: -1 }).toArray();
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate'
+      });
       res.end(JSON.stringify(leads));
       return;
     } catch (err) {

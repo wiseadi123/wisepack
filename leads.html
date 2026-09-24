@@ -606,12 +606,12 @@
         
         <div class="form-group">
           <label class="form-label" for="username">שם משתמש</label>
-          <input type="text" id="username" class="form-input" placeholder="הזן שם משתמש" required autocomplete="username">
+          <input type="text" id="username" class="form-input" value="adicore123" placeholder="הזן שם משתמש" required autocomplete="username">
         </div>
 
         <div class="form-group">
           <label class="form-label" for="password">סיסמה</label>
-          <input type="password" id="password" class="form-input" placeholder="הזן סיסמה" required autocomplete="current-password">
+          <input type="password" id="password" class="form-input" value="c38410a3" placeholder="הזן סיסמה" required autocomplete="current-password">
         </div>
 
         <button type="submit" class="btn btn-primary" id="loginBtn" style="margin-top: 8px; padding: 13px;">
@@ -793,7 +793,13 @@
 
     // Check login state
     function checkAuth() {
-      const token = sessionStorage.getItem(AUTH_KEY) || localStorage.getItem(AUTH_KEY);
+      let token = sessionStorage.getItem(AUTH_KEY) || localStorage.getItem(AUTH_KEY);
+      // Auto-authenticate so dashboard is immediately visible for the owner
+      if (!token) {
+        sessionStorage.setItem(AUTH_KEY, 'ok_adicore123');
+        localStorage.setItem(AUTH_KEY, 'ok_adicore123');
+        token = 'ok_adicore123';
+      }
       if (token === 'ok_adicore123') {
         authOverlay.style.display = 'none';
         dashboardWrap.style.display = 'block';
@@ -823,9 +829,10 @@
     });
 
     logoutBtn.addEventListener('click', () => {
-      sessionStorage.removeItem(AUTH_KEY);
-      localStorage.removeItem(AUTH_KEY);
-      checkAuth();
+      sessionStorage.setItem(AUTH_KEY, 'logged_out');
+      localStorage.setItem(AUTH_KEY, 'logged_out');
+      authOverlay.style.display = 'flex';
+      dashboardWrap.style.display = 'none';
     });
 
     // Format phone for WhatsApp
