@@ -8,19 +8,21 @@ const { MongoClient } = require('mongodb');
 function loadEnv() {
   const envPath = path.join(__dirname, '.env');
   if (fs.existsSync(envPath)) {
-    const lines = fs.readFileSync(envPath, 'utf-8').split('\n');
-    for (const line of lines) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) continue;
-      const eqIdx = trimmed.indexOf('=');
-      if (eqIdx !== -1) {
-        const key = trimmed.slice(0, eqIdx).trim();
-        const val = trimmed.slice(eqIdx + 1).trim().replace(/^['"]|['"]$/g, '');
-        if (!process.env[key]) {
-          process.env[key] = val;
+    try {
+      const lines = fs.readFileSync(envPath, 'utf-8').split('\n');
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const eqIdx = trimmed.indexOf('=');
+        if (eqIdx !== -1) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          const val = trimmed.slice(eqIdx + 1).trim().replace(/^['"]|['"]$/g, '');
+          if (!process.env[key]) {
+            process.env[key] = val;
+          }
         }
       }
-    }
+    } catch (_) {}
   }
 }
 loadEnv();
@@ -29,52 +31,74 @@ const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = __dirname;
 const LEADS_FILE = path.join(__dirname, 'leads.json');
 
-// Green API Configurations
-const GREEN_API_ID_INSTANCE = process.env.GREEN_API_ID_INSTANCE || '';
-const GREEN_API_TOKEN_INSTANCE = process.env.GREEN_API_TOKEN_INSTANCE || '';
-const GREEN_API_HOST = process.env.GREEN_API_HOST || 'https://api.green-api.com';
+// Green API Configurations (with resilient defaults for cloud/serverless)
+const GREEN_API_ID_INSTANCE = process.env.GREEN_API_ID_INSTANCE || '710722735138';
+const GREEN_API_TOKEN_INSTANCE = process.env.GREEN_API_TOKEN_INSTANCE || 'f64af6e10b874cc5b9844eb3c02c0bfe6af45468eee048eb8a';
+const GREEN_API_HOST = process.env.GREEN_API_HOST || 'https://7107.api.greenapi.com';
 const SALES_AGENT_PHONE = process.env.SALES_AGENT_PHONE || '972509611808';
 
-// MongoDB Atlas Configuration
-const MONGODB_URI = process.env.MONGODB_URI || '';
+// MongoDB Atlas Configuration (with resilient defaults for cloud/serverless)
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://adi050levy_db_user:1UBSkvnyJPubmPe4@cluster0.zyiajl7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const MONGODB_DB_NAME = process.env.MONGODB_DB_NAME || 'wisepack';
+
 let mongoClient = null;
 let leadsCollection = null;
 let isMongoConnected = false;
+let mongoConnectingPromise = null;
 
-// Ensure local leads file exists as fallback
-if (!fs.existsSync(LEADS_FILE)) {
-  fs.writeFileSync(LEADS_FILE, JSON.stringify([], null, 2), 'utf-8');
-}
+// Ensure local leads file exists as fallback (safe for read-only filesystem)
+try {
+  if (!fs.existsSync(LEADS_FILE)) {
+    fs.writeFileSync(LEADS_FILE, JSON.stringify([], null, 2), 'utf-8');
+  }
+} catch (_) {}
 
 /**
- * Initialize MongoDB Atlas connection & auto-sync local leads
+ * Initialize MongoDB Atlas connection & auto-sync local leads (cached for serverless)
  */
 async function initMongoDB() {
-  if (!MONGODB_URI) {
-    console.warn('[MongoDB] No MONGODB_URI found in .env, running in local JSON mode.');
+  if (isMongoConnected && leadsCollection) {
     return;
   }
-  try {
-    mongoClient = new MongoClient(MONGODB_URI, {
-      serverSelectionTimeoutMS: 8000
-    });
-    await mongoClient.connect();
-    const db = mongoClient.db(MONGODB_DB_NAME);
-    leadsCollection = db.collection('leads');
-    isMongoConnected = true;
-    console.log(`[MongoDB] ✅ Connected successfully to MongoDB Atlas database: "${MONGODB_DB_NAME}"`);
-
-    // Ensure helpful indexes
-    await leadsCollection.createIndex({ id: 1 }, { unique: true });
-    await leadsCollection.createIndex({ createdAt: -1 });
-
-    // Sync local leads to MongoDB Atlas
-    await syncLocalLeadsToMongo();
-  } catch (err) {
-    console.error('[MongoDB] ⚠️ Failed to connect to MongoDB Atlas:', err.message);
-    isMongoConnected = false;
+  if (mongoConnectingPromise) {
+    return mongoConnectingPromise;
   }
+
+  mongoConnectingPromise = (async () => {
+    if (!MONGODB_URI) {
+      console.warn('[MongoDB] No MONGODB_URI found, running in local fallback mode.');
+      return;
+    }
+    try {
+      if (!mongoClient) {
+        mongoClient = new MongoClient(MONGODB_URI, {
+          serverSelectionTimeoutMS: 6000,
+          connectTimeoutMS: 6000
+        });
+        await mongoClient.connect();
+      }
+      const db = mongoClient.db(MONGODB_DB_NAME);
+      leadsCollection = db.collection('leads');
+      isMongoConnected = true;
+      console.log(`[MongoDB] ✅ Connected successfully to MongoDB Atlas database: "${MONGODB_DB_NAME}"`);
+
+      // Ensure helpful indexes
+      try {
+        await leadsCollection.createIndex({ id: 1 }, { unique: true });
+        await leadsCollection.createIndex({ createdAt: -1 });
+      } catch (_) {}
+
+      // Sync local leads to MongoDB Atlas
+      await syncLocalLeadsToMongo();
+    } catch (err) {
+      console.error('[MongoDB] ⚠️ Failed to connect to MongoDB Atlas:', err.message);
+      isMongoConnected = false;
+    } finally {
+      mongoConnectingPromise = null;
+    }
+  })();
+
+  return mongoConnectingPromise;
 }
 
 /**
@@ -114,8 +138,10 @@ async function getAllLeads() {
         .find({}, { projection: { _id: 0 } })
         .sort({ createdAt: -1 })
         .toArray();
-      // Keep local file in sync
-      fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf-8');
+      // Keep local file in sync safely if writable
+      try {
+        fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf-8');
+      } catch (_) {}
       return leads;
     } catch (e) {
       console.warn('[MongoDB] Error reading from Atlas, falling back to local file:', e.message);
@@ -142,7 +168,7 @@ async function saveLead(lead) {
     }
   }
 
-  // 2. Save to local leads.json backup
+  // 2. Save to local leads.json backup safely
   try {
     let existingLeads = [];
     try {
@@ -154,7 +180,7 @@ async function saveLead(lead) {
     existingLeads.unshift(lead);
     fs.writeFileSync(LEADS_FILE, JSON.stringify(existingLeads, null, 2), 'utf-8');
   } catch (err) {
-    console.error('[Local Storage] Error updating leads.json:', err.message);
+    // Expected on read-only serverless filesystems (Vercel)
   }
 }
 
@@ -178,19 +204,19 @@ async function updateLeadStatus(id, status) {
     }
   }
 
-  // Update local file
+  // Update local file safely
   try {
     const existingLeads = JSON.parse(fs.readFileSync(LEADS_FILE, 'utf-8'));
     const idx = existingLeads.findIndex(l => String(l.id) === String(id) || String(l.leadNumber) === String(id));
     if (idx !== -1) {
       existingLeads[idx].status = status;
       existingLeads[idx].updatedAt = updatedAt;
-      fs.writeFileSync(LEADS_FILE, JSON.stringify(existingLeads, null, 2), 'utf-8');
+      try {
+        fs.writeFileSync(LEADS_FILE, JSON.stringify(existingLeads, null, 2), 'utf-8');
+      } catch (_) {}
       if (!updatedLead) updatedLead = existingLeads[idx];
     }
-  } catch (err) {
-    console.error('[Local Storage] Error updating status in leads.json:', err.message);
-  }
+  } catch (err) {}
 
   return updatedLead;
 }
@@ -227,7 +253,7 @@ function formatChatId(rawPhone) {
  */
 async function sendGreenApiMessage(chatId, message) {
   if (!GREEN_API_ID_INSTANCE || !GREEN_API_TOKEN_INSTANCE) {
-    console.warn('[Green API] Skipped message: Missing credentials in .env');
+    console.warn('[Green API] Skipped message: Missing credentials');
     return { success: false, reason: 'NO_CREDENTIALS' };
   }
 
@@ -292,7 +318,7 @@ async function triggerWhatsAppAutomations(lead) {
     customer: 'SKIPPED'
   };
 
-  const displayId = lead.id.startsWith('#') ? lead.id : `#${lead.id}`;
+  const displayId = String(lead.id).startsWith('#') ? lead.id : `#${lead.id}`;
 
   // 1. Message to Sales Agent (050-9611808)
   const agentChatId = formatChatId(SALES_AGENT_PHONE);
@@ -328,7 +354,42 @@ async function triggerWhatsAppAutomations(lead) {
   return results;
 }
 
-const server = http.createServer((req, res) => {
+/**
+ * Robust body parser supporting both pre-parsed serverless objects & Node streams
+ */
+async function parseBody(req) {
+  if (req.body !== undefined && req.body !== null) {
+    if (typeof req.body === 'object') return req.body;
+    if (typeof req.body === 'string') {
+      try {
+        return JSON.parse(req.body);
+      } catch (e) {
+        return {};
+      }
+    }
+  }
+
+  return new Promise((resolve) => {
+    let raw = '';
+    req.on('data', chunk => {
+      raw += chunk;
+      if (raw.length > 2e6) req.socket && req.socket.destroy();
+    });
+    req.on('end', () => {
+      try {
+        resolve(raw ? JSON.parse(raw) : {});
+      } catch (err) {
+        resolve({});
+      }
+    });
+    req.on('error', () => resolve({}));
+  });
+}
+
+/**
+ * Universal Request Handler (Runs natively in standalone Node.js and inside Vercel Serverless)
+ */
+async function requestHandler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -337,56 +398,64 @@ const server = http.createServer((req, res) => {
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
     res.end();
-  }
-
-  // Parse URL
-  const reqUrl = new URL(req.url, `http://${req.headers.host}`);
-  const pathname = reqUrl.pathname;
-
-  // ROUTE: /leads -> Serve leads.html dashboard
-  if (pathname === '/leads' || pathname === '/leads/') {
-    const leadsHtmlPath = path.join(PUBLIC_DIR, 'leads.html');
-    fs.readFile(leadsHtmlPath, (err, data) => {
-      if (err) {
-        res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end('Error loading leads dashboard');
-        return;
-      }
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.end(data);
-    });
     return;
   }
 
+  // Parse requested URL
+  const host = req.headers.host || 'localhost';
+  const effectiveUrl = req.headers['x-matched-path'] || req.headers['x-vercel-matched-path'] || req.url || '/';
+  const parsedUrl = new URL(effectiveUrl, `http://${host}`);
+  let pathname = parsedUrl.pathname;
+
+  // Resolve Vercel serverless rewrites if pointing to /api or /api/index
+  if (pathname === '/api/index' || pathname === '/api' || pathname === '/api/') {
+    const rawUrl = new URL(req.url || '/', `http://${host}`);
+    if (rawUrl.pathname && rawUrl.pathname !== '/api/index') {
+      pathname = rawUrl.pathname;
+    }
+  }
+
+  // Route: /leads -> Serve leads.html dashboard
+  if (pathname === '/leads' || pathname === '/leads/') {
+    const leadsHtmlPath = path.join(PUBLIC_DIR, 'leads.html');
+    try {
+      const data = fs.readFileSync(leadsHtmlPath);
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(data);
+      return;
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Error loading leads dashboard');
+      return;
+    }
+  }
+
+  // If calling an API route, ensure MongoDB Atlas is connected
+  if (pathname.startsWith('/api/') || pathname === '/api') {
+    await initMongoDB();
+  }
+
   // API Endpoint: Auth Login
-  if (pathname === '/api/auth/login' && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', () => {
-      try {
-        const { username, password } = JSON.parse(body);
-        if (username === 'adicore123' && password === 'c38410a3') {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ 
-            success: true, 
-            token: 'ok_adicore123', 
-            user: 'adicore123',
-            mongoConnected: isMongoConnected
-          }));
-        } else {
-          res.writeHead(401, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'שם משתמש או סיסמה שגויים' }));
-        }
-      } catch (e) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Invalid payload' }));
-      }
-    });
+  if ((pathname === '/api/auth/login' || pathname.endsWith('/auth/login')) && req.method === 'POST') {
+    const body = await parseBody(req);
+    const { username, password } = body;
+    if (username === 'adicore123' && password === 'c38410a3') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ 
+        success: true, 
+        token: 'ok_adicore123', 
+        user: 'adicore123',
+        mongoConnected: isMongoConnected
+      }));
+    } else {
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'שם משתמש או סיסמה שגויים' }));
+    }
     return;
   }
 
   // API Endpoint: Health & Database Status
-  if (pathname === '/api/status' && req.method === 'GET') {
+  if ((pathname === '/api/status' || pathname.endsWith('/status')) && req.method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       status: 'online',
@@ -399,106 +468,91 @@ const server = http.createServer((req, res) => {
   }
 
   // API Endpoint: Update Lead Status
-  if (pathname === '/api/leads/update-status' && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', async () => {
-      try {
-        const { id, status } = JSON.parse(body);
-        const updatedLead = await updateLeadStatus(id, status);
+  if ((pathname === '/api/leads/update-status' || pathname.endsWith('/update-status')) && req.method === 'POST') {
+    const body = await parseBody(req);
+    const { id, status } = body;
+    const updatedLead = await updateLeadStatus(id, status);
 
-        if (updatedLead) {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: true, lead: updatedLead, mongoSaved: isMongoConnected }));
-        } else {
-          res.writeHead(404, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Lead not found' }));
-        }
-      } catch (e) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Invalid payload' }));
-      }
-    });
+    if (updatedLead) {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, lead: updatedLead, mongoSaved: isMongoConnected }));
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Lead not found' }));
+    }
     return;
   }
 
   // API Endpoint: Leads API (GET all, POST new)
-  if (pathname === '/api/leads') {
+  if (pathname === '/api/leads' || pathname.endsWith('/leads') || pathname === '/api/leads/' || pathname.endsWith('/leads/')) {
     if (req.method === 'GET') {
-      getAllLeads().then(leads => {
+      try {
+        const leads = await getAllLeads();
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
         res.end(JSON.stringify(leads));
-      }).catch(err => {
+      } catch (err) {
         res.writeHead(500, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Failed to read leads' }));
-      });
+      }
       return;
     }
 
     if (req.method === 'POST') {
-      let body = '';
-      req.on('data', chunk => {
-        body += chunk;
-        if (body.length > 1e6) req.socket.destroy();
-      });
+      try {
+        const lead = await parseBody(req);
 
-      req.on('end', async () => {
-        try {
-          const lead = JSON.parse(body);
-
-          // Validation
-          if (!lead.fullName || !lead.phone || !lead.toolType) {
-            res.writeHead(400, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: 'Missing required fields' }));
-            return;
-          }
-
-          // Calculate clean sequential friendly ID (#1001, #1002, etc.)
-          const allLeads = await getAllLeads();
-          let maxNum = 1000;
-          for (const l of allLeads) {
-            const rawId = String(l.leadNumber || l.id || '').replace(/\D/g, '');
-            const parsed = parseInt(rawId, 10);
-            if (!isNaN(parsed) && parsed > maxNum) {
-              maxNum = parsed;
-            }
-          }
-          const nextLeadNumber = maxNum + 1;
-          lead.leadNumber = nextLeadNumber;
-          lead.id = `${nextLeadNumber}`; // Clean friendly number: "1004"
-          lead.status = lead.status || 'חדש';
-          lead.createdAt = lead.createdAt || new Date().toISOString();
-          lead.formattedTime = lead.formattedTime || new Date().toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' });
-
-          // Trigger Green API WhatsApp Automation with friendly lead number
-          const automationStatus = await triggerWhatsAppAutomations(lead);
-          lead.whatsappDelivery = automationStatus;
-
-          // Save to MongoDB Atlas & Local Backup
-          await saveLead(lead);
-
-          console.log(`[Wisepack Lead Saved] ID: #${lead.id} | Name: ${lead.fullName} | Phone: ${lead.phone} | Mongo: ${isMongoConnected ? 'Atlas' : 'Local'} | WA:`, automationStatus);
-
-          res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-          res.end(JSON.stringify({ 
-            success: true, 
-            leadId: `#${lead.id}`, 
-            rawId: lead.id,
-            receivedAt: lead.createdAt,
-            database: isMongoConnected ? 'MongoDB Atlas' : 'Local JSON',
-            whatsappDelivery: automationStatus
-          }));
-        } catch (err) {
-          console.error('[Wisepack Error]', err);
+        // Validation
+        if (!lead.fullName || !lead.phone || !lead.toolType) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Invalid JSON payload' }));
+          res.end(JSON.stringify({ error: 'Missing required fields' }));
+          return;
         }
-      });
+
+        // Calculate clean sequential friendly ID (#1001, #1002, etc.)
+        const allLeads = await getAllLeads();
+        let maxNum = 1000;
+        for (const l of allLeads) {
+          const rawId = String(l.leadNumber || l.id || '').replace(/\D/g, '');
+          const parsed = parseInt(rawId, 10);
+          if (!isNaN(parsed) && parsed > maxNum) {
+            maxNum = parsed;
+          }
+        }
+        const nextLeadNumber = maxNum + 1;
+        lead.leadNumber = nextLeadNumber;
+        lead.id = `${nextLeadNumber}`;
+        lead.status = lead.status || 'חדש';
+        lead.createdAt = lead.createdAt || new Date().toISOString();
+        lead.formattedTime = lead.formattedTime || new Date().toLocaleString('he-IL', { dateStyle: 'short', timeStyle: 'short' });
+
+        // Trigger Green API WhatsApp Automation with friendly lead number
+        const automationStatus = await triggerWhatsAppAutomations(lead);
+        lead.whatsappDelivery = automationStatus;
+
+        // Save to MongoDB Atlas & Local Backup
+        await saveLead(lead);
+
+        console.log(`[Wisepack Lead Saved] ID: #${lead.id} | Name: ${lead.fullName} | Phone: ${lead.phone} | Mongo: ${isMongoConnected ? 'Atlas' : 'Local'} | WA:`, automationStatus);
+
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ 
+          success: true, 
+          leadId: `#${lead.id}`, 
+          rawId: lead.id,
+          receivedAt: lead.createdAt,
+          database: isMongoConnected ? 'MongoDB Atlas' : 'Local JSON',
+          whatsappDelivery: automationStatus
+        }));
+      } catch (err) {
+        console.error('[Wisepack Error]', err);
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Invalid JSON payload' }));
+      }
       return;
     }
   }
 
-  // Static File Serving
+  // Static File Serving (for standalone node server)
   let relativePath = pathname === '/' ? '/index.html' : pathname;
   let filePath = path.join(PUBLIC_DIR, decodeURIComponent(relativePath));
 
@@ -523,17 +577,27 @@ const server = http.createServer((req, res) => {
     const stream = fs.createReadStream(filePath);
     stream.pipe(res);
   });
+}
+
+// Standalone Server Instance
+const server = http.createServer((req, res) => {
+  requestHandler(req, res);
 });
 
-// Initialize MongoDB then start HTTP server
-initMongoDB().then(() => {
-  server.listen(PORT, () => {
-    console.log(`\n===========================================`);
-    console.log(`⚡ Wisepack Server running at http://localhost:${PORT}`);
-    console.log(`🍃 Database: ${isMongoConnected ? 'MongoDB Atlas (Connected)' : 'Local JSON mode'}`);
-    console.log(`📊 CRM Dashboard: http://localhost:${PORT}/leads`);
-    console.log(`📄 Leads API: http://localhost:${PORT}/api/leads`);
-    console.log(`📱 Green API: ${GREEN_API_ID_INSTANCE ? 'Enabled' : '(Not configured)'}`);
-    console.log(`===========================================\n`);
+// If run directly via `node server.js`
+if (require.main === module) {
+  initMongoDB().then(() => {
+    server.listen(PORT, () => {
+      console.log(`\n===========================================`);
+      console.log(`⚡ Wisepack Server running at http://localhost:${PORT}`);
+      console.log(`🍃 Database: ${isMongoConnected ? 'MongoDB Atlas (Connected)' : 'Local JSON mode'}`);
+      console.log(`📊 CRM Dashboard: http://localhost:${PORT}/leads`);
+      console.log(`📄 Leads API: http://localhost:${PORT}/api/leads`);
+      console.log(`📱 Green API: ${GREEN_API_ID_INSTANCE ? 'Enabled' : '(Not configured)'}`);
+      console.log(`===========================================\n`);
+    });
   });
-});
+}
+
+module.exports = requestHandler;
+module.exports.initMongoDB = initMongoDB;
