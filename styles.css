@@ -567,16 +567,16 @@ button {
   align-items: center;
   justify-content: center;
   gap: 18px;
-  padding: 16px 32px;
-  background: rgba(16, 43, 80, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 14px 32px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
   border-radius: var(--radius-full);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2);
   font-size: 0.96rem;
-  color: #F8FAFC;
-  margin: 0 auto;
+  color: #102B50;
+  margin: 30px auto 0 auto;
 }
 
 .trust-item {
@@ -586,27 +586,29 @@ button {
 }
 
 .trust-item svg {
-  color: #38B6FF;
+  color: #175CD3;
   flex-shrink: 0;
 }
 
 .trust-item strong {
-  color: #38B6FF;
+  color: #175CD3;
+  font-weight: 800;
 }
 
 .trust-divider {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(16, 43, 80, 0.2);
   font-weight: bold;
 }
 
 /* Responsive Mobile Hero Styles (Under 992px where sticky bar is visible) */
 @media (max-width: 991px) {
   .hero-section {
-    padding: 38px 0 46px 0;
+    padding: 34px 0 42px 0;
     min-height: calc(100svh - 68px);
     display: flex;
     align-items: center;
     justify-content: center;
+    background-position: center 20%;
   }
 
   .hero-container {
@@ -616,19 +618,19 @@ button {
   .hero-status-pill {
     font-size: 0.82rem;
     padding: 6px 14px;
-    margin-bottom: 14px;
-  }
-
-  .hero-title {
-    font-size: 2.15rem;
-    line-height: 1.2;
     margin-bottom: 12px;
   }
 
+  .hero-title {
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
   .hero-subtitle {
-    font-size: 0.98rem;
+    font-size: 0.96rem;
     line-height: 1.55;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     padding: 0 4px;
   }
 
@@ -637,16 +639,32 @@ button {
     display: none !important;
   }
 
+  /* Frosted White Glass Trust Bar - positioned lower so it doesn't obstruct the battery photo */
   .hero-trust-bar {
-    border-radius: 18px;
+    border-radius: 20px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-    padding: 12px 20px;
+    gap: 9px;
+    padding: 14px 22px;
     width: auto;
     max-width: 320px;
-    font-size: 0.88rem;
-    background: rgba(16, 43, 80, 0.88);
+    font-size: 0.9rem;
+    color: #102B50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+    margin-top: 42px;
+    margin-bottom: 8px;
+  }
+
+  .hero-trust-bar .trust-item svg {
+    color: #175CD3;
+  }
+
+  .hero-trust-bar .trust-item strong {
+    color: #175CD3;
   }
 
   .trust-divider {
@@ -755,6 +773,144 @@ button {
 
 .link-arrow.whatsapp-link:hover {
   color: var(--whatsapp);
+}
+
+/* Services: Desktop vs Mobile Responsive Layout */
+.services-mobile-container {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .services-grid-desktop {
+    display: none !important;
+  }
+
+  .services-mobile-container {
+    display: block;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .services-segmented-tabs {
+    display: flex;
+    background: #EBF3FF;
+    border: 1.5px solid #D0E2FF;
+    padding: 5px;
+    border-radius: 9999px;
+    gap: 4px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(16, 43, 80, 0.05);
+  }
+
+  .service-tab-btn {
+    flex: 1;
+    padding: 9px 6px;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    color: #5E6C84;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .service-tab-btn:hover {
+    color: #102B50;
+  }
+
+  .service-tab-btn.active {
+    background: #FFFFFF;
+    color: #102B50;
+    box-shadow: 0 4px 12px rgba(16, 43, 80, 0.12);
+    font-weight: 800;
+  }
+
+  .tab-badge-pill {
+    background: #175CD3;
+    color: #FFFFFF;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 9999px;
+  }
+
+  .service-mobile-card {
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: 0 8px 24px rgba(16, 43, 80, 0.08);
+    position: relative;
+    transition: all 0.28s ease;
+  }
+
+  .service-mobile-card.featured-card {
+    border-color: #175CD3;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F9FF 100%);
+    box-shadow: 0 10px 28px rgba(23, 92, 211, 0.12);
+  }
+
+  .mobile-card-badge {
+    position: absolute;
+    top: -11px;
+    left: 20px;
+    background: #175CD3;
+    color: #FFFFFF;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px rgba(23, 92, 211, 0.25);
+  }
+
+  .mobile-card-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .mobile-card-meta {
+    flex: 1;
+  }
+
+  .service-mobile-card .service-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #102B50;
+    margin: 0 0 2px 0;
+    line-height: 1.25;
+  }
+
+  .mobile-card-subtag {
+    font-size: 0.82rem;
+    color: #5E6C84;
+    font-weight: 500;
+    display: block;
+  }
+
+  .service-mobile-card .service-icon-box {
+    margin-bottom: 0;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 12px;
+  }
+
+  .service-mobile-card .service-desc {
+    font-size: 0.94rem;
+    color: #4A5568;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
 }
 
 /* SECTION: TOOL TYPES */
@@ -1279,7 +1435,67 @@ button {
   color: rgba(255, 255, 255, 0.42);
 }
 
+/* Premium Select Dropdown */
+.select-wrap-premium {
+  position: relative;
+  width: 100%;
+}
+
+.premium-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 13px 44px 13px 42px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  font-size: 1.02rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.premium-select:hover {
+  border-color: rgba(56, 182, 255, 0.45);
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.premium-select:focus {
+  outline: none;
+  border-color: #38B6FF;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 4px rgba(56, 182, 255, 0.22);
+}
+
+.premium-select option {
+  background-color: #0A1C34;
+  color: #FFFFFF;
+  padding: 12px;
+  font-size: 0.98rem;
+}
+
+.select-chevron-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #38B6FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.select-wrap-premium:hover .select-chevron-icon {
+  color: #79D1FF;
+}
+
 .quote-field-group.has-error .premium-input,
+.quote-field-group.has-error .premium-select,
 .quote-step-tool.has-error .tool-chips-grid {
   border-color: #FF6B6B !important;
   box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.25) !important;

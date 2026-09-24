@@ -43,18 +43,122 @@ document.addEventListener('DOMContentLoaded', () => {
   const successClientNameEl = document.getElementById('successClientName');
   const successModalWhatsappBtn = document.getElementById('successModalWhatsappBtn');
 
-  // --- Tool Category Buttons (Click -> Auto-select in form) ---
-  const toolChips = document.querySelectorAll('.tool-chip');
-  toolChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      const chipVal = chip.getAttribute('data-chip');
-      toolChips.forEach(c => c.classList.remove('selected'));
-      chip.classList.add('selected');
-      if (toolTypeSelect) {
-        toolTypeSelect.value = chipVal;
-        clearFieldError('toolType');
+  // --- Tool Category Dropdown Change Listener ---
+  if (toolTypeSelect) {
+    toolTypeSelect.addEventListener('change', () => {
+      clearFieldError('toolType');
+      trackEvent('select_tool_dropdown', { tool: toolTypeSelect.value });
+    });
+  }
+
+  // --- Mobile Services Segmented Tab Switcher ---
+  const serviceTabBtns = document.querySelectorAll('.service-tab-btn');
+  const mobileCard = document.getElementById('serviceMobileCard');
+  const mobileBadge = document.getElementById('mobileCardBadge');
+  const mobileIcon = document.getElementById('mobileCardIcon');
+  const mobileTitle = document.getElementById('mobileCardTitle');
+  const mobileSubtag = document.getElementById('mobileCardSubtag');
+  const mobileDesc = document.getElementById('mobileCardDesc');
+  const mobileCta = document.getElementById('mobileCardCta');
+
+  const SERVICE_DATA = {
+    build: {
+      badge: false,
+      isFeatured: false,
+      icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+      title: 'ייצור סוללות בהתאמה אישית',
+      subtag: 'סוללות ליתיום חדשות באיכות פרימיום',
+      desc: 'זקוקים לסוללה חדשה? נבדוק את דרישות הכלי והשימוש ונבחן פתרון מתאים מבית Wisepack עם 12 חודשי אחריות.',
+      ctaText: 'פנייה לבדיקת ייצור סוללה',
+      ctaHref: '#contact',
+      isWa: false,
+      serviceName: 'ייצור סוללות בהתאמה אישית'
+    },
+    repair: {
+      badge: 'פנייה שכיחה',
+      isFeatured: true,
+      icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+      title: 'תיקון וחידוש סוללות',
+      subtag: 'איתור תקלות מעבדתי והחלפת תאים',
+      desc: 'הסוללה לא נטענת או אינה מתפקדת כרגיל? פנו אלינו לבירור ולבדיקת אפשרות תיקון במעבדה עם 3 חודשי אחריות.',
+      ctaText: 'בדיקת אפשרות לתיקון סוללה',
+      ctaHref: '#contact',
+      isWa: false,
+      serviceName: 'תיקון סוללות'
+    },
+    custom: {
+      badge: false,
+      isFeatured: false,
+      icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>`,
+      title: 'התאמה לכלים ומכשירים נוספים',
+      subtag: 'שואבי אבק, רחפנים, כלי עבודה ועוד',
+      desc: 'לא מצאתם את המכשיר שלכם ברשימה? שלחו דגם או תמונה בווטסאפ ונבדוק כיצד ניתן לעזור.',
+      ctaText: 'שליחת תמונה לבירור בוואטסאפ',
+      ctaHref: 'https://wa.me/972509611808?text=%D7%A9%D7%9C%D7%95%D7%9D%20Wisepack%2C%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%9B%D7%9C%D7%99%2F%D7%9E%D7%9B%D7%A9%D7%99%D7%A8%20%D7%95%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%91%D7%93%D7%95%D7%A2%20%D7%94%D7%AA%D7%90%D7%9E%D7%94%20%D7%9C%D7%A1%D7%95%D7%9C%D7%9C%D7%94.',
+      isWa: true,
+      serviceName: 'התאמה לכלים נוספים'
+    }
+  };
+
+  serviceTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabKey = btn.getAttribute('data-tab');
+      const data = SERVICE_DATA[tabKey];
+      if (!data) return;
+
+      // Update active tab button
+      serviceTabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Update card content with smooth transition
+      if (mobileCard) {
+        mobileCard.style.opacity = '0.35';
+        mobileCard.style.transform = 'translateY(4px)';
+
+        setTimeout(() => {
+          if (data.isFeatured) {
+            mobileCard.classList.add('featured-card');
+          } else {
+            mobileCard.classList.remove('featured-card');
+          }
+
+          if (mobileBadge) {
+            if (data.badge) {
+              mobileBadge.textContent = data.badge;
+              mobileBadge.style.display = 'block';
+            } else {
+              mobileBadge.style.display = 'none';
+            }
+          }
+
+          if (mobileIcon) mobileIcon.innerHTML = data.icon;
+          if (mobileTitle) mobileTitle.textContent = data.title;
+          if (mobileSubtag) mobileSubtag.textContent = data.subtag;
+          if (mobileDesc) mobileDesc.textContent = data.desc;
+
+          if (mobileCta) {
+            const spanText = mobileCta.querySelector('span');
+            if (spanText) spanText.textContent = data.ctaText;
+            mobileCta.href = data.ctaHref;
+            mobileCta.setAttribute('data-service', data.serviceName);
+
+            if (data.isWa) {
+              mobileCta.className = 'btn btn-whatsapp btn-block';
+              mobileCta.target = '_blank';
+              mobileCta.rel = 'noopener';
+            } else {
+              mobileCta.className = 'btn btn-primary btn-block select-service-trigger';
+              mobileCta.removeAttribute('target');
+              mobileCta.removeAttribute('rel');
+            }
+          }
+
+          mobileCard.style.opacity = '1';
+          mobileCard.style.transform = 'translateY(0)';
+        }, 120);
       }
-      trackEvent('select_tool_chip', { tool: chipVal });
+
+      trackEvent('switch_service_tab', { tab: tabKey });
     });
   });
 
@@ -82,15 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
         toolButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // Update form chips & dropdown
-        toolChips.forEach(c => {
-          if (c.getAttribute('data-chip') === selectedTool) {
-            c.classList.add('selected');
-          } else {
-            c.classList.remove('selected');
-          }
-        });
-
         if (toolTypeSelect) {
           toolTypeSelect.value = selectedTool;
           clearFieldError('toolType');
@@ -102,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contactSection = document.getElementById('contact');
         if (contactSection) {
           contactSection.scrollIntoView({ behavior: 'smooth' });
+          if (toolTypeSelect) toolTypeSelect.focus();
         }
       }
     });

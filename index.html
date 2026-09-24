@@ -125,7 +125,8 @@
           </p>
         </div>
 
-        <div class="services-grid">
+        <!-- Desktop 3-Card Grid (Hidden on mobile) -->
+        <div class="services-grid services-grid-desktop">
           <!-- Card 1 -->
           <div class="service-card">
             <div class="service-icon-box">
@@ -179,6 +180,52 @@
           </div>
         </div>
 
+        <!-- Mobile Unified Tabbed Card (Shown on mobile only: max-width: 768px) -->
+        <div class="services-mobile-container">
+          <!-- Segmented Tab Header Bar -->
+          <div class="services-segmented-tabs" role="tablist" aria-label="בחירת שירות">
+            <button type="button" class="service-tab-btn active" data-tab="build" id="tab-btn-build" role="tab" aria-selected="true">
+              <span class="tab-icon">⚡</span>
+              <span>ייצור סוללות</span>
+            </button>
+            <button type="button" class="service-tab-btn" data-tab="repair" id="tab-btn-repair" role="tab" aria-selected="false">
+              <span class="tab-icon">🔧</span>
+              <span>תיקון סוללות</span>
+              <span class="tab-badge-pill">שכיח</span>
+            </button>
+            <button type="button" class="service-tab-btn" data-tab="custom" id="tab-btn-custom" role="tab" aria-selected="false">
+              <span class="tab-icon">➕</span>
+              <span>כלים נוספים</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Active Service Card -->
+          <div class="service-mobile-card" id="serviceMobileCard">
+            <div class="mobile-card-badge" id="mobileCardBadge" style="display: none;">פנייה שכיחה</div>
+            
+            <div class="mobile-card-top">
+              <div class="service-icon-box" id="mobileCardIcon">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div class="mobile-card-meta">
+                <h3 class="service-title" id="mobileCardTitle">ייצור סוללות בהתאמה אישית</h3>
+                <span class="mobile-card-subtag" id="mobileCardSubtag">סוללות חדשות ברמה הנדסית גבוהה</span>
+              </div>
+            </div>
+
+            <p class="service-desc" id="mobileCardDesc">
+              זקוקים לסוללה חדשה? נבדוק את דרישות הכלי והשימוש ונבחן פתרון מתאים עם 12 חודשי אחריות.
+            </p>
+
+            <div class="service-action" id="mobileCardAction">
+              <a href="#contact" class="btn btn-primary btn-block select-service-trigger" id="mobileCardCta" data-service="ייצור סוללות בהתאמה אישית">
+                <span>פנייה לבדיקת ייצור</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -205,44 +252,29 @@
           <!-- The Form -->
           <form id="leadForm" class="fast-lead-form" novalidate>
             
-            <!-- Step 1: Visual Interactive Tool Chips -->
-            <div class="quote-step-tool" id="group-toolType">
-              <label class="form-label-step">
+            <!-- Step 1: Tool Types Dropdown -->
+            <div class="quote-field-group" id="group-toolType" style="margin-bottom: 16px;">
+              <label for="toolType" class="form-label-step">
                 <span>1. בחרו את סוג הכלי:</span>
                 <span class="required-star">*</span>
               </label>
-              <div class="tool-chips-grid">
-                <button type="button" class="tool-chip" data-chip="אופניים חשמליים">
-                  <span class="chip-icon">🚲</span>
-                  <span class="chip-label">אופניים חשמליים</span>
-                </button>
-                <button type="button" class="tool-chip" data-chip="טרקטורונים חשמליים">
-                  <span class="chip-icon">🚜</span>
-                  <span class="chip-label">טרקטורון חשמלי</span>
-                </button>
-                <button type="button" class="tool-chip" data-chip="שואבי אבק">
-                  <span class="chip-icon">🧹</span>
-                  <span class="chip-label">שואב אבק</span>
-                </button>
-                <button type="button" class="tool-chip" data-chip="רחפנים">
-                  <span class="chip-icon">🛸</span>
-                  <span class="chip-label">רחפן</span>
-                </button>
-                <button type="button" class="tool-chip" data-chip="כלים ומכשירים נוספים">
-                  <span class="chip-icon">⚡</span>
-                  <span class="chip-label">כלי / מכשיר אחר</span>
-                </button>
+              <div class="input-wrap-premium select-wrap-premium">
+                <span class="input-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </span>
+                <select id="toolType" name="toolType" class="premium-input premium-select" required>
+                  <option value="" disabled selected>בחרו את סוג הכלי שלכם...</option>
+                  <option value="אופניים חשמליים">🚲 אופניים חשמליים</option>
+                  <option value="טרקטורונים חשמליים">🚜 טרקטורון חשמלי</option>
+                  <option value="שואבי אבק">🧹 שואב אבק (Dyson וכד')</option>
+                  <option value="רחפנים">🛸 רחפן / צילום אווירי</option>
+                  <option value="כלים ומכשירים נוספים">⚡ כלי / מכשיר חשמלי אחר</option>
+                </select>
+                <span class="select-chevron-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
               </div>
-              <!-- Hidden select for form value & accessibility -->
-              <select id="toolType" name="toolType" class="sr-only-select" required>
-                <option value="" disabled selected>בחרו כלי...</option>
-                <option value="אופניים חשמליים">אופניים חשמליים</option>
-                <option value="טרקטורונים חשמליים">טרקטורונים חשמליים</option>
-                <option value="שואבי אבק">שואבי אבק</option>
-                <option value="רחפנים">רחפנים</option>
-                <option value="כלים ומכשירים נוספים">כלים ומכשירים נוספים</option>
-              </select>
-              <div class="form-error" id="error-toolType" role="alert">נא לבחור את סוג הכלי</div>
+              <div class="form-error" id="error-toolType" role="alert">נא לבחור את סוג הכלי מהרשימה</div>
             </div>
 
             <!-- Step 2: Ultra-Short Contact Fields (Name & Phone) -->
