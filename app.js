@@ -43,13 +43,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const successClientNameEl = document.getElementById('successClientName');
   const successModalWhatsappBtn = document.getElementById('successModalWhatsappBtn');
 
-  // --- Tool Category Dropdown Change Listener ---
-  if (toolTypeSelect) {
-    toolTypeSelect.addEventListener('change', () => {
-      clearFieldError('toolType');
-      trackEvent('select_tool_dropdown', { tool: toolTypeSelect.value });
-    });
+  // --- Dynamic Tool Types Loading from API / MongoDB ---
+  async function loadToolTypes() {
+    if (!toolTypeSelect) return;
+    try {
+      const res = await fetch('/api/tool-types');
+      if (res.ok) {
+        const data = await res.json();
+        const types = data.toolTypes || [];
+        if (Array.isArray(types) && types.length > 0) {
+          const currentVal = toolTypeSelect.value;
+          toolTypeSelect.innerHTML = '<option value="" disabled selected>בחרו את סוג הכלי שלכם...</option>';
+          types.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item;
+            opt.textContent = item;
+            toolTypeSelect.appendChild(opt);
+          });
+          if (currentVal && types.includes(currentVal)) {
+            toolTypeSelect.value = currentVal;
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('Could not load dynamic tool types:', err);
+    }
   }
+  loadToolTypes();
 
   // --- Mobile Services Segmented Tab Switcher ---
   const serviceTabBtns = document.querySelectorAll('.service-tab-btn');
@@ -92,10 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
       icon: `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>`,
       title: 'התאמה לכלים ומכשירים נוספים',
       subtag: 'שואבי אבק, רחפנים, כלי עבודה ועוד',
-      desc: 'לא מצאתם את המכשיר שלכם ברשימה? שלחו דגם או תמונה בווטסאפ ונבדוק כיצד ניתן לעזור.',
-      ctaText: 'שליחת תמונה לבירור בוואטסאפ',
-      ctaHref: 'https://wa.me/972509611808?text=%D7%A9%D7%9C%D7%95%D7%9D%20Wisepack%2C%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%9B%D7%9C%D7%99%2F%D7%9E%D7%9B%D7%A9%D7%99%D7%A8%20%D7%95%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%91%D7%93%D7%95%D7%A2%20%D7%94%D7%AA%D7%90%D7%9E%D7%94%20%D7%9C%D7%A1%D7%95%D7%9C%D7%9C%D7%94.',
-      isWa: true,
+      desc: 'לא מצאתם את המכשיר שלכם ברשימה? מלאו פרטים בטופס ונבדוק במעבדה כיצד נוכל לעזור.',
+      ctaText: 'פנייה לבדיקת התאמה מיוחדת',
+      ctaHref: '#contact',
+      isWa: false,
       serviceName: 'התאמה לכלים נוספים'
     }
   };

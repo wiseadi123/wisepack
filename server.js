@@ -446,6 +446,12 @@ async function requestHandler(req, res) {
     await initMongoDB();
   }
 
+  // API Endpoint: Tool Types Management (Dropdown Options)
+  if (pathname === '/api/tool-types' || pathname.endsWith('/tool-types')) {
+    const toolTypesHandler = require('./api/tool-types.js');
+    return toolTypesHandler(req, res);
+  }
+
   // API Endpoint: Auth Login
   if ((pathname === '/api/auth/login' || pathname.endsWith('/auth/login')) && req.method === 'POST') {
     const body = await parseBody(req);

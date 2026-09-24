@@ -573,6 +573,61 @@
       opacity: 0.4;
     }
 
+    /* TOOL TYPES MANAGEMENT CHIPS */
+    .tool-settings-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px 20px;
+      margin-top: 24px;
+      box-shadow: var(--shadow-xs);
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .tool-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      border-radius: 20px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--primary);
+      transition: all 0.2s;
+    }
+
+    .tool-chip:hover {
+      background: #E2E8F0;
+      border-color: #94A3B8;
+    }
+
+    .tool-chip-del {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(239, 68, 68, 0.12);
+      color: #DC2626;
+      border: none;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 800;
+      line-height: 1;
+      transition: all 0.15s;
+      padding: 0;
+    }
+
+    .tool-chip-del:hover {
+      background: #DC2626;
+      color: #FFFFFF;
+      transform: scale(1.15);
+    }
+
     /* LOGIN MODAL (Light theme matching the landing page) */
     .auth-overlay {
       position: fixed;
@@ -987,6 +1042,38 @@
 
         </div>
 
+        <!-- TOOL TYPES MANAGEMENT CARD (ניהול דרופדאון בטופס) -->
+        <div class="tool-settings-card" id="toolSettingsCard">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px;">
+            <div>
+              <h2 style="font-size: 1.15rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; margin: 0 0 4px 0;">
+                <span>⚙️ ניהול סוגי כלים בטופס (Dropdown)</span>
+                <span class="user-pill" style="font-size: 0.72rem; padding: 2px 8px; background: #EBF3FF; color: #175CD3; border-color: #C9E0FF; font-weight: 700;">סנכרון חי ל-Atlas</span>
+              </h2>
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+                סוגי הכלים שנוספים או נמחקים כאן מתעדכנים מיידית בטופס הצעת המחיר בדף הנחיתה ובפילטר הלידים.
+              </p>
+            </div>
+          </div>
+
+          <!-- Add new tool input -->
+          <form id="addToolTypeForm" style="display: flex; gap: 10px; margin-bottom: 18px; max-width: 540px; flex-wrap: wrap;">
+            <input type="text" id="newToolTypeInput" class="form-input" placeholder="הזן שם סוג כלי חדש (למשל: סקייטבורד חשמלי)..." style="flex: 1; min-width: 220px;" required>
+            <button type="submit" class="btn btn-primary" id="addToolTypeBtn" style="padding: 10px 18px; white-space: nowrap;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>הוסף לרשימה</span>
+            </button>
+          </form>
+
+          <!-- Current Chips Container -->
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 10px;">סוגי הכלים הפעילים בטופס כעת (לחצו על ✕ להסרה):</label>
+            <div id="toolChipsContainer" style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <!-- Populated via loadAdminTools() -->
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
 
@@ -1030,6 +1117,7 @@
         authOverlay.style.display = 'none';
         dashboardWrap.style.display = 'block';
         loadLeads();
+        loadAdminTools();
       } else {
         authOverlay.style.display = 'flex';
         dashboardWrap.style.display = 'none';
@@ -1049,6 +1137,7 @@
         authOverlay.style.display = 'none';
         dashboardWrap.style.display = 'block';
         loadLeads();
+        loadAdminTools();
       } else {
         authError.style.display = 'block';
       }
@@ -1227,12 +1316,127 @@
       }).join('');
     }
 
+    // --- TOOL TYPES MANAGEMENT LOGIC ---
+    let currentAdminTools = [];
+
+    async function loadAdminTools() {
+      const container = document.getElementById('toolChipsContainer');
+      if (!container) return;
+      try {
+        const res = await fetch('/api/tool-types');
+        if (res.ok) {
+          const data = await res.json();
+          currentAdminTools = data.toolTypes || data.tools || (Array.isArray(data) ? data : []);
+          renderAdminToolChips();
+          updateLeadsFilterTools();
+        }
+      } catch (err) {
+        console.warn('Could not load tool types:', err);
+      }
+    }
+
+    function renderAdminToolChips() {
+      const container = document.getElementById('toolChipsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      if (!currentAdminTools.length) {
+        container.innerHTML = '<span style="color: var(--text-muted); font-size: 0.88rem;">אין סוגי כלים מוגדרים.</span>';
+        return;
+      }
+      currentAdminTools.forEach(tool => {
+        const chip = document.createElement('div');
+        chip.className = 'tool-chip';
+        chip.innerHTML = `
+          <span>${tool}</span>
+          <button type="button" class="tool-chip-del" title="הסר מהטופס" data-tool="${tool}">✕</button>
+        `;
+        const delBtn = chip.querySelector('.tool-chip-del');
+        delBtn.addEventListener('click', () => deleteAdminTool(tool));
+        container.appendChild(chip);
+      });
+    }
+
+    function updateLeadsFilterTools() {
+      const filter = document.getElementById('toolFilter');
+      if (!filter) return;
+      const currentVal = filter.value;
+      filter.innerHTML = '<option value="ALL">כל סוגי הכלים</option>';
+      currentAdminTools.forEach(tool => {
+        const opt = document.createElement('option');
+        opt.value = tool;
+        opt.textContent = tool;
+        filter.appendChild(opt);
+      });
+      if (currentVal && currentAdminTools.includes(currentVal)) {
+        filter.value = currentVal;
+      }
+    }
+
+    async function addAdminTool(toolName) {
+      if (!toolName) return;
+      try {
+        const res = await fetch('/api/tool-types', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'add', name: toolName })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          currentAdminTools = data.toolTypes || data.tools || [];
+          renderAdminToolChips();
+          updateLeadsFilterTools();
+          showToast(`נוסף בהצלחה: "${toolName}"`);
+        } else {
+          showToast('שגיאה בהוספת סוג הכלי');
+        }
+      } catch (e) {
+        showToast('שגיאת תקשורת');
+      }
+    }
+
+    async function deleteAdminTool(toolName) {
+      if (!confirm(`האם להסיר את "${toolName}" מרשימת הבחירה בטופס?`)) return;
+      try {
+        const res = await fetch('/api/tool-types', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'delete', name: toolName })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          currentAdminTools = data.toolTypes || data.tools || [];
+          renderAdminToolChips();
+          updateLeadsFilterTools();
+          showToast(`הוסר מהטופס: "${toolName}"`);
+        } else {
+          showToast('שגיאה בהסרת סוג הכלי');
+        }
+      } catch (e) {
+        showToast('שגיאת תקשורת');
+      }
+    }
+
+    // Add tool type form listener
+    const addToolTypeForm = document.getElementById('addToolTypeForm');
+    const newToolTypeInput = document.getElementById('newToolTypeInput');
+    if (addToolTypeForm && newToolTypeInput) {
+      addToolTypeForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const val = newToolTypeInput.value.trim();
+        if (val) {
+          addAdminTool(val);
+          newToolTypeInput.value = '';
+        }
+      });
+    }
+
     // Search and filters listeners
     searchInput.addEventListener('input', render);
     statusFilter.addEventListener('change', render);
     toolFilter.addEventListener('change', render);
     refreshBtn.addEventListener('click', () => {
       loadLeads();
+      loadAdminTools();
       showToast('הנתונים רועננו בהצלחה');
     });
 
