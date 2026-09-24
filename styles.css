@@ -437,7 +437,7 @@ button {
 .hero-section {
   position: relative;
   background-image: 
-    linear-gradient(180deg, rgba(10, 28, 52, 0.82) 0%, rgba(16, 43, 80, 0.74) 45%, rgba(10, 28, 52, 0.88) 100%),
+    linear-gradient(180deg, rgba(10, 28, 52, 0.70) 0%, rgba(16, 43, 80, 0.48) 45%, rgba(10, 28, 52, 0.82) 100%),
     url('assets/hero-battery.jpg');
   background-position: center 30%;
   background-size: cover;
@@ -566,49 +566,53 @@ button {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  padding: 14px 32px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  gap: 20px;
+  padding: 14px 34px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
   border-radius: var(--radius-full);
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   font-size: 0.96rem;
-  color: #102B50;
-  margin: 30px auto 0 auto;
+  color: #0F172A;
+  margin: 50px auto 0 auto;
 }
 
 .trust-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+  font-weight: 500;
+  color: #1E293B;
 }
 
 .trust-item svg {
-  color: #175CD3;
+  color: #0284C7;
   flex-shrink: 0;
+  filter: drop-shadow(0 1px 2px rgba(2, 132, 199, 0.2));
 }
 
 .trust-item strong {
-  color: #175CD3;
+  color: #0284C7;
   font-weight: 800;
 }
 
 .trust-divider {
-  color: rgba(16, 43, 80, 0.2);
+  color: rgba(15, 23, 42, 0.25);
   font-weight: bold;
 }
 
 /* Responsive Mobile Hero Styles (Under 992px where sticky bar is visible) */
 @media (max-width: 991px) {
   .hero-section {
-    padding: 34px 0 42px 0;
+    padding: 36px 0 48px 0;
     min-height: calc(100svh - 68px);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-position: center 20%;
+    background-position: center 32%;
   }
 
   .hero-container {
@@ -639,32 +643,36 @@ button {
     display: none !important;
   }
 
-  /* Frosted White Glass Trust Bar - positioned lower so it doesn't obstruct the battery photo */
+  /* Frosted White Glass Trust Bar - positioned lower down so the battery photo is clearly visible */
   .hero-trust-bar {
     border-radius: 20px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 9px;
-    padding: 14px 22px;
+    gap: 11px;
+    padding: 16px 24px;
     width: auto;
     max-width: 320px;
-    font-size: 0.9rem;
-    color: #102B50;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1.5px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
-    margin-top: 42px;
-    margin-bottom: 8px;
+    font-size: 0.92rem;
+    color: #0F172A;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 18px 40px -4px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    margin-top: 58px;
+    margin-bottom: 16px;
+  }
+
+  .hero-trust-bar .trust-item {
+    color: #1E293B;
   }
 
   .hero-trust-bar .trust-item svg {
-    color: #175CD3;
+    color: #0284C7;
   }
 
   .hero-trust-bar .trust-item strong {
-    color: #175CD3;
+    color: #0284C7;
   }
 
   .trust-divider {
