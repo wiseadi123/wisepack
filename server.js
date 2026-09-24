@@ -158,14 +158,22 @@ async function getAllLeads() {
  * Save new lead (to MongoDB Atlas and local file)
  */
 async function saveLead(lead) {
+  const result = { atlas: false, local: false, error: null };
+
   // 1. Save to MongoDB Atlas
   if (isMongoConnected && leadsCollection) {
     try {
-      await leadsCollection.insertOne({ ...lead });
+      const docToInsert = Object.assign({}, lead);
+      delete docToInsert._id; // Ensure clean insert
+      const insertRes = await leadsCollection.insertOne(docToInsert);
+      result.atlas = !!insertRes.acknowledged;
       console.log(`[MongoDB] ✅ Lead #${lead.id} saved to Atlas collection "leads"`);
     } catch (e) {
+      result.error = e.message;
       console.error('[MongoDB] Error saving lead to Atlas:', e.message);
     }
+  } else {
+    result.error = `Not connected to MongoDB (isMongoConnected=${isMongoConnected})`;
   }
 
   // 2. Save to local leads.json backup safely
@@ -179,9 +187,12 @@ async function saveLead(lead) {
     existingLeads = existingLeads.filter(l => String(l.id) !== String(lead.id));
     existingLeads.unshift(lead);
     fs.writeFileSync(LEADS_FILE, JSON.stringify(existingLeads, null, 2), 'utf-8');
+    result.local = true;
   } catch (err) {
     // Expected on read-only serverless filesystems (Vercel)
   }
+
+  return result;
 }
 
 /**
@@ -530,9 +541,9 @@ async function requestHandler(req, res) {
         lead.whatsappDelivery = automationStatus;
 
         // Save to MongoDB Atlas & Local Backup
-        await saveLead(lead);
+        const saveResult = await saveLead(lead);
 
-        console.log(`[Wisepack Lead Saved] ID: #${lead.id} | Name: ${lead.fullName} | Phone: ${lead.phone} | Mongo: ${isMongoConnected ? 'Atlas' : 'Local'} | WA:`, automationStatus);
+        console.log(`[Wisepack Lead Saved] ID: #${lead.id} | Name: ${lead.fullName} | Phone: ${lead.phone} | Mongo: ${isMongoConnected ? 'Atlas' : 'Local'} | WA:`, automationStatus, 'SaveResult:', saveResult);
 
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
         res.end(JSON.stringify({ 
@@ -541,6 +552,8 @@ async function requestHandler(req, res) {
           rawId: lead.id,
           receivedAt: lead.createdAt,
           database: isMongoConnected ? 'MongoDB Atlas' : 'Local JSON',
+          mongoSaved: saveResult.atlas,
+          mongoError: saveResult.error,
           whatsappDelivery: automationStatus
         }));
       } catch (err) {
