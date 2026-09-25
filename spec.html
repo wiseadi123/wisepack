@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wisepack | אפיון והגדרת סוללה בהתאמה אישית</title>
   <meta name="description" content="טופס אפיון והגדרת מידות, אמפר ומחברים לסוללת ליתיום בהתאמה אישית ממעבדת Wisepack.">
   <meta name="theme-color" content="#102B50">
@@ -230,90 +230,6 @@
       .dimensions-grid {
         grid-template-columns: 1fr;
       }
-    }
-
-    .box-preview-wrap {
-      background: linear-gradient(145deg, #0A1C34, #102B50);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 220px;
-      color: #FFFFFF;
-      position: relative;
-      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .cube-container {
-      width: 180px;
-      height: 140px;
-      perspective: 1000px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      margin-top: 15px;
-    }
-
-    .cube {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      transform-style: preserve-3d;
-      transform: rotateX(-15deg) rotateY(-40deg);
-      transition: transform 0.4s ease-out, width 0.3s, height 0.3s;
-    }
-
-    .cube .face {
-      position: absolute;
-      background: rgba(23, 92, 211, 0.7);
-      border: 2px solid #38B6FF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: white;
-      font-size: 13px;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-      transition: width 0.3s, height 0.3s, transform 0.3s;
-      text-align: center;
-    }
-
-    .cube .face.front  { background: rgba(16, 43, 80, 0.85); flex-direction: column; }
-    .cube .face.back   { background: rgba(16, 43, 80, 0.85); }
-    .cube .face.right  { background: rgba(23, 92, 211, 0.85); flex-direction: column; }
-    .cube .face.left   { background: rgba(23, 92, 211, 0.85); }
-    .cube .face.top    { background: rgba(30, 79, 145, 0.85); }
-    .cube .face.bottom { background: rgba(30, 79, 145, 0.85); }
-
-    .cube .terminals {
-      display: flex;
-      gap: 15px;
-      transform: rotateX(0deg) translateZ(1px);
-    }
-    .cube .t-red, .cube .t-black {
-      display: block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-    }
-    .cube .t-red { background: #EF4444; }
-    .cube .t-black { background: #25D366; }
-
-    .box-live-badge {
-      margin-top: 14px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--cyan);
-      letter-spacing: 0.5px;
-      text-align: center;
     }
 
     .measure-inputs-col {
@@ -756,6 +672,8 @@
       margin: 0 auto 20px auto;
     }
   </style>
+  <link rel="stylesheet" href="/assets/battery-preview.css">
+  <script type="module" src="/assets/battery-preview.js"></script>
 </head>
 <body>
 
@@ -805,24 +723,30 @@
           <div class="dimensions-grid">
             <!-- 3D visual preview box -->
             <div class="box-preview-wrap">
-              <div class="cube-container" id="cubeContainer">
-                <div class="cube" id="liveCube">
-                  <div class="face front">חזית</div>
-                  <div class="face back"></div>
-                  <div class="face right"><span>אורך</span></div>
-                  <div class="face left"></div>
-                  <div class="face top">
-                    <div class="terminals">
-                      <span class="t-red"></span>
-                      <span class="t-black"></span>
-                    </div>
-                  </div>
-                  <div class="face bottom"></div>
+              <div class="preview-heading"><strong>תצוגת המארז</strong><span class="preview-status">מארז סגור</span></div>
+              <div class="battery-stage" id="batteryStage" tabindex="0" role="group" aria-label="תצוגה תלת־ממדית של המארז" aria-describedby="previewHint" data-state="loading">
+                <div class="battery-fallback" role="status">
+                  <svg viewBox="0 0 220 220" aria-hidden="true"><defs><linearGradient id="fallbackFront" x2="1" y2="1"><stop stop-color="#526775"/><stop offset="1" stop-color="#252d38"/></linearGradient></defs><path d="M36 65 118 34 184 64 105 96Z" fill="#8493a3" stroke="#acbac7"/><path d="M36 65 105 96 105 192 36 157Z" fill="url(#fallbackFront)" stroke="#6c8797"/><path d="M105 96 184 64 184 157 105 192Z" fill="#252d38" stroke="#546b7c"/><path d="M37 75 105 107 183 75" fill="none" stroke="#58e1d0" stroke-width="3"/><text x="48" y="132" fill="#edf3f8" font-size="10" transform="rotate(25 48 132)">WISEPACK</text></svg>
+                  <span>הדמיית המארז · המידות מתעדכנות בטופס</span>
+                </div>
+                <div class="battery-labels" id="batteryLabels" aria-hidden="false"></div>
+              </div>
+              <p class="preview-material">גרפיט מט · מכסה בגימור סאטן</p>
+              <div class="preview-controls" aria-label="שליטה בתצוגה">
+                <div class="preview-views">
+                  <button type="button" id="resetView" aria-label="איפוס מבט" title="איפוס מבט" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5M12 12v9M12 12 4 7.5"/></svg></button>
+                  <button type="button" id="frontView" aria-pressed="false">חזית</button>
+                  <button type="button" id="sideView" aria-pressed="false">צד</button>
+                  <button type="button" id="topView" aria-pressed="false">על</button>
+                </div>
+                <div class="preview-zoom">
+                  <button type="button" id="zoomOut" aria-label="הקטנת המארז"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button>
+                  <button type="button" id="zoomIn" aria-label="הגדלת המארז"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12M12 6v12"/></svg></button>
                 </div>
               </div>
-              <div class="box-live-badge" id="liveBoxDimensions">
-                25 ס״מ (א) × 10 ס״מ (ר) × 12 ס״מ (ג)
-              </div>
+              <button type="button" class="preview-dimensions-toggle" id="toggleDimensions" aria-pressed="true" aria-controls="batteryLabels"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 15 12-12 6 6L9 21 3 15Zm8-8 3 3m-6 0 2 2m-5 1 3 3"/></svg><span>הסתרת מידות</span></button>
+              <p class="preview-hint" id="previewHint">גררו לסיבוב · חיצי מקלדת · צביטה לזום<br>הדמיה להמחשה; גימור ומחברים נקבעים באפיון</p>
+              <div class="box-live-badge" id="liveBoxDimensions" aria-live="polite" aria-atomic="true"><span>אורך<b><span data-dimension="length">25</span> <small>ס״מ</small></b></span><span>רוחב<b><span data-dimension="width">10</span> <small>ס״מ</small></b></span><span>גובה<b><span data-dimension="height">12</span> <small>ס״מ</small></b></span></div>
             </div>
 
             <!-- Measurement sliders & inputs -->
@@ -1268,27 +1192,6 @@
 
       let leadData = null;
 
-      // 2. Fetch existing lead info if leadId present
-      if (leadId) {
-        try {
-          const res = await fetch(`/api/spec?id=${encodeURIComponent(leadId)}`);
-          if (res.ok) {
-            const json = await res.json();
-            if (json.success && json.lead) {
-              leadData = json.lead;
-              leadBadgeText.textContent = `פנייה #${leadData.id} • ${leadData.fullName} (${leadData.toolType})`;
-              
-              // If already completed, prefill
-              if (leadData.spec) {
-                applyPrefillSpec(leadData.spec);
-              }
-            }
-          }
-        } catch (e) {
-          console.warn('Could not fetch lead details:', e);
-        }
-      }
-
       // --- Interactive Dimensions Sync ---
       const lengthInput = document.getElementById('lengthInput');
       const lengthRange = document.getElementById('lengthRange');
@@ -1300,66 +1203,16 @@
       const sumDims = document.getElementById('sumDims');
 
       function syncDimensions() {
-        const l = parseFloat(lengthInput.value) || 25;
-        const w = parseFloat(widthInput.value) || 10;
-        const h = parseFloat(heightInput.value) || 12;
-        liveBoxDimensions.textContent = `${l} ס״מ (א) × ${w} ס״מ (ר) × ${h} ס״מ (ג)`;
-        sumDims.textContent = `${l}×${w}×${h} ס״מ`;
-
-        // Update 3D Cube live
-        const liveCube = document.getElementById('liveCube');
-        if (liveCube) {
-          // Normalize max dimension to ~120px to fit container
-          const maxDim = Math.max(l, w, h);
-          const scale = 120 / maxDim;
-          
-          const pxL = l * scale; // Depth (Z)
-          const pxW = w * scale; // Width (X)
-          const pxH = h * scale; // Height (Y)
-          
-          liveCube.style.width = pxW + 'px';
-          liveCube.style.height = pxH + 'px';
-          
-          const front = liveCube.querySelector('.front');
-          const back = liveCube.querySelector('.back');
-          const right = liveCube.querySelector('.right');
-          const left = liveCube.querySelector('.left');
-          const top = liveCube.querySelector('.top');
-          const bottom = liveCube.querySelector('.bottom');
-          
-          if (front) {
-            front.style.width = pxW + 'px';
-            front.style.height = pxH + 'px';
-            front.style.transform = `translateZ(${pxL / 2}px)`;
-            front.innerHTML = `<span>רוחב</span><br><span style="font-size:0.75rem">${w}</span>`;
-          }
-          if (back) {
-            back.style.width = pxW + 'px';
-            back.style.height = pxH + 'px';
-            back.style.transform = `rotateY(180deg) translateZ(${pxL / 2}px)`;
-          }
-          if (right) {
-            right.style.width = pxL + 'px';
-            right.style.height = pxH + 'px';
-            right.style.transform = `rotateY(90deg) translateZ(${pxW / 2}px)`;
-            right.innerHTML = `<span>אורך</span><br><span style="font-size:0.75rem">${l}</span>`;
-          }
-          if (left) {
-            left.style.width = pxL + 'px';
-            left.style.height = pxH + 'px';
-            left.style.transform = `rotateY(-90deg) translateZ(${pxW / 2}px)`;
-          }
-          if (top) {
-            top.style.width = pxW + 'px';
-            top.style.height = pxL + 'px';
-            top.style.transform = `rotateX(90deg) translateZ(${pxH / 2}px)`;
-          }
-          if (bottom) {
-            bottom.style.width = pxW + 'px';
-            bottom.style.height = pxL + 'px';
-            bottom.style.transform = `rotateX(-90deg) translateZ(${pxH / 2}px)`;
-          }
+        const inputs = [lengthInput, widthInput, heightInput];
+        if (!inputs.every(input => Number.isFinite(input.valueAsNumber) && input.validity.valid)) return;
+        const [l, w, h] = inputs.map(input => input.valueAsNumber);
+        for (const [key, value] of Object.entries({ length: l, width: w, height: h })) {
+          liveBoxDimensions.querySelector(`[data-dimension="${key}"]`).textContent = value;
         }
+        sumDims.textContent = `${l}×${w}×${h} ס״מ`;
+        document.dispatchEvent(new CustomEvent('battery-dimensions', {
+          detail: { length: l, width: w, height: h }
+        }));
       }
 
       function setupLinked(input, range) {
@@ -1513,6 +1366,27 @@
 
         if (spec.notes) {
           document.getElementById('notesInput').value = spec.notes;
+        }
+      }
+
+      // 2. Fetch existing lead info if leadId present
+      if (leadId) {
+        try {
+          const res = await fetch(`/api/spec?id=${encodeURIComponent(leadId)}`);
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success && json.lead) {
+              leadData = json.lead;
+              leadBadgeText.textContent = `פנייה #${leadData.id} • ${leadData.fullName} (${leadData.toolType})`;
+              
+              // If already completed, prefill
+              if (leadData.spec) {
+                applyPrefillSpec(leadData.spec);
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Could not fetch lead details:', e);
         }
       }
 
