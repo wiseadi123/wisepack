@@ -342,52 +342,6 @@
       border: 2px solid #FFFFFF;
     }
 
-    /* SHAPES SELECTION */
-    .shape-options {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    @media (max-width: 600px) {
-      .shape-options {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .shape-card {
-      border: 1.5px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 12px 10px;
-      text-align: center;
-      cursor: pointer;
-      background: #FFFFFF;
-      transition: all 0.2s;
-    }
-
-    .shape-card:hover {
-      border-color: var(--accent);
-      background: #FAFCFF;
-    }
-
-    .shape-card.active {
-      border-color: var(--accent);
-      background: var(--accent-light);
-      box-shadow: 0 0 0 2px rgba(23, 92, 211, 0.2);
-    }
-
-    .shape-icon {
-      font-size: 1.5rem;
-      margin-bottom: 6px;
-    }
-
-    .shape-name {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
     /* OPTION CARDS (VOLTAGE, AH, CONNECTORS) */
     .cards-select-grid {
       display: grid;
@@ -861,30 +815,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Shape Presets -->
-          <div style="margin-top: 20px;">
-            <label style="font-size: 0.88rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px;">צורת המארז הרצויה:</label>
-            <div class="shape-options">
-              <div class="shape-card active" data-shape="מלבני סטנדרטי">
-                <div class="shape-icon">🟦</div>
-                <div class="shape-name">מלבני (קופסה/תיק)</div>
-              </div>
-              <div class="shape-card" data-shape="משולש שלדה">
-                <div class="shape-icon">📐</div>
-                <div class="shape-name">משולש שלדה</div>
-              </div>
-              <div class="shape-card" data-shape="מארז קשיח Hailong">
-                <div class="shape-icon">🔋</div>
-                <div class="shape-name">מארז Hailong נשלף</div>
-              </div>
-              <div class="shape-card" data-shape="צורה מותאמת אישית">
-                <div class="shape-icon">🛠️</div>
-                <div class="shape-name">מותאם אישית</div>
-              </div>
-            </div>
-            <input type="hidden" name="shape" id="selectedShape" value="מלבני סטנדרטי">
-          </div>
         </div>
 
         <!-- STEP 2: VOLTAGE & CAPACITY -->
@@ -1343,17 +1273,6 @@
       setupLinked(widthInput, widthRange);
       setupLinked(heightInput, heightRange);
 
-      // --- Shape Preset Cards ---
-      const shapeCards = document.querySelectorAll('.shape-card');
-      const selectedShapeInput = document.getElementById('selectedShape');
-      shapeCards.forEach(c => {
-        c.addEventListener('click', () => {
-          shapeCards.forEach(x => x.classList.remove('active'));
-          c.classList.add('active');
-          selectedShapeInput.value = c.getAttribute('data-shape');
-        });
-      });
-
       // --- Voltage Cards ---
       const voltageCards = document.querySelectorAll('#voltageGrid .select-card');
       const selectedVoltageInput = document.getElementById('selectedVoltage');
@@ -1506,7 +1425,6 @@
           length: lengthInput.value,
           width: widthInput.value,
           height: heightInput.value,
-          shape: selectedShapeInput.value,
           voltage: selectedVoltageInput.value,
           capacityAh: selectedCapacityInput.value,
           dischargeConnector: selectedDischargeInput.value,

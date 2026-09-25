@@ -197,9 +197,9 @@ module.exports = async (req, res) => {
 
         const waMessage = 
 `היי ${lead.fullName},
-כדי שנתאים ונבנה את הסוללה המושלמת בדיוק ל${lead.toolType} שלך (פנייה ${displayId}), הכנו עבורך טופס אפיון קצר ונוח לבחירת מידות (אורך, רוחב, גובה), אמפר וסוגי חיבורים עם תמונות להמחשה ⚡
+כדי שנתאים ונבנה את הסוללה המושלמת בדיוק ל${lead.toolType} שלך (פנייה ${displayId}), הכנו עבורך קישור קצר ונוח לבקשת מידות (אורך, רוחב, גובה), אמפר וסוגי חיבורים עם תמונות להמחשה ⚡
 
-למילוי המפרט הקצר:
+למילוי המידות והמפרט:
 ${specUrl}
 
 נשמח לעמוד לרשותך,
@@ -231,7 +231,7 @@ ${specUrl}
           specStatus: 'SENT',
           specUrl,
           whatsappStatus: waStatus,
-          message: 'טופס האפיון נשלח ללקוח בוואטסאפ בהצלחה'
+          message: 'בקשת המידות נשלחה ללקוח בוואטסאפ בהצלחה'
         }));
         return;
       } catch (err) {
@@ -260,7 +260,6 @@ ${specUrl}
         width: body.width || '',
         height: body.height || '',
         unit: body.unit || 'cm',
-        shape: body.shape || 'מלבני סטנדרטי',
         voltage: body.voltage || '',
         capacityAh: body.capacityAh || '',
         dischargeRate: body.dischargeRate || '',
@@ -297,7 +296,7 @@ ${specUrl}
 מספר פנייה: ${displayId}
 לקוח: ${lead.fullName} (${lead.phone})
 סוג כלי: ${lead.toolType}
-מידות: אורך ${specData.length} ס״מ, רוחב ${specData.width} ס״מ, גובה ${specData.height} ס״מ (${specData.shape})
+מידות: אורך ${specData.length} ס״מ, רוחב ${specData.width} ס״מ, גובה ${specData.height} ס״מ
 מתח וקיבולת: ${specData.voltage}V | ${specData.capacityAh}Ah
 מחבר ראשי (פריקה): ${specData.dischargeConnector}
 מחבר טעינה: ${specData.chargeConnector} (${specData.chargePortsCount} יציאות)

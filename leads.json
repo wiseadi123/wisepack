@@ -1,5 +1,95 @@
 [
   {
+    "id": "1009",
+    "leadNumber": 1009,
+    "fullName": "adi levy",
+    "phone": "050-9611808",
+    "toolType": "אופניים חשמליים",
+    "description": "לא צוין פירוט נוסף",
+    "whatsappConsent": true,
+    "status": "חדש",
+    "source": "landing_page_form",
+    "createdAt": "2026-09-24T20:53:07.363Z",
+    "formattedTime": "24.9.2026, 20:53",
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "SENT"
+    },
+    "specSentAt": "2026-09-25T08:52:33.716Z",
+    "specStatus": "SENT",
+    "specUrl": "http://localhost:3000/spec.html?id=1009",
+    "updatedAt": "2026-09-25T08:52:33.716Z"
+  },
+  {
+    "id": "1008",
+    "leadNumber": 1008,
+    "fullName": "adi levy",
+    "phone": "050-9611808",
+    "toolType": "אופניים חשמליים",
+    "description": "לא צוין פירוט נוסף",
+    "whatsappConsent": true,
+    "status": "חדש",
+    "source": "landing_page_form",
+    "createdAt": "2026-09-24T17:26:20.791Z",
+    "formattedTime": "24.9.2026, 17:26",
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "SENT"
+    }
+  },
+  {
+    "id": "1007",
+    "leadNumber": 1007,
+    "fullName": "עדי - בדיקת מערכת סופית",
+    "phone": "0509611808",
+    "toolType": "טרקטורון חשמלי",
+    "description": "בדיקת קליטה, סנכרון עם מונגו אטלס והודעת וואטסאפ",
+    "whatsappConsent": true,
+    "status": "חדש",
+    "source": "landing_page_form",
+    "createdAt": "2026-09-24T17:25:37.412Z",
+    "formattedTime": "24.9.2026, 17:25",
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "SENT"
+    },
+    "updatedAt": "2026-09-24T17:25:58.225Z"
+  },
+  {
+    "id": "1006",
+    "leadNumber": 1006,
+    "fullName": "בדיקת מערכת חיה",
+    "phone": "0509611808",
+    "toolType": "אופניים חשמליים",
+    "description": "בדיקת תקינות פריסה ב-Vercel והגעת פנייה ל-CRM",
+    "whatsappConsent": true,
+    "status": "חדש",
+    "source": "landing_page_form",
+    "createdAt": "2026-09-24T17:22:04.050Z",
+    "formattedTime": "24.9.2026, 17:22",
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "SENT"
+    }
+  },
+  {
+    "id": "1005",
+    "leadNumber": 1005,
+    "fullName": "Adicorr Levy",
+    "phone": "050-9611808",
+    "toolType": "אופניים חשמליים",
+    "description": "לא צוין פירוט נוסף",
+    "whatsappConsent": true,
+    "status": "חדש",
+    "source": "landing_page_form",
+    "createdAt": "2026-09-24T17:21:55.806Z",
+    "formattedTime": "24.9.2026, 17:21",
+    "whatsappDelivery": {
+      "agent": "SENT",
+      "customer": "SENT"
+    }
+  },
+  {
     "id": "1004",
     "createdAt": "2026-09-24T15:25:52.828Z",
     "description": "בדיקת פרימיום",
@@ -14,7 +104,30 @@
       "agent": "SENT",
       "customer": "NOT_REQUESTED"
     },
-    "updatedAt": "2026-09-24T15:38:40.531Z"
+    "updatedAt": "2026-09-25T08:28:43.147Z",
+    "spec": {
+      "length": "28",
+      "width": "11",
+      "height": "14",
+      "unit": "cm",
+      "shape": "מלבני סטנדרטי",
+      "voltage": "48",
+      "capacityAh": "21",
+      "dischargeRate": "",
+      "dischargeConnector": "XT60",
+      "chargeConnector": "XT30",
+      "chargePortsCount": 2,
+      "bmsFeatures": [
+        "BMS חכם בלוטות'",
+        "מד אחוז סוללה מובנה"
+      ],
+      "notes": "נא להתקין כבל יציאה ארוך של 40 ס״מ עם שרוול מגן",
+      "customerName": "בדיקת טופס מהיר",
+      "customerPhone": "0509611808",
+      "submittedAt": "2026-09-25T08:28:43.147Z"
+    },
+    "specCompletedAt": "2026-09-25T08:28:43.147Z",
+    "specStatus": "COMPLETED"
   },
   {
     "id": "1003",

@@ -1166,7 +1166,7 @@
                   <th>טלפון</th>
                   <th>סוג כלי</th>
                   <th>תיאור / פרטים</th>
-                  <th>אפיון סוללה ומפרט</th>
+                  <th>בקשת מידות ומפרט</th>
                   <th>סטטוס</th>
                   <th>פעולות מהירות</th>
                 </tr>
@@ -1244,7 +1244,6 @@
         <div class="spec-item-box">
           <div class="spec-item-title">📏 מידות מארז (אורך × רוחב × גובה):</div>
           <div class="spec-item-val" id="modalSpecDims">---</div>
-          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;" id="modalSpecShape">מבנה: ---</div>
         </div>
 
         <div class="spec-item-box">
@@ -1439,9 +1438,9 @@
         `;
       } else {
         return `
-          <button type="button" class="btn btn-spec-send" onclick="sendSpecForm('${leadId}')" title="שליחת טופס אפיון מידות ומחברים בוואטסאפ">
-            <span style="font-size: 0.95rem;">⚡</span>
-            <span>שלח טופס אפיון</span>
+          <button type="button" class="btn btn-spec-send" onclick="sendSpecForm('${leadId}')" title="שליחת בקשת מידות ומחברים בוואטסאפ ללקוח">
+            <span style="font-size: 0.95rem;">📏</span>
+            <span>בקשת מידות</span>
           </button>
         `;
       }
@@ -1450,9 +1449,9 @@
     async function sendSpecForm(leadId) {
       const lead = allLeads.find(l => String(l.id) === String(leadId));
       const clientName = lead ? lead.fullName : 'הלקוח';
-      if (!confirm(`האם לשלוח קישור לטופס אפיון מידות ומחברים ל${clientName} בוואטסאפ?`)) return;
+      if (!confirm(`האם לשלוח קישור לבקשת מידות ומחברים ל${clientName} בוואטסאפ?`)) return;
 
-      showToast(`שולח טופס אפיון ל${clientName} בוואטסאפ...`);
+      showToast(`שולח בקשת מידות ל${clientName} בוואטסאפ...`);
       try {
         const res = await fetch('/api/spec', {
           method: 'POST',
@@ -1461,7 +1460,7 @@
         });
         const data = await res.json();
         if (res.ok && data.success) {
-          showToast(`טופס האפיון נשלח ל${clientName} בהצלחה! ⚡`);
+          showToast(`בקשת המידות נשלחה ל${clientName} בהצלחה! ⚡`);
           if (lead) {
             lead.specStatus = 'SENT';
             lead.specUrl = data.specUrl;
@@ -1471,7 +1470,7 @@
           showToast(`שגיאה בשליחה: ${data.error || 'נסו שוב'}`);
         }
       } catch (err) {
-        showToast('שגיאת תקשורת בשליחת הטופס');
+        showToast('שגיאת תקשורת בשליחת הבקשה');
       }
     }
 
@@ -1501,7 +1500,6 @@
       document.getElementById('modalSpecSubtitle').textContent = `לקוח: ${lead.fullName} | טלפון: ${lead.phone} | כלי: ${lead.toolType}`;
 
       document.getElementById('modalSpecDims').textContent = `${spec.length || '-'} × ${spec.width || '-'} × ${spec.height || '-'} ס״מ`;
-      document.getElementById('modalSpecShape').textContent = `מבנה מארז: ${spec.shape || 'מלבני סטנדרטי'}`;
 
       document.getElementById('modalSpecElec').textContent = `${spec.voltage || '-'}V | ${spec.capacityAh || '-'}Ah`;
 
@@ -1629,7 +1627,7 @@
 
             <!-- Mobile Spec Row -->
             <div class="mobile-spec-row">
-              <span style="font-size: 0.85rem; font-weight: 700; color: var(--primary);">טופס אפיון ומפרט:</span>
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--primary);">בקשת מידות:</span>
               <div>${specColHtml}</div>
             </div>
 
