@@ -246,12 +246,62 @@
       box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
-    .box-svg-canvas {
-      width: 100%;
-      max-width: 220px;
-      height: 150px;
-      display: block;
+    .cube-container {
+      width: 180px;
+      height: 140px;
+      perspective: 1000px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      margin-top: 15px;
     }
+
+    .cube {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      transform-style: preserve-3d;
+      transform: rotateX(-15deg) rotateY(-40deg);
+      transition: transform 0.4s ease-out, width 0.3s, height 0.3s;
+    }
+
+    .cube .face {
+      position: absolute;
+      background: rgba(23, 92, 211, 0.7);
+      border: 2px solid #38B6FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 13px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      transition: width 0.3s, height 0.3s, transform 0.3s;
+      text-align: center;
+    }
+
+    .cube .face.front  { background: rgba(16, 43, 80, 0.85); flex-direction: column; }
+    .cube .face.back   { background: rgba(16, 43, 80, 0.85); }
+    .cube .face.right  { background: rgba(23, 92, 211, 0.85); flex-direction: column; }
+    .cube .face.left   { background: rgba(23, 92, 211, 0.85); }
+    .cube .face.top    { background: rgba(30, 79, 145, 0.85); }
+    .cube .face.bottom { background: rgba(30, 79, 145, 0.85); }
+
+    .cube .terminals {
+      display: flex;
+      gap: 15px;
+      transform: rotateX(0deg) translateZ(1px);
+    }
+    .cube .t-red, .cube .t-black {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+    .cube .t-red { background: #EF4444; }
+    .cube .t-black { background: #25D366; }
 
     .box-live-badge {
       margin-top: 14px;
@@ -755,22 +805,21 @@
           <div class="dimensions-grid">
             <!-- 3D visual preview box -->
             <div class="box-preview-wrap">
-              <svg class="box-svg-canvas" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Isometric Battery Box -->
-                <!-- Top Face -->
-                <polygon points="120,20 190,50 120,80 50,50" fill="#1E4F91" stroke="#38B6FF" stroke-width="2" />
-                <!-- Left Face (Length & Height) -->
-                <polygon points="50,50 120,80 120,140 50,110" fill="#102B50" stroke="#38B6FF" stroke-width="2" />
-                <!-- Right Face (Width & Height) -->
-                <polygon points="120,80 190,50 190,110 120,140" fill="#175CD3" stroke="#38B6FF" stroke-width="2" />
-                <!-- Terminal Marks -->
-                <circle cx="105" cy="50" r="4" fill="#25D366" />
-                <circle cx="135" cy="50" r="4" fill="#EF4444" />
-                <!-- Dimension Labels -->
-                <text x="70" y="132" fill="#FFFFFF" font-size="11" font-weight="700">אורך</text>
-                <text x="160" y="132" fill="#FFFFFF" font-size="11" font-weight="700">רוחב</text>
-                <text x="124" y="115" fill="#38B6FF" font-size="11" font-weight="700">גובה</text>
-              </svg>
+              <div class="cube-container" id="cubeContainer">
+                <div class="cube" id="liveCube">
+                  <div class="face front">חזית</div>
+                  <div class="face back"></div>
+                  <div class="face right"><span>אורך</span></div>
+                  <div class="face left"></div>
+                  <div class="face top">
+                    <div class="terminals">
+                      <span class="t-red"></span>
+                      <span class="t-black"></span>
+                    </div>
+                  </div>
+                  <div class="face bottom"></div>
+                </div>
+              </div>
               <div class="box-live-badge" id="liveBoxDimensions">
                 25 ס״מ (א) × 10 ס״מ (ר) × 12 ס״מ (ג)
               </div>
@@ -1251,11 +1300,66 @@
       const sumDims = document.getElementById('sumDims');
 
       function syncDimensions() {
-        const l = lengthInput.value;
-        const w = widthInput.value;
-        const h = heightInput.value;
+        const l = parseFloat(lengthInput.value) || 25;
+        const w = parseFloat(widthInput.value) || 10;
+        const h = parseFloat(heightInput.value) || 12;
         liveBoxDimensions.textContent = `${l} ס״מ (א) × ${w} ס״מ (ר) × ${h} ס״מ (ג)`;
         sumDims.textContent = `${l}×${w}×${h} ס״מ`;
+
+        // Update 3D Cube live
+        const liveCube = document.getElementById('liveCube');
+        if (liveCube) {
+          // Normalize max dimension to ~120px to fit container
+          const maxDim = Math.max(l, w, h);
+          const scale = 120 / maxDim;
+          
+          const pxL = l * scale; // Depth (Z)
+          const pxW = w * scale; // Width (X)
+          const pxH = h * scale; // Height (Y)
+          
+          liveCube.style.width = pxW + 'px';
+          liveCube.style.height = pxH + 'px';
+          
+          const front = liveCube.querySelector('.front');
+          const back = liveCube.querySelector('.back');
+          const right = liveCube.querySelector('.right');
+          const left = liveCube.querySelector('.left');
+          const top = liveCube.querySelector('.top');
+          const bottom = liveCube.querySelector('.bottom');
+          
+          if (front) {
+            front.style.width = pxW + 'px';
+            front.style.height = pxH + 'px';
+            front.style.transform = `translateZ(${pxL / 2}px)`;
+            front.innerHTML = `<span>רוחב</span><br><span style="font-size:0.75rem">${w}</span>`;
+          }
+          if (back) {
+            back.style.width = pxW + 'px';
+            back.style.height = pxH + 'px';
+            back.style.transform = `rotateY(180deg) translateZ(${pxL / 2}px)`;
+          }
+          if (right) {
+            right.style.width = pxL + 'px';
+            right.style.height = pxH + 'px';
+            right.style.transform = `rotateY(90deg) translateZ(${pxW / 2}px)`;
+            right.innerHTML = `<span>אורך</span><br><span style="font-size:0.75rem">${l}</span>`;
+          }
+          if (left) {
+            left.style.width = pxL + 'px';
+            left.style.height = pxH + 'px';
+            left.style.transform = `rotateY(-90deg) translateZ(${pxW / 2}px)`;
+          }
+          if (top) {
+            top.style.width = pxW + 'px';
+            top.style.height = pxL + 'px';
+            top.style.transform = `rotateX(90deg) translateZ(${pxH / 2}px)`;
+          }
+          if (bottom) {
+            bottom.style.width = pxW + 'px';
+            bottom.style.height = pxL + 'px';
+            bottom.style.transform = `rotateX(-90deg) translateZ(${pxH / 2}px)`;
+          }
+        }
       }
 
       function setupLinked(input, range) {
@@ -1272,6 +1376,9 @@
       setupLinked(lengthInput, lengthRange);
       setupLinked(widthInput, widthRange);
       setupLinked(heightInput, heightRange);
+      
+      // Initialize on load
+      syncDimensions();
 
       // --- Voltage Cards ---
       const voltageCards = document.querySelectorAll('#voltageGrid .select-card');
