@@ -628,6 +628,153 @@
       transform: scale(1.15);
     }
 
+    /* SPEC PILLS & BUTTONS */
+    .spec-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .spec-status-pill.completed {
+      background: #E7F9EE;
+      color: #0E6235;
+      border: 1px solid #B8E8CA;
+    }
+    .spec-status-pill.sent {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+    }
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .pill-dot.green { background: #25D366; }
+    .pill-dot.amber { background: #F59E0B; }
+
+    .btn-spec-send {
+      background: linear-gradient(135deg, #175CD3, #154EB5);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+    .btn-spec-send:hover {
+      background: #1A68EE;
+      transform: translateY(-1px);
+    }
+    .btn-spec-view {
+      background: #EBF3FF;
+      color: #175CD3;
+      border: 1px solid #C9E0FF;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      padding: 5px 8px;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+    .btn-spec-view:hover {
+      background: #DCEBFF;
+    }
+    .btn-xs {
+      padding: 4px 6px;
+      font-size: 0.76rem;
+      border-radius: 4px;
+    }
+    .mobile-spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: #F8FAFC;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* SPEC MODAL */
+    .spec-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 28, 52, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2500;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+    .spec-modal-box {
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+    .spec-modal-close {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748B;
+      transition: all 0.2s;
+    }
+    .spec-modal-close:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+    .spec-item-box {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+    .spec-item-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .spec-item-val {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
     /* LOGIN MODAL (Light theme matching the landing page) */
     .auth-overlay {
       position: fixed;
@@ -1019,6 +1166,7 @@
                   <th>טלפון</th>
                   <th>סוג כלי</th>
                   <th>תיאור / פרטים</th>
+                  <th>אפיון סוללה ומפרט</th>
                   <th>סטטוס</th>
                   <th>פעולות מהירות</th>
                 </tr>
@@ -1077,6 +1225,66 @@
       </div>
     </main>
 
+  </div>
+
+  <!-- SPECIFICATION VIEW MODAL -->
+  <div class="spec-modal-overlay" id="specModalOverlay">
+    <div class="spec-modal-box">
+      <button type="button" class="spec-modal-close" onclick="closeSpecModal()">✕</button>
+      
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 1.5px solid #F1F5F9; padding-bottom: 12px;">
+        <span style="font-size: 2rem;">📋</span>
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--primary); margin: 0;" id="modalSpecTitle">מפרט סוללה לפנייה</h2>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;" id="modalSpecSubtitle">פרטי לקוח וכלי</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+        <div class="spec-item-box">
+          <div class="spec-item-title">📏 מידות מארז (אורך × רוחב × גובה):</div>
+          <div class="spec-item-val" id="modalSpecDims">---</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;" id="modalSpecShape">מבנה: ---</div>
+        </div>
+
+        <div class="spec-item-box">
+          <div class="spec-item-title">⚡ נתונים חשמליים (מתח וקיבולת):</div>
+          <div class="spec-item-val" id="modalSpecElec">---</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">תאים איכותיים בבנייה מקצועית</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+        <div class="spec-item-box">
+          <div class="spec-item-title">🔌 יציאת פריקה ראשית (לבקר/מנוע):</div>
+          <div class="spec-item-val" style="color: #CA8A04;" id="modalSpecDischarge">---</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">עמיד בזרם פריקה רציף</div>
+        </div>
+
+        <div class="spec-item-box">
+          <div class="spec-item-title">🔋 שקע וכמות יציאות טעינה:</div>
+          <div class="spec-item-val" style="color: #0284C7;" id="modalSpecCharge">---</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">לטעינה בטוחה ומהירה</div>
+        </div>
+      </div>
+
+      <div class="spec-item-box" style="margin-bottom: 12px;">
+        <div class="spec-item-title">📱 תוספות BMS ושדרוגים שנבחרו:</div>
+        <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-top: 2px;" id="modalSpecBms">אין</div>
+      </div>
+
+      <div class="spec-item-box" style="margin-bottom: 20px;">
+        <div class="spec-item-title">📝 הערות הלקוח / דגם הכלי:</div>
+        <div style="font-size: 0.92rem; color: var(--text-main); line-height: 1.4; margin-top: 2px;" id="modalSpecNotes">אין</div>
+      </div>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
+        <a href="#" id="modalSpecWaLink" target="_blank" rel="noopener" class="btn btn-whatsapp" style="padding: 10px 18px;">
+          <span>💬 פתח וואטסאפ עם הלקוח לגבי המפרט</span>
+        </a>
+        <button type="button" class="btn btn-header" style="color: var(--text-main); background: #F1F5F9; border-color: #CBD5E1; padding: 10px 16px;" onclick="closeSpecModal()">סגור</button>
+      </div>
+    </div>
   </div>
 
   <div class="toast" id="toast"></div>
@@ -1194,6 +1402,128 @@
       }
     }
 
+    // --- BATTERY SPECIFICATION AUTOMATIONS & MODAL ---
+    function renderSpecColumn(lead) {
+      const specStatus = lead.specStatus || 'NONE';
+      const hasSpec = !!lead.spec;
+      const leadId = String(lead.id || '');
+
+      if (specStatus === 'COMPLETED' || hasSpec) {
+        return `
+          <div style="display: flex; flex-direction: column; gap: 5px; align-items: flex-start;">
+            <span class="spec-status-pill completed" title="המפרט הטכני מולא על ידי הלקוח">
+              <span class="pill-dot green"></span>
+              <span>מפרט מוכן ✓</span>
+            </span>
+            <button type="button" class="btn btn-spec-view btn-xs" onclick="openSpecModal('${leadId}')">
+              <span>🔍 צפה במפרט</span>
+            </button>
+          </div>
+        `;
+      } else if (specStatus === 'SENT') {
+        return `
+          <div style="display: flex; flex-direction: column; gap: 5px; align-items: flex-start;">
+            <span class="spec-status-pill sent" title="קישור לטופס נשלח בוואטסאפ ללקוח">
+              <span class="pill-dot amber"></span>
+              <span>נשלח ללקוח ⏳</span>
+            </span>
+            <div style="display: flex; gap: 4px; align-items: center;">
+              <button type="button" class="btn btn-spec-send btn-xs" onclick="sendSpecForm('${leadId}')" title="שלח שוב בוואטסאפ">
+                <span>שלח שוב 💬</span>
+              </button>
+              <button type="button" class="btn btn-header btn-xs" style="color: var(--text-main); background: #F1F5F9; border-color: #CBD5E1;" onclick="copySpecLink('${leadId}')" title="העתק קישור לטופס">
+                <span>🔗</span>
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        return `
+          <button type="button" class="btn btn-spec-send" onclick="sendSpecForm('${leadId}')" title="שליחת טופס אפיון מידות ומחברים בוואטסאפ">
+            <span style="font-size: 0.95rem;">⚡</span>
+            <span>שלח טופס אפיון</span>
+          </button>
+        `;
+      }
+    }
+
+    async function sendSpecForm(leadId) {
+      const lead = allLeads.find(l => String(l.id) === String(leadId));
+      const clientName = lead ? lead.fullName : 'הלקוח';
+      if (!confirm(`האם לשלוח קישור לטופס אפיון מידות ומחברים ל${clientName} בוואטסאפ?`)) return;
+
+      showToast(`שולח טופס אפיון ל${clientName} בוואטסאפ...`);
+      try {
+        const res = await fetch('/api/spec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'send', leadId })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(`טופס האפיון נשלח ל${clientName} בהצלחה! ⚡`);
+          if (lead) {
+            lead.specStatus = 'SENT';
+            lead.specUrl = data.specUrl;
+            render();
+          }
+        } else {
+          showToast(`שגיאה בשליחה: ${data.error || 'נסו שוב'}`);
+        }
+      } catch (err) {
+        showToast('שגיאת תקשורת בשליחת הטופס');
+      }
+    }
+
+    function copySpecLink(leadId) {
+      const url = `${window.location.origin}/spec.html?id=${leadId}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('הקישור לטופס הועתק ללוח! 📋');
+        }).catch(() => {
+          prompt('העתק את הקישור לטופס:', url);
+        });
+      } else {
+        prompt('העתק את הקישור לטופס:', url);
+      }
+    }
+
+    function openSpecModal(leadId) {
+      const lead = allLeads.find(l => String(l.id) === String(leadId));
+      if (!lead || !lead.spec) {
+        showToast('לא נמצאו נתוני מפרט לפנייה זו');
+        return;
+      }
+      const spec = lead.spec;
+      const displayId = String(lead.id).startsWith('#') ? lead.id : `#${lead.id}`;
+
+      document.getElementById('modalSpecTitle').textContent = `מפרט סוללה לפנייה ${displayId}`;
+      document.getElementById('modalSpecSubtitle').textContent = `לקוח: ${lead.fullName} | טלפון: ${lead.phone} | כלי: ${lead.toolType}`;
+
+      document.getElementById('modalSpecDims').textContent = `${spec.length || '-'} × ${spec.width || '-'} × ${spec.height || '-'} ס״מ`;
+      document.getElementById('modalSpecShape').textContent = `מבנה מארז: ${spec.shape || 'מלבני סטנדרטי'}`;
+
+      document.getElementById('modalSpecElec').textContent = `${spec.voltage || '-'}V | ${spec.capacityAh || '-'}Ah`;
+
+      document.getElementById('modalSpecDischarge').textContent = spec.dischargeConnector || 'XT60';
+      document.getElementById('modalSpecCharge').textContent = `${spec.chargeConnector || 'XT30'} (${spec.chargePortsCount || 1} יציאות)`;
+
+      const bms = Array.isArray(spec.bmsFeatures) && spec.bmsFeatures.length > 0 ? spec.bmsFeatures.join(', ') : 'ללא תוספות מיוחדות';
+      document.getElementById('modalSpecBms').textContent = bms;
+
+      document.getElementById('modalSpecNotes').textContent = spec.notes || 'אין הערות נוספות';
+
+      const waPhone = cleanPhoneForWa(lead.phone);
+      const waMsg = encodeURIComponent(`שלום ${lead.fullName}, קיבלנו את המפרט הטכני שלך לסוללה (${spec.length}x${spec.width}x${spec.height} ס״מ, ${spec.voltage}V ${spec.capacityAh}Ah, מחבר ${spec.dischargeConnector}). נשמח לתאם את המשך הייצור.`);
+      document.getElementById('modalSpecWaLink').href = `https://wa.me/${waPhone}?text=${waMsg}`;
+
+      document.getElementById('specModalOverlay').style.display = 'flex';
+    }
+
+    function closeSpecModal() {
+      document.getElementById('specModalOverlay').style.display = 'none';
+    }
+
     // Render Filtered Leads
     function render() {
       const q = searchInput.value.toLowerCase().trim();
@@ -1237,6 +1567,7 @@
         const waLink = `https://wa.me/${waPhone}?text=${waMsg}`;
         const telLink = `tel:${lead.phone.replace(/[^0-9+]/g, '')}`;
         const curStatus = lead.status || 'חדש';
+        const specColHtml = renderSpecColumn(lead);
 
         return `
           <tr>
@@ -1245,7 +1576,8 @@
             <td><strong>${lead.fullName}</strong></td>
             <td><a href="${telLink}" style="color: var(--accent); font-weight: 600; text-decoration: none;">${lead.phone}</a></td>
             <td><span class="tool-badge">${lead.toolType}</span></td>
-            <td style="max-width: 280px; font-size: 0.88rem; color: var(--text-muted);">${lead.description || '-'}</td>
+            <td style="max-width: 240px; font-size: 0.88rem; color: var(--text-muted);">${lead.description || '-'}</td>
+            <td>${specColHtml}</td>
             <td>
               <select class="status-select-sm" onchange="updateLeadStatus('${lead.id}', this.value)">
                 <option value="חדש" ${curStatus === 'חדש' ? 'selected' : ''}>חדש</option>
@@ -1277,6 +1609,7 @@
         const waLink = `https://wa.me/${waPhone}?text=${waMsg}`;
         const telLink = `tel:${lead.phone.replace(/[^0-9+]/g, '')}`;
         const curStatus = lead.status || 'חדש';
+        const specColHtml = renderSpecColumn(lead);
 
         return `
           <div class="mobile-lead-card">
@@ -1293,6 +1626,12 @@
             </div>
 
             ${lead.description ? `<div class="desc-preview">${lead.description}</div>` : ''}
+
+            <!-- Mobile Spec Row -->
+            <div class="mobile-spec-row">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--primary);">טופס אפיון ומפרט:</span>
+              <div>${specColHtml}</div>
+            </div>
 
             <div class="mobile-status-row">
               <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-main);">סטטוס פנייה:</span>

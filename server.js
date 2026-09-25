@@ -441,9 +441,30 @@ async function requestHandler(req, res) {
     }
   }
 
+  // Route: /spec -> Serve spec.html (Battery Specification & Dimensions Form)
+  if (pathname === '/spec' || pathname === '/spec/' || pathname === '/spec.html' || pathname === '/battery-spec') {
+    const specHtmlPath = path.join(PUBLIC_DIR, 'spec.html');
+    try {
+      const data = fs.readFileSync(specHtmlPath);
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(data);
+      return;
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Error loading spec form');
+      return;
+    }
+  }
+
   // If calling an API route, ensure MongoDB Atlas is connected
   if (pathname.startsWith('/api/') || pathname === '/api') {
     await initMongoDB();
+  }
+
+  // API Endpoint: Battery Specification & Customization
+  if (pathname === '/api/spec' || pathname.startsWith('/api/spec')) {
+    const specHandler = require('./api/spec.js');
+    return specHandler(req, res);
   }
 
   // API Endpoint: Tool Types Management (Dropdown Options)

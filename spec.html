@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Wisepack | אפיון והגדרת סוללה בהתאמה אישית</title>
+  <meta name="description" content="טופס אפיון והגדרת מידות, אמפר ומחברים לסוללת ליתיום בהתאמה אישית ממעבדת Wisepack.">
+  <meta name="theme-color" content="#102B50">
+
+  <!-- Google Fonts: Heebo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #102B50;
+      --primary-dark: #0A1C34;
+      --accent: #175CD3;
+      --accent-hover: #154EB5;
+      --accent-light: #EFF8FF;
+      --cyan: #38B6FF;
+      --success: #25D366;
+      --success-dark: #0E6235;
+      --success-light: #E7F9EE;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --border-color: #E2E8F0;
+      --border-active: #175CD3;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 6px rgba(16, 43, 80, 0.05);
+      --shadow-md: 0 8px 24px rgba(16, 43, 80, 0.08);
+      --shadow-lg: 0 16px 40px rgba(16, 43, 80, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      direction: rtl;
+      text-align: right;
+      overflow-x: hidden;
+      width: 100%;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HEADER */
+    .spec-header {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: #FFFFFF;
+      padding: 24px 0 36px 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .spec-header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 10%;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(56, 182, 255, 0.22) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #FFFFFF;
+      padding: 3px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .lead-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      backdrop-filter: blur(8px);
+    }
+
+    .lead-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    .header-hero {
+      text-align: right;
+    }
+
+    .page-title {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .page-desc {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 680px;
+      line-height: 1.5;
+    }
+
+    /* MAIN CONTAINER & STEPS */
+    .spec-main {
+      padding: 24px 0 80px 0;
+    }
+
+    .spec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s;
+    }
+
+    .spec-card:focus-within {
+      border-color: rgba(23, 92, 211, 0.4);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1.5px solid #F1F5F9;
+      padding-bottom: 14px;
+    }
+
+    .step-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      border: 1.5px solid rgba(23, 92, 211, 0.2);
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .step-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* 3D VISUAL BOX & MEASUREMENT SLIDERS */
+    .dimensions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .dimensions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .box-preview-wrap {
+      background: linear-gradient(145deg, #0A1C34, #102B50);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      color: #FFFFFF;
+      position: relative;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .box-svg-canvas {
+      width: 100%;
+      max-width: 220px;
+      height: 150px;
+      display: block;
+    }
+
+    .box-live-badge {
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .measure-inputs-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .measure-group {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+    }
+
+    .measure-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .measure-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .measure-val-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .measure-number-input {
+      width: 68px;
+      padding: 6px 8px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-align: center;
+      font-family: inherit;
+    }
+
+    .measure-number-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .measure-unit {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .slider-range {
+      width: 100%;
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    .slider-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(23, 92, 211, 0.4);
+      border: 2px solid #FFFFFF;
+    }
+
+    /* SHAPES SELECTION */
+    .shape-options {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .shape-options {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .shape-card {
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 10px;
+      text-align: center;
+      cursor: pointer;
+      background: #FFFFFF;
+      transition: all 0.2s;
+    }
+
+    .shape-card:hover {
+      border-color: var(--accent);
+      background: #FAFCFF;
+    }
+
+    .shape-card.active {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      box-shadow: 0 0 0 2px rgba(23, 92, 211, 0.2);
+    }
+
+    .shape-icon {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+
+    .shape-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* OPTION CARDS (VOLTAGE, AH, CONNECTORS) */
+    .cards-select-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+    }
+
+    .select-card {
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 12px;
+      text-align: center;
+      cursor: pointer;
+      background: #FFFFFF;
+      transition: all 0.2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .select-card:hover {
+      border-color: var(--accent);
+      background: #FAFCFF;
+      transform: translateY(-2px);
+    }
+
+    .select-card.active {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      box-shadow: 0 4px 14px rgba(23, 92, 211, 0.15);
+    }
+
+    .select-card.active::after {
+      content: '✓';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+
+    .val-main {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .val-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* CONNECTOR CARDS (WITH HIGH QUALITY VISUAL ILLUSTRATIONS) */
+    .connector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 14px;
+    }
+
+    .connector-card {
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      background: #FFFFFF;
+      transition: all 0.2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .connector-card:hover {
+      border-color: var(--accent);
+      background: #FAFCFF;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .connector-card.active {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      box-shadow: 0 6px 18px rgba(23, 92, 211, 0.18);
+    }
+
+    .connector-card.active::after {
+      content: '✓';
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+
+    .connector-img-box {
+      width: 90px;
+      height: 80px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .conn-svg {
+      max-width: 100%;
+      max-height: 100%;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.1));
+      transition: transform 0.2s;
+    }
+
+    .connector-card:hover .conn-svg {
+      transform: scale(1.06);
+    }
+
+    .connector-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .connector-amp {
+      display: inline-block;
+      margin-top: 4px;
+      background: #F1F5F9;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .connector-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
+    /* CHARGE PORTS ROW */
+    .ports-count-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+    }
+
+    .ports-count-label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+
+    .ports-radio-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .radio-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* CHECKBOX TILES (EXTRAS) */
+    .extras-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .extras-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .extra-tile {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .extra-tile:hover {
+      background: #FAFCFF;
+      border-color: var(--accent);
+    }
+
+    .extra-tile input[type="checkbox"] {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .extra-text-wrap {
+      flex: 1;
+    }
+
+    .extra-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .extra-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    /* TEXTAREA & INPUTS */
+    .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(23, 92, 211, 0.15);
+    }
+
+    /* SUBMIT FOOTER BAR */
+    .submit-bar {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .submit-summary {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .summary-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .summary-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .summary-chip {
+      background: #F1F5F9;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .btn-submit-spec {
+      background: linear-gradient(135deg, #175CD3 0%, #154EB5 100%);
+      color: #FFFFFF;
+      border: none;
+      padding: 16px 36px;
+      border-radius: 40px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(23, 92, 211, 0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-submit-spec:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(23, 92, 211, 0.45);
+      background: linear-gradient(135deg, #1A68EE 0%, #175CD3 100%);
+    }
+
+    .btn-submit-spec:active {
+      transform: translateY(0);
+    }
+
+    .btn-submit-spec:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* SUCCESS STATE */
+    .success-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 48px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      max-width: 600px;
+      margin: 40px auto;
+      display: none;
+    }
+
+    .success-icon-ring {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--success-light);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="spec-header">
+    <div class="container">
+      <div class="header-top">
+        <a href="/" class="brand-wrap">
+          <img src="assets/logo.png" alt="Wisepack" class="brand-logo">
+          <div>
+            <div class="brand-title">Wisepack</div>
+            <div class="brand-sub">מעבדה וייצור סוללות פרימיום</div>
+          </div>
+        </a>
+
+        <div class="lead-badge" id="leadBadge">
+          <span class="dot"></span>
+          <span id="leadBadgeText">אפיון סוללה בהתאמה אישית</span>
+        </div>
+      </div>
+
+      <div class="header-hero">
+        <h1 class="page-title">טופס אפיון והגדרת מידות לסוללה</h1>
+        <p class="page-desc">
+          בחרו את המידות, המתח, האמפר וסוגי המחברים המדויקים שתרצו בסוללה שלכם. כל סוללה נבנית במעבדה בהתאמה מלאה לצרכים שלכם.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="spec-main">
+    <div class="container" id="formContainer">
+
+      <form id="batterySpecForm">
+
+        <!-- STEP 1: DIMENSIONS & SHAPE -->
+        <div class="spec-card">
+          <div class="step-header">
+            <div class="step-num">1</div>
+            <div>
+              <h2 class="step-title">מידות פיזיות ומבנה המארז</h2>
+              <div class="step-subtitle">הגדירו את המידות החיצוניות המקסימליות הזמינות לכלי שלכם</div>
+            </div>
+          </div>
+
+          <div class="dimensions-grid">
+            <!-- 3D visual preview box -->
+            <div class="box-preview-wrap">
+              <svg class="box-svg-canvas" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Isometric Battery Box -->
+                <!-- Top Face -->
+                <polygon points="120,20 190,50 120,80 50,50" fill="#1E4F91" stroke="#38B6FF" stroke-width="2" />
+                <!-- Left Face (Length & Height) -->
+                <polygon points="50,50 120,80 120,140 50,110" fill="#102B50" stroke="#38B6FF" stroke-width="2" />
+                <!-- Right Face (Width & Height) -->
+                <polygon points="120,80 190,50 190,110 120,140" fill="#175CD3" stroke="#38B6FF" stroke-width="2" />
+                <!-- Terminal Marks -->
+                <circle cx="105" cy="50" r="4" fill="#25D366" />
+                <circle cx="135" cy="50" r="4" fill="#EF4444" />
+                <!-- Dimension Labels -->
+                <text x="70" y="132" fill="#FFFFFF" font-size="11" font-weight="700">אורך</text>
+                <text x="160" y="132" fill="#FFFFFF" font-size="11" font-weight="700">רוחב</text>
+                <text x="124" y="115" fill="#38B6FF" font-size="11" font-weight="700">גובה</text>
+              </svg>
+              <div class="box-live-badge" id="liveBoxDimensions">
+                25 ס״מ (א) × 10 ס״מ (ר) × 12 ס״מ (ג)
+              </div>
+            </div>
+
+            <!-- Measurement sliders & inputs -->
+            <div class="measure-inputs-col">
+              <!-- Length -->
+              <div class="measure-group">
+                <div class="measure-top">
+                  <span class="measure-label">📏 אורך (Length):</span>
+                  <div class="measure-val-wrap">
+                    <input type="number" id="lengthInput" class="measure-number-input" value="25" min="5" max="90" step="0.5">
+                    <span class="measure-unit">ס״מ</span>
+                  </div>
+                </div>
+                <input type="range" id="lengthRange" class="slider-range" value="25" min="5" max="90" step="0.5">
+              </div>
+
+              <!-- Width -->
+              <div class="measure-group">
+                <div class="measure-top">
+                  <span class="measure-label">📐 רוחב (Width):</span>
+                  <div class="measure-val-wrap">
+                    <input type="number" id="widthInput" class="measure-number-input" value="10" min="4" max="50" step="0.5">
+                    <span class="measure-unit">ס״מ</span>
+                  </div>
+                </div>
+                <input type="range" id="widthRange" class="slider-range" value="10" min="4" max="50" step="0.5">
+              </div>
+
+              <!-- Height -->
+              <div class="measure-group">
+                <div class="measure-top">
+                  <span class="measure-label">📦 גובה (Height):</span>
+                  <div class="measure-val-wrap">
+                    <input type="number" id="heightInput" class="measure-number-input" value="12" min="4" max="50" step="0.5">
+                    <span class="measure-unit">ס״מ</span>
+                  </div>
+                </div>
+                <input type="range" id="heightRange" class="slider-range" value="12" min="4" max="50" step="0.5">
+              </div>
+            </div>
+          </div>
+
+          <!-- Shape Presets -->
+          <div style="margin-top: 20px;">
+            <label style="font-size: 0.88rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px;">צורת המארז הרצויה:</label>
+            <div class="shape-options">
+              <div class="shape-card active" data-shape="מלבני סטנדרטי">
+                <div class="shape-icon">🟦</div>
+                <div class="shape-name">מלבני (קופסה/תיק)</div>
+              </div>
+              <div class="shape-card" data-shape="משולש שלדה">
+                <div class="shape-icon">📐</div>
+                <div class="shape-name">משולש שלדה</div>
+              </div>
+              <div class="shape-card" data-shape="מארז קשיח Hailong">
+                <div class="shape-icon">🔋</div>
+                <div class="shape-name">מארז Hailong נשלף</div>
+              </div>
+              <div class="shape-card" data-shape="צורה מותאמת אישית">
+                <div class="shape-icon">🛠️</div>
+                <div class="shape-name">מותאם אישית</div>
+              </div>
+            </div>
+            <input type="hidden" name="shape" id="selectedShape" value="מלבני סטנדרטי">
+          </div>
+        </div>
+
+        <!-- STEP 2: VOLTAGE & CAPACITY -->
+        <div class="spec-card">
+          <div class="step-header">
+            <div class="step-num">2</div>
+            <div>
+              <h2 class="step-title">מתח (וולט) וקיבולת (אמפר-שעה)</h2>
+              <div class="step-subtitle">בחרו את העוצמה וטווח הנסיעה הדרושים לכם</div>
+            </div>
+          </div>
+
+          <!-- Voltage -->
+          <div style="margin-bottom: 22px;">
+            <label style="font-size: 0.95rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 10px;">⚡ מתח הסוללה (וולט):</label>
+            <div class="cards-select-grid" id="voltageGrid">
+              <div class="select-card" data-val="36">
+                <div class="val-main">36V</div>
+                <div class="val-sub">כלים קלים / קורקינטים</div>
+              </div>
+              <div class="select-card active" data-val="48">
+                <div class="val-main">48V</div>
+                <div class="val-sub">הנפוץ באופניים</div>
+              </div>
+              <div class="select-card" data-val="52">
+                <div class="val-main">52V</div>
+                <div class="val-sub">ביצועים מוגברים</div>
+              </div>
+              <div class="select-card" data-val="60">
+                <div class="val-main">60V</div>
+                <div class="val-sub">אופניים חזקים / טרקטורון</div>
+              </div>
+              <div class="select-card" data-val="72">
+                <div class="val-main">72V</div>
+                <div class="val-sub">מהירות ועוצמה מרבית</div>
+              </div>
+            </div>
+            <input type="hidden" name="voltage" id="selectedVoltage" value="48">
+          </div>
+
+          <!-- Capacity (Ah) -->
+          <div>
+            <label style="font-size: 0.95rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 10px;">🔋 קיבולת רצויה (Ah — אמפר שעה / טווח):</label>
+            <div class="cards-select-grid" id="capacityGrid">
+              <div class="select-card" data-val="13">
+                <div class="val-main">13Ah</div>
+                <div class="val-sub">טווח בסיסי (25-35 ק״מ)</div>
+              </div>
+              <div class="select-card" data-val="17.5">
+                <div class="val-main">17.5Ah</div>
+                <div class="val-sub">טווח בינוני (40-55 ק״מ)</div>
+              </div>
+              <div class="select-card active" data-val="21">
+                <div class="val-main">21Ah</div>
+                <div class="val-sub">טווח ארוך פופולרי (60-80 ק״מ)</div>
+              </div>
+              <div class="select-card" data-val="25">
+                <div class="val-main">25Ah</div>
+                <div class="val-sub">טווח מורחב (80-100 ק״מ)</div>
+              </div>
+              <div class="select-card" data-val="30">
+                <div class="val-main">30Ah+</div>
+                <div class="val-sub">סוללת ענק לאקסטרים</div>
+              </div>
+            </div>
+            <input type="hidden" name="capacityAh" id="selectedCapacity" value="21">
+          </div>
+        </div>
+
+        <!-- STEP 3: DISCHARGE CONNECTOR (WITH VISUAL ILLUSTRATIONS) -->
+        <div class="spec-card">
+          <div class="step-header">
+            <div class="step-num">3</div>
+            <div>
+              <h2 class="step-title">סוג מחבר פריקה ראשי (למנוע / בקר)</h2>
+              <div class="step-subtitle">בחרו את החיבור שמתחבר לבקר הכלי שלכם (עם תמונות להמחשה)</div>
+            </div>
+          </div>
+
+          <div class="connector-grid" id="dischargeGrid">
+            <!-- XT60 -->
+            <div class="connector-card active" data-conn="XT60">
+              <div class="connector-img-box">
+                <!-- SVG: Yellow XT60 Male/Female Plug -->
+                <svg class="conn-svg" width="80" height="60" viewBox="0 0 100 70">
+                  <path d="M15,10 L75,10 Q85,10 85,20 L70,55 Q65,60 55,60 L15,60 Q10,60 10,50 L10,20 Q10,10 15,10 Z" fill="#FACC15" stroke="#CA8A04" stroke-width="2.5" />
+                  <!-- Gold pins inside -->
+                  <circle cx="35" cy="35" r="9" fill="#EAB308" stroke="#713F12" stroke-width="2" />
+                  <circle cx="62" cy="35" r="9" fill="#EAB308" stroke="#713F12" stroke-width="2" />
+                  <circle cx="35" cy="35" r="5" fill="#CA8A04" />
+                  <circle cx="62" cy="35" r="5" fill="#CA8A04" />
+                  <text x="38" y="20" fill="#713F12" font-size="9" font-weight="900">XT60</text>
+                </svg>
+              </div>
+              <div class="connector-name">XT60</div>
+              <span class="connector-amp">עד 60 אמפר</span>
+              <div class="connector-desc">המחבר הנפוץ והאמין ביותר לאופניים וכלים קלים</div>
+            </div>
+
+            <!-- XT90 -->
+            <div class="connector-card" data-conn="XT90 Anti-Spark">
+              <div class="connector-img-box">
+                <!-- SVG: XT90 Large Anti Spark -->
+                <svg class="conn-svg" width="84" height="64" viewBox="0 0 100 70">
+                  <path d="M12,8 L78,8 Q90,8 90,20 L75,58 Q70,64 58,64 L12,64 Q8,64 8,52 L8,20 Q8,8 12,8 Z" fill="#FBBF24" stroke="#B45309" stroke-width="3" />
+                  <rect x="70" y="8" width="12" height="56" fill="#15803D" opacity="0.85" rx="3" />
+                  <!-- Pins -->
+                  <circle cx="32" cy="36" r="11" fill="#F59E0B" stroke="#78350F" stroke-width="2" />
+                  <circle cx="64" cy="36" r="11" fill="#F59E0B" stroke="#78350F" stroke-width="2" />
+                  <circle cx="32" cy="36" r="6" fill="#B45309" />
+                  <circle cx="64" cy="36" r="6" fill="#B45309" />
+                  <text x="30" y="20" fill="#78350F" font-size="9" font-weight="900">XT90-S</text>
+                </svg>
+              </div>
+              <div class="connector-name">XT90 מוגן ניצוץ</div>
+              <span class="connector-amp">עד 90 אמפר</span>
+              <div class="connector-desc">מונע ניצוץ בחיבור, מומלץ למתחים וזרמים גבוהים</div>
+            </div>
+
+            <!-- Anderson Powerpole -->
+            <div class="connector-card" data-conn="Anderson Powerpole">
+              <div class="connector-img-box">
+                <!-- SVG: Anderson Red/Black -->
+                <svg class="conn-svg" width="76" height="60" viewBox="0 0 100 70">
+                  <!-- Red Housing -->
+                  <rect x="15" y="10" width="34" height="50" rx="6" fill="#DC2626" stroke="#991B1B" stroke-width="2" />
+                  <rect x="22" y="20" width="20" height="16" fill="#991B1B" rx="3" />
+                  <rect x="25" y="44" width="14" height="12" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5" />
+                  <!-- Black Housing -->
+                  <rect x="51" y="10" width="34" height="50" rx="6" fill="#1E293B" stroke="#0F172A" stroke-width="2" />
+                  <rect x="58" y="20" width="20" height="16" fill="#0F172A" rx="3" />
+                  <rect x="61" y="44" width="14" height="12" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5" />
+                </svg>
+              </div>
+              <div class="connector-name">אנדרסון (Powerpole)</div>
+              <span class="connector-amp">45A / 75A</span>
+              <div class="connector-desc">מחבר מודולרי אדום/שחור קלאסי ובטוח</div>
+            </div>
+
+            <!-- T-Plug (Deans) -->
+            <div class="connector-card" data-conn="T-Plug (Deans)">
+              <div class="connector-img-box">
+                <!-- SVG: Red Deans T-Plug -->
+                <svg class="conn-svg" width="76" height="60" viewBox="0 0 100 70">
+                  <rect x="20" y="12" width="60" height="46" rx="8" fill="#B91C1C" stroke="#7F1D1D" stroke-width="2.5" />
+                  <!-- Gold blades -->
+                  <rect x="36" y="24" width="28" height="6" fill="#FCD34D" stroke="#B45309" stroke-width="1" />
+                  <rect x="47" y="30" width="6" height="20" fill="#FCD34D" stroke="#B45309" stroke-width="1" />
+                </svg>
+              </div>
+              <div class="connector-name">T-Plug (Deans)</div>
+              <span class="connector-amp">עד 40 אמפר</span>
+              <div class="connector-desc">פלאג אדום קומפקטי לכלים קלים ושואבים</div>
+            </div>
+
+            <!-- Open Silicon Wires -->
+            <div class="connector-card" data-conn="חוטי סיליקון פתוחים">
+              <div class="connector-img-box">
+                <svg class="conn-svg" width="76" height="60" viewBox="0 0 100 70">
+                  <path d="M15,22 C40,22 55,30 85,25" stroke="#DC2626" stroke-width="8" stroke-linecap="round" fill="none" />
+                  <path d="M85,25 L94,25" stroke="#FCD34D" stroke-width="5" stroke-linecap="round" />
+                  <path d="M15,48 C40,48 55,40 85,45" stroke="#0F172A" stroke-width="8" stroke-linecap="round" fill="none" />
+                  <path d="M85,45 L94,45" stroke="#FCD34D" stroke-width="5" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="connector-name">חוטים חשופים</div>
+              <span class="connector-amp">כבל סיליקון 10/12AWG</span>
+              <div class="connector-desc">להלחמה או חיבור מהיר לקונקטור קיים</div>
+            </div>
+          </div>
+          <input type="hidden" name="dischargeConnector" id="selectedDischarge" value="XT60">
+        </div>
+
+        <!-- STEP 4: CHARGING PORTS & CONNECTORS (WITH VISUAL ILLUSTRATIONS) -->
+        <div class="spec-card">
+          <div class="step-header">
+            <div class="step-num">4</div>
+            <div>
+              <h2 class="step-title">יציאות טעינה ומחברי טעינה</h2>
+              <div class="step-subtitle">בחרו את שקע הטעינה המתאים למטען שלכם ואת מספר הפתחים</div>
+            </div>
+          </div>
+
+          <!-- Number of charging ports -->
+          <div class="ports-count-row">
+            <span class="ports-count-label">🔌 כמות יציאות טעינה:</span>
+            <div class="ports-radio-group">
+              <label class="radio-pill">
+                <input type="radio" name="chargePortsCount" value="1" checked>
+                <span>יציאת טעינה אחת (סטנדרטי)</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="chargePortsCount" value="2">
+                <span>⚡ 2 יציאות (תמיכה בטעינה מהירה כפולה)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Charging Connector Types -->
+          <label style="font-size: 0.95rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 12px;">סוג שקע הטעינה (עם תמונות להמחשה):</label>
+          <div class="connector-grid" id="chargeGrid">
+            
+            <!-- XT30 -->
+            <div class="connector-card active" data-conn="XT30">
+              <div class="connector-img-box">
+                <!-- SVG: XT30 Compact Yellow -->
+                <svg class="conn-svg" width="70" height="54" viewBox="0 0 100 70">
+                  <path d="M20,15 L70,15 Q78,15 78,22 L66,50 Q62,55 54,55 L20,55 Q16,55 16,48 L16,22 Q16,15 20,15 Z" fill="#FACC15" stroke="#CA8A04" stroke-width="2" />
+                  <circle cx="36" cy="35" r="7" fill="#EAB308" stroke="#713F12" stroke-width="1.8" />
+                  <circle cx="56" cy="35" r="7" fill="#EAB308" stroke="#713F12" stroke-width="1.8" />
+                  <text x="35" y="24" fill="#713F12" font-size="8" font-weight="900">XT30</text>
+                </svg>
+              </div>
+              <div class="connector-name">XT30</div>
+              <span class="connector-amp">עד 30A</span>
+              <div class="connector-desc">פלאג טעינה קומפקטי, בטיחותי ואיכותי</div>
+            </div>
+
+            <!-- XT60 for Fast Charging -->
+            <div class="connector-card" data-conn="XT60">
+              <div class="connector-img-box">
+                <svg class="conn-svg" width="76" height="58" viewBox="0 0 100 70">
+                  <path d="M15,10 L75,10 Q85,10 85,20 L70,55 Q65,60 55,60 L15,60 Q10,60 10,50 L10,20 Q10,10 15,10 Z" fill="#FACC15" stroke="#CA8A04" stroke-width="2.5" />
+                  <circle cx="35" cy="35" r="9" fill="#EAB308" stroke="#713F12" stroke-width="2" />
+                  <circle cx="62" cy="35" r="9" fill="#EAB308" stroke="#713F12" stroke-width="2" />
+                  <text x="38" y="20" fill="#713F12" font-size="9" font-weight="900">XT60</text>
+                </svg>
+              </div>
+              <div class="connector-name">XT60</div>
+              <span class="connector-amp">טעינה מהירה עד 60A</span>
+              <div class="connector-desc">מעולה לטעינה מהירה בזרמים גבוהים</div>
+            </div>
+
+            <!-- DC Barrel Jack -->
+            <div class="connector-card" data-conn="DC 5.5x2.1 / 2.5">
+              <div class="connector-img-box">
+                <!-- SVG: Round DC Barrel Port -->
+                <svg class="conn-svg" width="74" height="58" viewBox="0 0 100 70">
+                  <circle cx="50" cy="35" r="26" fill="#1E293B" stroke="#0F172A" stroke-width="2.5" />
+                  <circle cx="50" cy="35" r="20" fill="#94A3B8" stroke="#64748B" stroke-width="2" />
+                  <circle cx="50" cy="35" r="14" fill="#0F172A" />
+                  <circle cx="50" cy="35" r="5" fill="#FCD34D" stroke="#CA8A04" stroke-width="1.5" />
+                </svg>
+              </div>
+              <div class="connector-name">שקע עגול DC 5.5mm</div>
+              <span class="connector-amp">עד 5A</span>
+              <div class="connector-desc">השקע העגול הסטנדרטי ברוב המטענים הביתיים</div>
+            </div>
+
+            <!-- GX16 3-Pin Aviation -->
+            <div class="connector-card" data-conn="GX16 Aviation 3-Pin">
+              <div class="connector-img-box">
+                <!-- SVG: Metal Aviation Screw Plug -->
+                <svg class="conn-svg" width="74" height="58" viewBox="0 0 100 70">
+                  <circle cx="50" cy="35" r="26" fill="#CBD5E1" stroke="#64748B" stroke-width="3" />
+                  <circle cx="50" cy="35" r="20" fill="#1E293B" />
+                  <!-- 3 Pins -->
+                  <circle cx="50" cy="24" r="3.5" fill="#FCD34D" />
+                  <circle cx="41" cy="42" r="3.5" fill="#FCD34D" />
+                  <circle cx="59" cy="42" r="3.5" fill="#FCD34D" />
+                  <!-- Screw thread notches -->
+                  <line x1="22" y1="35" x2="26" y2="35" stroke="#475569" stroke-width="2" />
+                  <line x1="74" y1="35" x2="78" y2="35" stroke="#475569" stroke-width="2" />
+                </svg>
+              </div>
+              <div class="connector-name">מחבר תעופה (GX16)</div>
+              <span class="connector-amp">עד 10A</span>
+              <div class="connector-desc">שקע מתכתי מאובטח עם הברגה נגד ניתוק</div>
+            </div>
+
+            <!-- XLR 3-Pin -->
+            <div class="connector-card" data-conn="XLR 3-Pin">
+              <div class="connector-img-box">
+                <!-- SVG: XLR round plug -->
+                <svg class="conn-svg" width="74" height="58" viewBox="0 0 100 70">
+                  <circle cx="50" cy="35" r="25" fill="#475569" stroke="#1E293B" stroke-width="3" />
+                  <circle cx="50" cy="35" r="18" fill="#0F172A" />
+                  <circle cx="50" cy="27" r="3.5" fill="#FCD34D" />
+                  <circle cx="42" cy="41" r="3.5" fill="#FCD34D" />
+                  <circle cx="58" cy="41" r="3.5" fill="#FCD34D" />
+                  <rect x="47" y="10" width="6" height="5" fill="#E2E8F0" rx="1" />
+                </svg>
+              </div>
+              <div class="connector-name">שקע XLR (3 פינים)</div>
+              <span class="connector-amp">עד 15A</span>
+              <div class="connector-desc">נפוץ בקולנועיות, קורקינטים כבדים וסוללות גדולות</div>
+            </div>
+
+          </div>
+          <input type="hidden" name="chargeConnector" id="selectedCharge" value="XT30">
+        </div>
+
+        <!-- STEP 5: SPECIAL EXTRAS & NOTES -->
+        <div class="spec-card">
+          <div class="step-header">
+            <div class="step-num">5</div>
+            <div>
+              <h2 class="step-title">תוספות מיוחדות והערות</h2>
+              <div class="step-subtitle">התאמות אלקטרוניות מתקדמות מבית Wisepack</div>
+            </div>
+          </div>
+
+          <div class="extras-grid" style="margin-bottom: 18px;">
+            <label class="extra-tile">
+              <input type="checkbox" name="bmsFeatures" value="BMS חכם בלוטות'">
+              <div class="extra-text-wrap">
+                <div class="extra-title">📱 BMS חכם עם בלוטות' (Bluetooth)</div>
+                <div class="extra-desc">צפייה במתח כל תא, טמפרטורה ואחוז סוללה ישירות באפליקציה בנייד</div>
+              </div>
+            </label>
+
+            <label class="extra-tile">
+              <input type="checkbox" name="bmsFeatures" value="מד אחוז סוללה מובנה">
+              <div class="extra-text-wrap">
+                <div class="extra-title">🔋 מד סוללה מובנה (LED Indicator)</div>
+                <div class="extra-desc">תצוגת לדים צבעונית בלחיצת כפתור על גבי הסוללה</div>
+              </div>
+            </label>
+
+            <label class="extra-tile">
+              <input type="checkbox" name="bmsFeatures" value="מפסק הדלקה וכיבוי">
+              <div class="extra-text-wrap">
+                <div class="extra-title">🔘 מפסק הדלקה/כיבוי ראשי</div>
+                <div class="extra-desc">מתג מובנה על המארז לניתוק זרם מהיר ומניעת זליגה בחניה</div>
+              </div>
+            </label>
+
+            <label class="extra-tile">
+              <input type="checkbox" name="bmsFeatures" value="איטום מוגבר למים">
+              <div class="extra-text-wrap">
+                <div class="extra-title">🛡️ איטום כפול למים ולשטח</div>
+                <div class="extra-desc">ציפוי סיליקון ובידוד מחוזק לרכיבה בגשם ובתנאי שטח קשים</div>
+              </div>
+            </label>
+          </div>
+
+          <div>
+            <label style="font-size: 0.9rem; font-weight: 700; color: var(--primary); display: block; margin-bottom: 6px;">דגם הכלי / בקשות מיוחדות למעבדה (אופציונלי):</label>
+            <textarea id="notesInput" class="form-textarea" placeholder="למשל: שלדת אופני שיומי, מנוע 1000W Bafang, רוצה כבל באורך 35 ס״מ..."></textarea>
+          </div>
+        </div>
+
+        <!-- SUBMIT FOOTER BAR -->
+        <div class="submit-bar">
+          <div class="submit-summary">
+            <div class="summary-title">סיכום המפרט שלך:</div>
+            <div class="summary-chips" id="summaryChips">
+              <span class="summary-chip" id="sumDims">25×10×12 ס״מ</span>
+              <span class="summary-chip" id="sumVolt">48V</span>
+              <span class="summary-chip" id="sumAh">21Ah</span>
+              <span class="summary-chip" id="sumDischarge">פריקה: XT60</span>
+              <span class="summary-chip" id="sumCharge">טעינה: XT30 (×1)</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit-spec" id="submitSpecBtn">
+            <span>אישור ושליחת מפרט למעבדה 🚀</span>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <!-- SUCCESS SCREEN -->
+    <div class="container">
+      <div class="success-card" id="successCard">
+        <div class="success-icon-ring">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--primary); margin-bottom: 8px;">המפרט נקלט בהצלחה במעבדה!</h2>
+        <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">
+          תודה, <strong id="successCustomerName">לקוח יקר</strong>. כל הנתונים, המידות וסוגי המחברים שבחרת הועברו ישירות לצוות הטכנאים של Wisepack.
+        </p>
+
+        <div style="background: var(--success-light); border: 1px solid #B8E8CA; border-radius: var(--radius-md); padding: 16px; margin-bottom: 24px; text-align: right; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.6rem;">📱</span>
+          <div style="font-size: 0.95rem; color: var(--success-dark); line-height: 1.4;">
+            <strong>נשלח אליך אישור בוואטסאפ!</strong><br>
+            המהנדס שלנו יעבור על המפרט, יחשב את סידור התאים המושלם ויחזור אליך בהקדם.
+          </div>
+        </div>
+
+        <a href="/" class="btn-submit-spec" style="text-decoration: none; display: inline-flex;">
+          <span>חזרה לדף הבית של Wisepack</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Read leadId from URL params (?id=1004)
+      const urlParams = new URLSearchParams(window.location.search);
+      const leadId = urlParams.get('id') || urlParams.get('leadId') || '';
+
+      const leadBadgeText = document.getElementById('leadBadgeText');
+      const formContainer = document.getElementById('formContainer');
+      const successCard = document.getElementById('successCard');
+      const successCustomerName = document.getElementById('successCustomerName');
+      const submitSpecBtn = document.getElementById('submitSpecBtn');
+
+      let leadData = null;
+
+      // 2. Fetch existing lead info if leadId present
+      if (leadId) {
+        try {
+          const res = await fetch(`/api/spec?id=${encodeURIComponent(leadId)}`);
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success && json.lead) {
+              leadData = json.lead;
+              leadBadgeText.textContent = `פנייה #${leadData.id} • ${leadData.fullName} (${leadData.toolType})`;
+              
+              // If already completed, prefill
+              if (leadData.spec) {
+                applyPrefillSpec(leadData.spec);
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Could not fetch lead details:', e);
+        }
+      }
+
+      // --- Interactive Dimensions Sync ---
+      const lengthInput = document.getElementById('lengthInput');
+      const lengthRange = document.getElementById('lengthRange');
+      const widthInput = document.getElementById('widthInput');
+      const widthRange = document.getElementById('widthRange');
+      const heightInput = document.getElementById('heightInput');
+      const heightRange = document.getElementById('heightRange');
+      const liveBoxDimensions = document.getElementById('liveBoxDimensions');
+      const sumDims = document.getElementById('sumDims');
+
+      function syncDimensions() {
+        const l = lengthInput.value;
+        const w = widthInput.value;
+        const h = heightInput.value;
+        liveBoxDimensions.textContent = `${l} ס״מ (א) × ${w} ס״מ (ר) × ${h} ס״מ (ג)`;
+        sumDims.textContent = `${l}×${w}×${h} ס״מ`;
+      }
+
+      function setupLinked(input, range) {
+        input.addEventListener('input', () => {
+          range.value = input.value;
+          syncDimensions();
+        });
+        range.addEventListener('input', () => {
+          input.value = range.value;
+          syncDimensions();
+        });
+      }
+
+      setupLinked(lengthInput, lengthRange);
+      setupLinked(widthInput, widthRange);
+      setupLinked(heightInput, heightRange);
+
+      // --- Shape Preset Cards ---
+      const shapeCards = document.querySelectorAll('.shape-card');
+      const selectedShapeInput = document.getElementById('selectedShape');
+      shapeCards.forEach(c => {
+        c.addEventListener('click', () => {
+          shapeCards.forEach(x => x.classList.remove('active'));
+          c.classList.add('active');
+          selectedShapeInput.value = c.getAttribute('data-shape');
+        });
+      });
+
+      // --- Voltage Cards ---
+      const voltageCards = document.querySelectorAll('#voltageGrid .select-card');
+      const selectedVoltageInput = document.getElementById('selectedVoltage');
+      const sumVolt = document.getElementById('sumVolt');
+      voltageCards.forEach(c => {
+        c.addEventListener('click', () => {
+          voltageCards.forEach(x => x.classList.remove('active'));
+          c.classList.add('active');
+          const val = c.getAttribute('data-val');
+          selectedVoltageInput.value = val;
+          sumVolt.textContent = `${val}V`;
+        });
+      });
+
+      // --- Capacity Cards ---
+      const capacityCards = document.querySelectorAll('#capacityGrid .select-card');
+      const selectedCapacityInput = document.getElementById('selectedCapacity');
+      const sumAh = document.getElementById('sumAh');
+      capacityCards.forEach(c => {
+        c.addEventListener('click', () => {
+          capacityCards.forEach(x => x.classList.remove('active'));
+          c.classList.add('active');
+          const val = c.getAttribute('data-val');
+          selectedCapacityInput.value = val;
+          sumAh.textContent = `${val}Ah`;
+        });
+      });
+
+      // --- Discharge Connectors ---
+      const dischargeCards = document.querySelectorAll('#dischargeGrid .connector-card');
+      const selectedDischargeInput = document.getElementById('selectedDischarge');
+      const sumDischarge = document.getElementById('sumDischarge');
+      dischargeCards.forEach(c => {
+        c.addEventListener('click', () => {
+          dischargeCards.forEach(x => x.classList.remove('active'));
+          c.classList.add('active');
+          const conn = c.getAttribute('data-conn');
+          selectedDischargeInput.value = conn;
+          sumDischarge.textContent = `פריקה: ${conn}`;
+        });
+      });
+
+      // --- Charge Connectors ---
+      const chargeCards = document.querySelectorAll('#chargeGrid .connector-card');
+      const selectedChargeInput = document.getElementById('selectedCharge');
+      const sumCharge = document.getElementById('sumCharge');
+      chargeCards.forEach(c => {
+        c.addEventListener('click', () => {
+          chargeCards.forEach(x => x.classList.remove('active'));
+          c.classList.add('active');
+          const conn = c.getAttribute('data-conn');
+          selectedChargeInput.value = conn;
+          updateChargeSummary();
+        });
+      });
+
+      const chargePortRadios = document.querySelectorAll('input[name="chargePortsCount"]');
+      chargePortRadios.forEach(r => {
+        r.addEventListener('change', updateChargeSummary);
+      });
+
+      function updateChargeSummary() {
+        const portsCount = document.querySelector('input[name="chargePortsCount"]:checked')?.value || '1';
+        sumCharge.textContent = `טעינה: ${selectedChargeInput.value} (×${portsCount})`;
+      }
+
+      // --- Prefill function ---
+      function applyPrefillSpec(spec) {
+        if (spec.length) {
+          lengthInput.value = spec.length;
+          lengthRange.value = spec.length;
+        }
+        if (spec.width) {
+          widthInput.value = spec.width;
+          widthRange.value = spec.width;
+        }
+        if (spec.height) {
+          heightInput.value = spec.height;
+          heightRange.value = spec.height;
+        }
+        syncDimensions();
+
+        if (spec.voltage) {
+          selectedVoltageInput.value = spec.voltage;
+          sumVolt.textContent = `${spec.voltage}V`;
+          voltageCards.forEach(c => {
+            if (c.getAttribute('data-val') === String(spec.voltage)) {
+              voltageCards.forEach(x => x.classList.remove('active'));
+              c.classList.add('active');
+            }
+          });
+        }
+
+        if (spec.capacityAh) {
+          selectedCapacityInput.value = spec.capacityAh;
+          sumAh.textContent = `${spec.capacityAh}Ah`;
+          capacityCards.forEach(c => {
+            if (c.getAttribute('data-val') === String(spec.capacityAh)) {
+              capacityCards.forEach(x => x.classList.remove('active'));
+              c.classList.add('active');
+            }
+          });
+        }
+
+        if (spec.dischargeConnector) {
+          selectedDischargeInput.value = spec.dischargeConnector;
+          sumDischarge.textContent = `פריקה: ${spec.dischargeConnector}`;
+          dischargeCards.forEach(c => {
+            if (c.getAttribute('data-conn') === spec.dischargeConnector) {
+              dischargeCards.forEach(x => x.classList.remove('active'));
+              c.classList.add('active');
+            }
+          });
+        }
+
+        if (spec.chargeConnector) {
+          selectedChargeInput.value = spec.chargeConnector;
+          chargeCards.forEach(c => {
+            if (c.getAttribute('data-conn') === spec.chargeConnector) {
+              chargeCards.forEach(x => x.classList.remove('active'));
+              c.classList.add('active');
+            }
+          });
+        }
+
+        if (spec.chargePortsCount) {
+          const radio = document.querySelector(`input[name="chargePortsCount"][value="${spec.chargePortsCount}"]`);
+          if (radio) radio.checked = true;
+          updateChargeSummary();
+        }
+
+        if (spec.notes) {
+          document.getElementById('notesInput').value = spec.notes;
+        }
+      }
+
+      // --- Submit Handler ---
+      const batterySpecForm = document.getElementById('batterySpecForm');
+      batterySpecForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        submitSpecBtn.disabled = true;
+        submitSpecBtn.innerHTML = `<span>שומר ומעדכן מעבדה...</span>`;
+
+        const bmsCheckboxes = document.querySelectorAll('input[name="bmsFeatures"]:checked');
+        const bmsFeatures = Array.from(bmsCheckboxes).map(cb => cb.value);
+
+        const payload = {
+          leadId: leadId || 'DIRECT',
+          length: lengthInput.value,
+          width: widthInput.value,
+          height: heightInput.value,
+          shape: selectedShapeInput.value,
+          voltage: selectedVoltageInput.value,
+          capacityAh: selectedCapacityInput.value,
+          dischargeConnector: selectedDischargeInput.value,
+          chargeConnector: selectedChargeInput.value,
+          chargePortsCount: document.querySelector('input[name="chargePortsCount"]:checked')?.value || '1',
+          bmsFeatures: bmsFeatures,
+          notes: document.getElementById('notesInput').value.trim()
+        };
+
+        try {
+          const res = await fetch('/api/spec', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (res.ok) {
+            formContainer.style.display = 'none';
+            successCard.style.display = 'block';
+            if (leadData && leadData.fullName) {
+              successCustomerName.textContent = leadData.fullName;
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            const err = await res.json();
+            alert(`שגיאה בשמירת המפרט: ${err.error || 'נסו שוב'}`);
+            submitSpecBtn.disabled = false;
+            submitSpecBtn.innerHTML = `<span>אישור ושליחת מפרט למעבדה 🚀</span>`;
+          }
+        } catch (err) {
+          console.error(err);
+          alert('שגיאת תקשורת עם השרת');
+          submitSpecBtn.disabled = false;
+          submitSpecBtn.innerHTML = `<span>אישור ושליחת מפרט למעבדה 🚀</span>`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

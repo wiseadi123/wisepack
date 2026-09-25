@@ -3,6 +3,8 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/leads", "destination": "/leads.html" },
+    { "source": "/spec", "destination": "/spec.html" },
+    { "source": "/battery-spec", "destination": "/spec.html" },
     { "source": "/api/leads/update-status", "destination": "/api/leads?action=update-status" }
   ]
 }
